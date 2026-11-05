@@ -1,0 +1,30 @@
+{
+  "name": "relayers-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "author": "Klederson Bueno",
+  "description": "Open-source WhatsApp Web bridge for RELAYERS, derived from the TabHero core.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/klederson/relayers-bridge.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "node tests/browser.mjs",
+    "test:quick-reply": "node tests/quick-reply-browser.mjs",
+    "test:firefox": "node tests/firefox.mjs",
+    "test:popup:firefox": "node tests/popup-firefox.mjs",
+    "test:disclosures": "node tests/disclosures-browser.mjs",
+    "package": "npm run build && node scripts/package.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.64.1",
+    "selenium-webdriver": "4.35.0"
+  }
+}

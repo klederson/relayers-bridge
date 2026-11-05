@@ -1,0 +1,211 @@
+// Runs the unpacked Firefox add-on against synthetic web pages through BiDi.
+// Conversation requests themselves are handled by the browser's redirect rules.
+import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
+import { readFile } from "node:fs/promises";
+import { Builder, By } from "selenium-webdriver";
+import firefox from "selenium-webdriver/firefox.js";
+import { Network } from "selenium-webdriver/bidi/network.js";
+
+const options = new firefox.Options().addArguments("-headless").enableBidi();
+const binary = process.env.FIREFOX_BINARY
+  ?? (existsSync("/snap/firefox/current/usr/lib/firefox/firefox") ? "/snap/firefox/current/usr/lib/firefox/firefox" : null);
+if (binary) options.setBinary(binary);
+// Isolated synthetic test profile only: required to automate the add-on popup.
+const service = new firefox.ServiceBuilder().addArguments('--allow-system-access');
+const driver = await new Builder().forBrowser("firefox").setFirefoxService(service).setFirefoxOptions(options).build();
+const callbackErrors = [];
+const fixture = await readFile(new URL("./fixtures/whatsapp.html", import.meta.url), "utf8");
+const expectedUnavailable = JSON.parse(await readFile(new URL("../extension/_locales/en/messages.json", import.meta.url), "utf8")).errorUnavailable.message;
+let whatsappRequests = 0;
+
+try {
+  const network = await Network(driver);
+  const bidi = await driver.getBidi();
+  await network.beforeRequestSent(event => {
+    if (!/^https:\/\/(web\.whatsapp\.com|fixture\.test)\//.test(event.request.url)) return;
+    const isWhatsapp = event.request.url.startsWith("https://web.whatsapp.com/");
+    if (isWhatsapp) whatsappRequests++;
+    bidi.send({
+      method: "network.provideResponse",
+      params: {
+        request: event.request.request,
+        statusCode: 200,
+        headers: [{ name: "content-type", value: { type: "string", value: "text/html; charset=utf-8" } }],
+        body: { type: "string", value: isWhatsapp ? fixture : "<!doctype html><title>Fixture</title><main>Página de teste</main>" }
+      }
+    }).catch(error => callbackErrors.push(error));
+  });
+  await bidi.send({
+    method: "network.addIntercept",
+    params: {
+      phases: ["beforeRequestSent"],
+      urlPatterns: [
+        { type: "pattern", protocol: "https", hostname: "web.whatsapp.com" },
+        { type: "pattern", protocol: "https", hostname: "fixture.test" }
+      ]
+    }
+  });
+
+  const initialWindow = await driver.getWindowHandle();
+  await driver.installAddon(resolve("dist/firefox"), true);
+  // Verify and dismiss installation disclosures before this scenario counts tabs.
+  await driver.wait(async () => {
+    for (const handle of await driver.getAllWindowHandles()) {
+      if (handle === initialWindow) continue;
+      await driver.switchTo().window(handle);
+      if (!(await driver.getCurrentUrl()).endsWith('/welcome.html')) continue;
+      await driver.wait(() => driver.executeScript("return document.documentElement.dataset.ready === 'true'"), 5000);
+      assert.match(await driver.findElement(By.css('[data-disclosure="privacySummary"]')).getText(), /No developer server/);
+      await driver.close();
+      return true;
+    }
+    return false;
+  }, 10000, 'First installation must display privacy disclosures');
+  await driver.switchTo().window(initialWindow);
+  await driver.get("https://fixture.test/origem");
+  const origin = await driver.getWindowHandle();
+  await driver.switchTo().newWindow("tab");
+  await driver.get("https://web.whatsapp.com/");
+  const whatsapp = await driver.getWindowHandle();
+  const originalRoot = await driver.findElement(By.css("html"));
+  const originalToken = await driver.executeScript("return documentToken");
+  const requestsAtStart = whatsappRequests;
+  async function unchanged() {
+    assert.equal(await driver.getCurrentUrl(), "https://web.whatsapp.com/");
+    assert.equal(await driver.executeScript("return arguments[0] === document.documentElement", originalRoot), true);
+    assert.equal(await driver.executeScript("return documentToken"), originalToken);
+    assert.equal(await driver.executeScript("return appState.previousDraft"), "Rascunho anterior");
+    assert.equal(await driver.executeScript("return appState.messages.length"), 0);
+    assert.equal(whatsappRequests, requestsAtStart, "Não deve haver novo carregamento do WhatsApp");
+  }
+
+  // A new-tab link from an unrelated site must reuse the existing handle.
+  await driver.switchTo().window(origin);
+  const text = "Olá! 👋\nCampanha + 20% & orçamento #sim %26";
+  await driver.executeScript(text => {
+    const a = document.createElement("a");
+    a.id = "conversation";
+    a.href = `https://wa.me/12025550123?text=${encodeURIComponent(text)}`;
+    a.target = "_blank";
+    a.textContent = "Abrir conversa";
+    document.body.append(a);
+  }, text);
+  await driver.findElement(By.id("conversation")).click();
+  await driver.wait(async () => (await driver.getAllWindowHandles()).length === 2, 15_000);
+  await driver.switchTo().window(whatsapp);
+  await driver.wait(async () => (await driver.findElement(By.id("contact")).getText()) === "12025550123@lid", 15_000);
+  assert.equal(await driver.findElement(By.id("compose")).getAttribute("value"), text);
+  await unchanged();
+  console.log("OK Firefox: wa.me abre dentro do app, preservando documento, estado e rascunho.");
+
+  // A same-tab link restores the original page rather than closing that tab.
+  await driver.switchTo().window(origin);
+  await driver.executeScript(() => {
+    const a = document.createElement("a");
+    a.id = "same-tab";
+    a.href = "https://api.whatsapp.com/send/?phone=12025550124&text=Ol%C3%A1%21+Campanha&type=phone_number&app_absent=0";
+    a.textContent = "Abrir na mesma aba";
+    document.body.append(a);
+  });
+  await driver.findElement(By.id("same-tab")).click();
+  await driver.switchTo().window(whatsapp);
+  await driver.wait(async () => (await driver.findElement(By.id("contact")).getText()) === "12025550124@lid", 15_000);
+  await unchanged();
+  await driver.switchTo().window(origin);
+  await driver.wait(async () => (await driver.getCurrentUrl()) === "https://fixture.test/origem", 15_000);
+  assert.equal((await driver.getAllWindowHandles()).length, 2);
+  console.log("OK Firefox: api.whatsapp.com restaura a página de origem.");
+
+  // Native integration failure must retain the loaded app without a URL fallback.
+  await driver.switchTo().window(whatsapp);
+  await driver.executeScript("document.documentElement.setAttribute('data-integration-unavailable', '')");
+  await driver.switchTo().window(origin);
+  await driver.executeScript(() => {
+    const a = document.createElement("a");
+    a.id = "failure";
+    a.href = "https://wa.me/12025550128?text=Erro";
+    a.target = "_blank";
+    a.textContent = "Testar falha";
+    document.body.append(a);
+  });
+  await driver.findElement(By.id("failure")).click();
+  await driver.wait(async () => (await driver.getAllWindowHandles()).length === 3, 15_000, "Falha deve manter a intermediária aberta");
+  const failureTab = (await driver.getAllWindowHandles()).find(handle => ![origin, whatsapp].includes(handle));
+  await driver.switchTo().window(failureTab);
+  await driver.wait(async () => {
+    try {
+      // Extension focus and WebDriver selection can race after a popup opens.
+      await driver.switchTo().window(failureTab);
+      return (await driver.findElement(By.id("status")).getText()) === expectedUnavailable;
+    }
+    catch { return false; }
+  }, 15_000, "Página de erro deve oferecer nova tentativa");
+  assert.equal(await driver.findElement(By.id("status")).getText(), expectedUnavailable);
+  await driver.switchTo().window(whatsapp);
+  await unchanged();
+  assert.equal(await driver.executeScript("return appState.opens.length"), 2);
+  await driver.switchTo().window(failureTab);
+  const failurePageUrl = await driver.getCurrentUrl();
+  const failureUrl = new URL(failurePageUrl);
+  const extensionOrigin = `${failureUrl.protocol}//${failureUrl.host}`;
+  await driver.switchTo().window(whatsapp);
+  await driver.executeScript("document.documentElement.removeAttribute('data-integration-unavailable')");
+  await driver.switchTo().window(failureTab);
+  await driver.findElement(By.id("retry")).click();
+  await driver.wait(async () => (await driver.getAllWindowHandles()).length === 2, 15_000, "Nova tentativa deve fechar a intermediária");
+  await driver.switchTo().window(whatsapp);
+  await driver.wait(async () => (await driver.executeScript("return appState.opens.length")) === 3, 15_000);
+  await unchanged();
+  console.log("OK Firefox: falha preserva a página carregada; nova tentativa funciona sem recarga.");
+
+  // Same real add-on APIs; the WhatsApp sender is simulated by the fixture.
+  const priorDraft = await driver.findElement(By.id('compose')).getAttribute('value');
+  const priorContact = await driver.findElement(By.id('contact')).getText();
+  await driver.switchTo().newWindow('tab');
+  const quickPanel = await driver.getWindowHandle();
+  await driver.get(`${extensionOrigin}/popup.html`);
+  await driver.wait(async () => await driver.executeScript("return document.documentElement.dataset.ready==='true'"), 15000);
+  const badgeColors = await driver.executeAsyncScript("const done=arguments[arguments.length-1];Promise.all([browser.action.getBadgeBackgroundColor({}),browser.action.getBadgeTextColor({})]).then(done)");
+  assert.deepEqual(badgeColors, [[180, 35, 24, 255], [255, 255, 255, 255]], 'Unread badge must contrast with the lime icon');
+  await driver.findElement(By.id('recipient')).click();
+  await driver.findElement(By.id('recipient-search')).sendKeys('joao');
+  await driver.wait(async () => (await driver.findElements(By.css('#recipient-options [role="option"]'))).length === 1, 5000);
+  await driver.findElement(By.css('#recipient-options [data-chat-id="12025550141@c.us"]')).click();
+  await driver.wait(async () => await driver.executeScript("return !document.getElementById('recipient').disabled"), 5000);
+  await driver.findElement(By.id('reply')).sendKeys('Confirmado pelo painel.');
+  await driver.findElement(By.id('send')).click();
+  await driver.wait(async () => (await driver.findElement(By.id('status')).getText()).includes('Passed to WhatsApp'), 15000);
+  const activeAfter = await driver.executeAsyncScript("const done=arguments[arguments.length-1];browser.tabs.query({active:true,currentWindow:true}).then(t=>done(t[0].url))");
+  assert.equal(activeAfter, `${extensionOrigin}/popup.html`, 'Quick reply must not activate WhatsApp');
+  await driver.switchTo().window(whatsapp);
+  assert.equal(await driver.getCurrentUrl(), 'https://web.whatsapp.com/');
+  assert.equal(await driver.executeScript('return arguments[0]===document.documentElement', originalRoot), true);
+  assert.equal(await driver.executeScript('return documentToken'), originalToken);
+  assert.equal(await driver.findElement(By.id('compose')).getAttribute('value'), priorDraft);
+  assert.equal(await driver.findElement(By.id('contact')).getText(), priorContact);
+  assert.equal(whatsappRequests, requestsAtStart);
+  assert.deepEqual(await driver.executeScript('return appState.messages'), [{ to: '12025550141@c.us', text: 'Confirmado pelo painel.' }]);
+  await driver.switchTo().window(quickPanel); await driver.close();
+  await driver.switchTo().window(whatsapp);
+  console.log('OK Firefox quick reply: selected recipient sent, document and composer preserved, no focus change. Simulated WhatsApp.');
+
+  await driver.close();
+  await driver.switchTo().window(origin);
+  await driver.switchTo().newWindow("tab");
+  await driver.get("https://wa.me/12025550125?text=Primeira+conversa").catch(() => {});
+  await driver.wait(async () => (await driver.getCurrentUrl()).startsWith("https://web.whatsapp.com/send?phone=12025550125"), 15_000);
+  assert.equal((await driver.getAllWindowHandles()).length, 2);
+  console.log("OK Firefox: sem WhatsApp aberto, a aba intermediária vira o WhatsApp.");
+  assert.deepEqual(callbackErrors, []);
+} catch (error) {
+  for (const handle of await driver.getAllWindowHandles()) {
+    await driver.switchTo().window(handle);
+    console.error("Página de teste:", await driver.getCurrentUrl());
+    console.error((await driver.findElement(By.css("body")).getText()).slice(0, 500));
+  }
+  throw error;
+} finally {
+  await driver.quit();
+}
