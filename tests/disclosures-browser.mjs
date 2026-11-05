@@ -19,7 +19,7 @@ try {
   }
   assert.ok(welcome, 'A fresh install must open its bundled disclosure page');
   await welcome.waitForFunction(() => document.documentElement.dataset.ready === 'true');
-  assert.match(await welcome.locator('[data-disclosure="privacySummary"]').textContent(), /No developer server/);
+  assert.match(await welcome.locator('[data-disclosure="privacySummary"]').textContent(), /Relay is off by default/);
   assert.equal(await welcome.locator('[data-disclosure="privacySource"]').getAttribute('href'), 'https://github.com/klederson/relayers-bridge');
   assert.equal(await worker.evaluate(() => chrome.permissions.contains({ origins: ['https://openrouter.ai/*'] })), false);
   assert.equal(await worker.evaluate(async () => (await chrome.storage.local.get('qrAiKey')).qrAiKey), undefined);

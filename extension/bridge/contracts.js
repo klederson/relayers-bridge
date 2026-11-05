@@ -4,6 +4,7 @@ export const MAX_COMMAND_AGE = 24 * 60 * 60 * 1000;
 export const uuid = value => typeof value === 'string' && /^[a-f\d]{8}-[a-f\d]{4}-[a-f\d]{4}-[a-f\d]{4}-[a-f\d]{12}$/i.test(value);
 export const chatId = value => typeof value === 'string' && /^[\d-]+@(?:c\.us|lid|g\.us)$/.test(value);
 export function validateCommand(command, binding, now = Date.now()) {
+  if (!binding) return 'not-configured';
   if (!command || command.schema !== SCHEMA || command.type !== 'message.send' || !uuid(command.commandId) || !uuid(command.connectionId)
     || !chatId(command.accountId) || !chatId(command.chatId) || typeof command.text !== 'string' || !command.text.trim() || command.text.length > 10000) return 'invalid-command';
   if (command.connectionId !== binding.connectionId || command.accountId !== binding.accountId || !binding.chatIds.includes(command.chatId)) return 'wrong-binding';

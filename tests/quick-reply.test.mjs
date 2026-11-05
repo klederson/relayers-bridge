@@ -18,6 +18,22 @@ function app() {
   return { sandbox, elements, run: runInNewContext(`(${quickReplyInPage.toString()})`, sandbox) };
 }
 const operationId = 'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaaa';
+test('disconnecting AI retains native data grants still needed by a RELAYERS connection', async () => {
+  const data = { qrAiKey: 'fictional-key', bridgeAuth: { server: 'https://relay.example', access_token: 'fictional-token' } };
+  const storage = { async get(key) { return { [key]: data[key] }; }, async remove(key) { delete data[key]; } };
+  let removed;
+  const controller = createQuickReplyController({ storage: { local: storage, session: storage }, runtime: { getBrowserInfo() {} }, permissions: { async remove(value) { removed = value; } } });
+  await controller.handle({ type: 'qr-disconnect' });
+  assert.equal(data.qrAiKey, undefined); assert.ok(data.bridgeAuth);
+  assert.deepEqual(removed, { origins: ['https://openrouter.ai/*'] });
+});
+test('relay dispatch checks the bound account inside the native page before any send', async () => {
+  const { sandbox, run } = app();
+  const snapshot = await run({ action: 'snapshot' });
+  const result = await run({ action: 'send', accountId: '12025559999@c.us', documentId: snapshot.documentId, operationId, chatId: snapshot.chats[0].id, text: 'Must not send' });
+  assert.equal(result.code, 'wrong-account');
+  assert.equal(sandbox.appState.messages.length, 0);
+});
 test('selected and custom donation amounts reach GitHub as one-time review requests', () => {
   for (const amount of [1, 3, 5, 10, 27, 12000]) {
     const url = new URL(sponsorshipUrl(amount));

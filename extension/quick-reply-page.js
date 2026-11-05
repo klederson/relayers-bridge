@@ -18,6 +18,7 @@ export async function quickReplyInPage(request) {
     const user = load('WAWebUserPrefsMeUser');
     const accountId = serial(user?.getMaybeMeLidUser?.()) ?? serial(user?.getMaybeMePnUser?.());
     if (!accountId) return fail('not-ready');
+    if (request.accountId && request.accountId !== accountId) return fail('wrong-account');
     const stateKey = Symbol.for('RELAYERS Bridge.quickReply.v1');
     if (globalThis[stateKey]?.accountId !== accountId) globalThis[stateKey] = { accountId, documentId: crypto.randomUUID(), operations: new Map() };
     const state = globalThis[stateKey];
@@ -41,7 +42,7 @@ export async function quickReplyInPage(request) {
         return { id: serial(chat.id), name: name(chat),
           unread: unread(chat), active: Boolean(chat.active), timestamp: Number(chat.t) || 0, received, receivedType };
       });
-      return { ok: true, documentId: state.documentId, unread: total, chats };
+      return { ok: true, documentId: state.documentId, accountId, unread: total, chats };
     }
     if (request.action !== 'send' || !validChat(request.chatId) || typeof request.text !== 'string' || !request.text.trim() || request.text.length > 10000
       || typeof request.operationId !== 'string' || !/^[a-f\d-]{36}$/i.test(request.operationId)) return fail('invalid-request');

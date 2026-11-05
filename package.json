@@ -21,10 +21,14 @@
     "test:firefox": "node tests/firefox.mjs",
     "test:popup:firefox": "node tests/popup-firefox.mjs",
     "test:disclosures": "node tests/disclosures-browser.mjs",
-    "package": "npm run build && node scripts/package.mjs"
+    "package": "npm run build && node scripts/package.mjs",
+    "test:bridge": "node tests/bridge-browser.mjs",
+    "test:bridge:live": "node tests/bridge-live.mjs",
+    "build:icons": "node scripts/build-icons.mjs"
   },
   "devDependencies": {
     "playwright": "^1.64.1",
-    "selenium-webdriver": "4.35.0"
+    "selenium-webdriver": "4.35.0",
+    "ws": "^8.22.1"
   }
 }

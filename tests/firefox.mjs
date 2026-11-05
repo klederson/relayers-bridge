@@ -1,6 +1,8 @@
 // Runs the unpacked Firefox add-on against synthetic web pages through BiDi.
 // Conversation requests themselves are handled by the browser's redirect rules.
 import assert from "node:assert/strict";
+import { createServer } from "node:http";
+import { once } from "node:events";
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { readFile } from "node:fs/promises";
@@ -18,7 +20,20 @@ const driver = await new Builder().forBrowser("firefox").setFirefoxService(servi
 const callbackErrors = [];
 const fixture = await readFile(new URL("./fixtures/whatsapp.html", import.meta.url), "utf8");
 const expectedUnavailable = JSON.parse(await readFile(new URL("../extension/_locales/en/messages.json", import.meta.url), "utf8")).errorUnavailable.message;
-let whatsappRequests = 0;
+let whatsappRequests = 0, pairingRequests = 0;
+const pairingServer = createServer((request, response) => {
+  response.setHeader('Access-Control-Allow-Origin', '*');
+  response.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (request.method === 'OPTIONS') { response.writeHead(204).end(); return; }
+  const isCode = request.url === '/v1/auth/device/code';
+  if (isCode) pairingRequests++;
+  const data = isCode ? { device_code: 'fictional-firefox-device', user_code: 'FF-TEST', verification_uri: `http://127.0.0.1:${pairingServer.address().port}/approve`, expires_in: 600, interval: 5 }
+    : { access_token: 'fictional-firefox-access', refresh_token: 'fictional-firefox-refresh' };
+  response.writeHead(200, { 'Content-Type': 'application/json' }); response.end(JSON.stringify({ data }));
+});
+pairingServer.listen(0, '127.0.0.1'); await once(pairingServer, 'listening');
+const pairingAddress = `http://127.0.0.1:${pairingServer.address().port}`;
+
 
 try {
   const network = await Network(driver);
@@ -57,7 +72,7 @@ try {
       await driver.switchTo().window(handle);
       if (!(await driver.getCurrentUrl()).endsWith('/welcome.html')) continue;
       await driver.wait(() => driver.executeScript("return document.documentElement.dataset.ready === 'true'"), 5000);
-      assert.match(await driver.findElement(By.css('[data-disclosure="privacySummary"]')).getText(), /No developer server/);
+      assert.match(await driver.findElement(By.css('[data-disclosure="privacySummary"]')).getText(), /Relay is off by default/);
       await driver.close();
       return true;
     }
@@ -191,6 +206,36 @@ try {
   await driver.switchTo().window(whatsapp);
   console.log('OK Firefox quick reply: selected recipient sent, document and composer preserved, no focus change. Simulated WhatsApp.');
 
+  // Actual Firefox permission consent, simulated account approval/API responses.
+  await driver.switchTo().newWindow('tab');
+  const bridgePanel = await driver.getWindowHandle();
+  await driver.get(`${extensionOrigin}/bridge.html`);
+  await driver.wait(() => driver.executeScript("return document.documentElement.dataset.ready === 'true'"), 10000);
+  await driver.findElement(By.css('#login summary')).click();
+  await driver.findElement(By.id('server')).clear();
+  await driver.findElement(By.id('server')).sendKeys(pairingAddress);
+  await driver.findElement(By.id('connect')).click();
+  await driver.setContext(firefox.Context.CHROME);
+  await driver.wait(async () => {
+    if (pairingRequests) return true;
+    await driver.executeScript(`
+      const popup = document.getElementById('addon-webext-permissions-notification');
+      const button = popup?.button ?? popup?.querySelector('.popup-notification-primary-button');
+      if (button?.getBoundingClientRect().width > 0) button.click();
+    `);
+    return false;
+  }, 15000, 'Native host/data consent must permit the fixture pairing request', 100);
+  await driver.setContext(firefox.Context.CONTENT);
+  await driver.wait(async () => await driver.findElement(By.id('setup')).isDisplayed(), 15000);
+  const consent = await driver.executeAsyncScript(`const done=arguments[arguments.length-1];browser.permissions.contains({origins:['http://127.0.0.1/*'],data_collection:['authenticationInfo','personalCommunications','personallyIdentifyingInfo']}).then(done)`);
+  assert.equal(consent, true);
+  assert.equal(await driver.findElement(By.id('incoming')).isSelected(), false);
+  assert.equal(await driver.findElement(By.id('outgoing')).isSelected(), false);
+  assert.equal(await driver.findElement(By.id('consent')).isSelected(), false);
+  await driver.executeAsyncScript("const done=arguments[arguments.length-1];browser.runtime.sendMessage({type:'bridge-disconnect',confirm:true}).then(done)");
+  await driver.close(); await driver.switchTo().window(whatsapp);
+  console.log('OK Firefox Bridge: native optional host/data permission state and simulated device pairing; IN/OUT remain off until explicit scope consent.');
+
   await driver.close();
   await driver.switchTo().window(origin);
   await driver.switchTo().newWindow("tab");
@@ -200,6 +245,7 @@ try {
   console.log("OK Firefox: sem WhatsApp aberto, a aba intermediária vira o WhatsApp.");
   assert.deepEqual(callbackErrors, []);
 } catch (error) {
+  await driver.setContext(firefox.Context.CONTENT).catch(() => {});
   for (const handle of await driver.getAllWindowHandles()) {
     await driver.switchTo().window(handle);
     console.error("Página de teste:", await driver.getCurrentUrl());
@@ -208,4 +254,6 @@ try {
   throw error;
 } finally {
   await driver.quit();
+  pairingServer.closeAllConnections();
+  await new Promise(resolve => pairingServer.close(resolve));
 }

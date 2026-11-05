@@ -2,12 +2,16 @@ import { conversationUrl, redirectRules } from "./links.js";
 import { chooseTab, routeConversation, whatsappTabs } from "./router.js";
 import { errorMessage, message as translatedMessage, normalizeErrorCode } from "./i18n.js";
 import { createQuickReplyController } from './quick-reply.js';
+import { createBridgeController } from './bridge/controller.js';
 
 const api = globalThis.browser ?? globalThis.chrome;
 const handoffUrl = api.runtime.getURL("handoff.html");
 const quickReply = createQuickReplyController(api);
+const bridge = createBridgeController(api);
 // Chrome can restrict local storage to extension pages and background scripts.
-api.storage.local.setAccessLevel?.({ accessLevel: 'TRUSTED_CONTEXTS' }).catch(() => {});
+const storageReady = api.storage.local.setAccessLevel?.({ accessLevel: 'TRUSTED_CONTEXTS' }).catch(() => {}) ?? Promise.resolve();
+const bridgeReady = storageReady.then(() => bridge.initialize()).catch(() => {});
+api.alarms.onAlarm.addListener(alarm => { if (alarm.name === 'bridge-reconnect') bridgeReady.then(() => bridge.reconnect()).catch(() => {}); });
 let routing = Promise.resolve();
 
 async function installRules() {
@@ -40,6 +44,13 @@ api.runtime.onInstalled.addListener(details => {
 api.runtime.onStartup.addListener(initialize);
 
 api.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (typeof message?.type === 'string' && message.type.startsWith('bridge-')) {
+    if (sender.id !== api.runtime.id || sender.url !== api.runtime.getURL('bridge.html') || sender.tab?.incognito) {
+      sendResponse({ ok: false, code: 'unauthorized-source' }); return;
+    }
+    bridgeReady.then(() => bridge.handle(message)).then(sendResponse, error => sendResponse({ ok: false, code: error?.message || 'unavailable' }));
+    return true;
+  }
   if (typeof message?.type === 'string' && message.type.startsWith('qr-')) {
     const popup = sender.id === api.runtime.id && sender.url === api.runtime.getURL('popup.html');
     const heartbeat = message.type === 'qr-heartbeat' && sender.id === api.runtime.id && sender.frameId === 0 && sender.tab && sender.url?.startsWith('https://web.whatsapp.com/');

@@ -97,7 +97,11 @@ export function createQuickReplyController(api) {
       }
       if (message.type === 'qr-disconnect') {
         await local.remove('qrAiKey');
-        await api.permissions.remove(aiPermissions(api));
+        const permissions = aiPermissions(api);
+        const { bridgeAuth } = await local.get('bridgeAuth');
+        const { bridgePairing } = await session.get('bridgePairing');
+        if (bridgeAuth || bridgePairing) delete permissions.data_collection;
+        await api.permissions.remove(permissions);
         return { ok: true };
       }
       if (message.type === 'qr-suggest') {

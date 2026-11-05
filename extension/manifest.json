@@ -36,7 +36,9 @@
   },
   "optional_host_permissions": [
     "https://openrouter.ai/*",
-    "https://api.relayers.app/*"
+    "https://*/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
   ],
   "content_scripts": [
     {
@@ -59,5 +61,6 @@
       ]
     }
   ],
-  "minimum_chrome_version": "120"
+  "minimum_chrome_version": "120",
+  "incognito": "not_allowed"
 }

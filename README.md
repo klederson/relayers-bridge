@@ -1,3 +1,5 @@
+[Sponsor development](https://github.com/sponsors/klederson)
+
 # RELAYERS Bridge
 
 Open-source Chrome and Firefox extension connecting a loaded WhatsApp Web session to RELAYERS, with explicit controls for incoming events and outgoing commands.
@@ -13,9 +15,29 @@ npm run build
 npm run package
 ```
 
-Load `dist/chrome` as an unpacked extension in Chrome. In Firefox use `about:debugging`, Load Temporary Add-on, and `dist/firefox/manifest.json`. Store distribution is not available yet. This extension has its own identifier and does not need TabHero installed.
+Load `dist/chrome` as an unpacked extension in Chrome. In Firefox use `about:debugging`, Load Temporary Add-on, and `dist/firefox/manifest.json`. Store distribution is not available yet. This extension has its own identifier and does not need TabHero installed. The initial relay supports one active connection per browser profile, in regular windows.
 
-Bridge integration is under development. Do not use an experimental build for unattended or critical messaging. Automated WhatsApp and RELAYERS tests use simulated services; authenticated compatibility must be verified separately. No existing WhatsApp document may be navigated or reloaded as a fallback.
+The initial text IN/OUT relay is experimental. See [the public protocol](docs/protocol.md) for payloads, result semantics and limits. A dedicated account on the published RELAYERS test service has passed real panel approval, API, signed HTTP IN/OUT, queue/worker, bound WebSocket and duplicate-command checks. WhatsApp was simulated in that test; compatibility with an authenticated real WhatsApp session still needs validation. No existing WhatsApp document may be navigated or reloaded as a fallback.
+
+## Connect a test account
+
+1. Click the RELAYERS wordmark in the toolbar popup to open connection settings.
+2. Connect your RELAYERS account using the displayed device code.
+3. Choose the loaded WhatsApp account and conversations; enable IN and/or OUT and confirm the scope. Creating a connection provisions dedicated endpoints and a device-bound OUT route.
+4. Configure your workflows in RELAYERS. Integration details show the endpoint URLs, an expiring OUT example and an explicitly revealed OUT signing secret. IN and OUT use separate secrets.
+5. Pause, resume or disconnect from the same settings page. After reopening WhatsApp in a new tab, explicitly reattach the same account; another account is rejected.
+
+For a first test in a profile that already has TabHero, disable its link handling by disabling that extension before loading Bridge, so two extensions do not compete for the same conversation links. Leave the WhatsApp document loaded. Do not use real customer conversations to test automatic sending.
+
+Run `npm run test:bridge` for actual loopback HTTP/WebSocket transport with simulated accounts, WhatsApp and consent grants. Core browser checks are available through `test:browser`, `test:quick-reply` and `test:firefox`. The Firefox test also exercises native optional host/data consent, with simulated service approval.
+
+Maintainers can explicitly run the live transport test against an owned test account:
+
+```sh
+RELAYERS_LIVE_TEST=1 RELAYERS_LIVE_ACCOUNT_FILE=/absolute/path/to/qa-account.json npm run test:bridge:live
+```
+
+Keep that file outside the repository, readable only by its owner. Its JSON fields are `server` (HTTPS API origin), `email` and `password`. The test requires a dedicated `bridge-qa-…@example.invalid` account on your own test service. It always substitutes a WhatsApp fixture, pre-grants the API origin only in an isolated test manifest, creates its own endpoints/device and removes those resources afterward. It never proves real WhatsApp compatibility or sends messages to real recipients. Live tests are excluded from CI.
 
 ## Data and source
 
