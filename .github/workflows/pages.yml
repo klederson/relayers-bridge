@@ -24,8 +24,10 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
-      - run: npm run test:site
+      - name: Check website with the browser already on the runner
+        run: npm run test:site
+        env:
+          SITE_BROWSER_CHANNEL: chrome
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
