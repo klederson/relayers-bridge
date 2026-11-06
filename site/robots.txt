@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://klederson.github.io/relayers-bridge/sitemap.xml
+

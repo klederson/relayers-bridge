@@ -2,7 +2,16 @@
 
 # RELAYERS Bridge
 
-Open-source Chrome and Firefox extension connecting a loaded WhatsApp Web session to RELAYERS, with explicit controls for incoming events and outgoing commands.
+**RELAYERS can send messages through your open WhatsApp. Messages you receive in the chats you choose can also go to RELAYERS.**
+
+RELAYERS Bridge is a Firefox and Chrome extension that connects the two sides:
+
+- **Receive — WhatsApp → RELAYERS:** new messages arriving in the chats you chose can go to RELAYERS. You choose what RELAYERS should do with them.
+- **Send — RELAYERS → WhatsApp:** your program can ask RELAYERS to send a message, even from somewhere else. Once you allow sending, you do not need to click Send each time.
+
+You choose the account, the chats and what is allowed. Keep the computer, browser and WhatsApp Web available. When replying yourself through the extension, you still click Send. This is a test version and is not an official WhatsApp product.
+
+[Explore the website](https://klederson.github.io/relayers-bridge/) · [Read the protocol](docs/protocol.md) · [Privacy](PRIVACY.md)
 
 Derived from the [TabHero](https://github.com/klederson/tabhero) MIT core: conversation links reuse the loaded document, and the toolbar keeps quick reply, conversation search, saved replies, optional AI, media placeholders and the silent unread badge.
 
