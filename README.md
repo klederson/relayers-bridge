@@ -15,6 +15,8 @@ You choose the account, the chats and what is allowed. Keep the computer, browse
 
 Derived from the [TabHero](https://github.com/klederson/tabhero) MIT core: conversation links reuse the loaded document, and the toolbar keeps quick reply, conversation search, saved replies, optional AI, media placeholders and the silent unread badge.
 
+Usage statistics are optional and start off. You may share feature counts and broad error categories; messages and credentials never enter these statistics. Refusing leaves all features available. See [extension statistics](docs/extension-analytics.md) for activation and data handling.
+
 ## Development
 
 ```sh

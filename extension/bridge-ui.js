@@ -1,6 +1,8 @@
+import { recordUsage } from './analytics-ui.js';
 import { permissionOrigin } from './bridge/contracts.js';
 import { bridgeMessages } from './bridge/ui-i18n.js';
 const api = globalThis.browser ?? globalThis.chrome;
+recordUsage('bridge_open', api);
 const language = api.i18n.getMessage('language') || api.i18n.getUILanguage();
 const t = bridgeMessages(language), $ = selector => document.querySelector(selector);
 document.documentElement.lang = language;
