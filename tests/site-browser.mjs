@@ -60,12 +60,18 @@ try{
   assert.equal(await page.locator('#install-steps').innerText(),content[locale].install.chrome.join('\n'));
   assert.equal(await page.locator('#install-note').innerText(),messages[locale].chromeNote);
   for(const section of ['.hero','.final-cta']){
+   const primary=page.locator(section+' [data-detected-download]');
+   assert.equal(await primary.isVisible(),true);
+   assert.equal(await primary.innerText().then(text=>text.includes(messages[locale].tryChrome)),true);
+   assert.equal(await page.locator(section+' [data-install-browser]').count(),1,'Only the detected browser belongs in the main CTA');
+   await primary.click();
+   assert.equal(await page.locator('#browser-chrome').getAttribute('aria-selected'),'true');
+   const otherDownloads=page.locator(section+' [data-other-downloads]');
+   assert.equal(await otherDownloads.innerText().then(text=>text.includes(messages[locale].otherDownloads)),true);
+   await otherDownloads.click();
    for(const choice of ['chrome','firefox']){
-    const link=page.locator(section+' [data-install-browser="'+choice+'"]');
-    assert.equal(await link.isVisible(),true,'Both browsers must be offered in '+section);
-    assert.equal(await link.innerText().then(text=>text.includes(messages[locale][choice==='chrome'?'tryChrome':'tryFirefox'])),true);
-    await link.click();
-    assert.equal(await page.locator('#browser-'+choice).getAttribute('aria-selected'),'true','A browser link must select its own instructions');
+    await page.locator('#browser-'+choice).click();
+    assert.equal(await page.locator('#browser-'+choice).getAttribute('aria-selected'),'true','Other downloads must offer both browsers');
     assert.equal(await page.locator('#install-steps').innerText(),content[locale].install[choice].join('\n'));
    }
   }
@@ -80,7 +86,7 @@ try{
   assert.equal(await page.locator('#demo-permission').isChecked(),false);
  }
  // Exercise the complete page with different browser identities. Detection
- // only suggests a desktop choice; it never hides alternatives or overrides a choice.
+ // highlights the detected desktop browser; other downloads retain both choices.
  const desktopChrome='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36';
  const identities=[
   ['Chrome',desktopChrome,'chrome'],
@@ -99,15 +105,20 @@ try{
   const selected=detected||'firefox';
   assert.equal(await visitor.locator('#browser-'+selected).getAttribute('aria-selected'),'true',name+': matching instructions');
   for(const section of ['.hero','.final-cta']){
-   assert.equal(await visitor.locator(section+' [data-install-browser]').first().getAttribute('data-install-browser'),selected,name+': matching button first');
-   assert.equal(await visitor.locator(section+' [data-install-browser="'+selected+'"]').evaluate(node=>!node.classList.contains('button-outline')),true);
+   assert.equal(await visitor.locator(section+' [data-detected-download]').isVisible(),Boolean(detected),name+': a browser CTA needs a detected browser');
+   assert.equal(await visitor.locator(section+' [data-install-browser]').count(),detected?1:0,name+': no guessed browser CTA');
+   if(detected)assert.equal(await visitor.locator(section+' [data-install-browser]').getAttribute('data-install-browser'),detected);
+   assert.equal(await visitor.locator(section+' [data-other-downloads]').innerText().then(text=>text.includes(messages.en[detected?'otherDownloads':'viewDownloads'])),true);
   }
   assert.equal(await visitor.locator('#browser-choice').innerText(),detected?messages.en.browserDetected.replace('{browser}',name):messages.en.browserPick);
   const other=selected==='chrome'?'firefox':'chrome';
-  await visitor.locator('.hero [data-install-browser="'+other+'"]').click();
+  await visitor.locator('.hero [data-other-downloads]').click();
+  await visitor.locator('#browser-'+other).click();
   await visitor.selectOption('#language','pt');
   assert.equal(await visitor.locator('#browser-'+other).getAttribute('aria-selected'),'true',name+': manual choice survives language changes');
+  assert.equal(await visitor.locator('#browser-choice').innerText(),messages.pt.browserPick,name+': the hint must respect the manual choice');
   assert.equal(await visitor.locator('#install-steps').innerText(),content.pt.install[other].join('\n'));
+  if(detected)assert.equal(await visitor.locator('.hero [data-install-browser]').getAttribute('data-install-browser'),detected,'A manual alternative must not replace the detected-browser CTA');
   await visitor.close();
  }
  await page.selectOption('#language','en');

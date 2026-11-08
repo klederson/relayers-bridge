@@ -10,10 +10,6 @@ function detectBrowser(userAgent){
 }
 const detectedBrowser=detectBrowser(navigator.userAgent);
 let language='en', browser=detectedBrowser||'firefox', direction='in', permissions={in:false,out:false}, outSent=false, result='waiting';
-if(detectedBrowser)for(const group of document.querySelectorAll('.hero-cta')){
- const preferred=group.querySelector('[data-install-browser="'+detectedBrowser+'"]');
- if(preferred)group.insertBefore(preferred,group.firstChild);
-}
 try {const requested=new URL(location.href).searchParams.get('lang');const saved=localStorage.getItem('relayersBridgeSiteLanguage');language=locales.includes(requested)?requested:locales.includes(saved)?saved:'en';}catch {}
 const text=(tag,value,className)=>{const node=document.createElement(tag);node.textContent=value;if(className)node.className=className;return node;};
 function renderCards(){
@@ -25,8 +21,16 @@ function renderCards(){
 }
 function renderInstall(){
  const t=messages[language];
- $('#browser-choice').textContent=detectedBrowser?t.browserDetected.replace('{browser}',detectedBrowser==='chrome'?'Chrome':'Firefox'):t.browserPick;
- for(const link of document.querySelectorAll('[data-install-browser]'))link.classList.toggle('button-outline',link.dataset.installBrowser!==browser);
+ $('#browser-choice').textContent=detectedBrowser&&browser===detectedBrowser?t.browserDetected.replace('{browser}',detectedBrowser==='chrome'?'Chrome':'Firefox'):t.browserPick;
+ for(const link of document.querySelectorAll('[data-detected-download]')){
+  link.hidden=!detectedBrowser;
+  if(detectedBrowser){link.dataset.installBrowser=detectedBrowser;link.querySelector('[data-detected-label]').textContent=t[detectedBrowser==='chrome'?'tryChrome':'tryFirefox'];}
+  else link.removeAttribute('data-install-browser');
+ }
+ for(const link of document.querySelectorAll('[data-other-downloads]')){
+  link.classList.toggle('button-outline',Boolean(detectedBrowser));
+  link.querySelector('[data-other-downloads-label]').textContent=t[detectedBrowser?'otherDownloads':'viewDownloads'];
+ }
  for(const button of document.querySelectorAll('[data-browser]'))button.setAttribute('aria-selected',String(button.dataset.browser===browser));
  $('#install-steps').setAttribute('aria-labelledby','browser-'+browser);
  $('#install-steps').replaceChildren(...content[language].install[browser].map(step=>text('li',step)));
@@ -58,7 +62,7 @@ function render(){
 }
 $('#language').addEventListener('change',event=>{language=event.target.value;try{localStorage.setItem('relayersBridgeSiteLanguage',language);const url=new URL(location.href);url.searchParams.set('lang',language);history.replaceState(null,'',url);}catch{}render();});
 for(const button of document.querySelectorAll('[data-browser]'))button.addEventListener('click',()=>{browser=button.dataset.browser;renderInstall();});
-for(const link of document.querySelectorAll('[data-install-browser]'))link.addEventListener('click',()=>{browser=link.dataset.installBrowser;renderInstall();});
+for(const link of document.querySelectorAll('[data-detected-download]'))link.addEventListener('click',()=>{if(detectedBrowser){browser=detectedBrowser;renderInstall();}});
 for(const button of document.querySelectorAll('[data-direction]'))button.addEventListener('click',()=>{direction=button.dataset.direction;result='waiting';renderDemo();});
 $('#demo-permission').addEventListener('change',event=>{permissions[direction]=event.target.checked;result='waiting';renderDemo();});
 function run(){if(!permissions[direction])result='blocked';else if(direction==='in')result='inResult';else if(outSent)result='duplicateResult';else{outSent=true;result='outResult';}renderDemo();}

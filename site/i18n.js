@@ -107,7 +107,9 @@ export const messages = {
     "whatHappens": "WHAT HAPPENS",
     "tryChrome": "Try it on Chrome",
     "browserDetected": "Looks like you use {browser}. Its steps are ready below. You can choose another browser.",
-    "browserPick": "Choose Firefox or Chrome below. These tests are for a computer."
+    "browserPick": "Choose Firefox or Chrome below. These tests are for a computer.",
+    "otherDownloads": "Other downloads",
+    "viewDownloads": "View downloads"
   },
   "pt": {
     "skip": "Ir para o conteúdo",
@@ -215,7 +217,9 @@ export const messages = {
     "whatHappens": "O QUE ACONTECE",
     "tryChrome": "Testar no Chrome",
     "browserDetected": "Parece que você usa {browser}. Os passos dele já estão selecionados abaixo. Você pode trocar de navegador.",
-    "browserPick": "Escolha Firefox ou Chrome abaixo. Estes testes são para usar no computador."
+    "browserPick": "Escolha Firefox ou Chrome abaixo. Estes testes são para usar no computador.",
+    "otherDownloads": "Outros downloads",
+    "viewDownloads": "Ver downloads"
   },
   "es": {
     "skip": "Ir al contenido",
@@ -323,7 +327,9 @@ export const messages = {
     "whatHappens": "QUÉ PASA",
     "tryChrome": "Probar en Chrome",
     "browserDetected": "Parece que usas {browser}. Sus pasos ya están seleccionados abajo. Puedes elegir otro navegador.",
-    "browserPick": "Elige Firefox o Chrome abajo. Estas pruebas son para un ordenador."
+    "browserPick": "Elige Firefox o Chrome abajo. Estas pruebas son para un ordenador.",
+    "otherDownloads": "Otras descargas",
+    "viewDownloads": "Ver descargas"
   },
   "id": {
     "skip": "Ke konten",
@@ -431,7 +437,9 @@ export const messages = {
     "whatHappens": "YANG TERJADI",
     "tryChrome": "Coba di Chrome",
     "browserDetected": "Sepertinya Anda memakai {browser}. Langkahnya sudah dipilih di bawah. Anda bisa memilih browser lain.",
-    "browserPick": "Pilih Firefox atau Chrome di bawah. Pengujian ini untuk komputer."
+    "browserPick": "Pilih Firefox atau Chrome di bawah. Pengujian ini untuk komputer.",
+    "otherDownloads": "Unduhan lainnya",
+    "viewDownloads": "Lihat unduhan"
   },
   "hi": {
     "skip": "सामग्री पर जाएँ",
@@ -539,7 +547,9 @@ export const messages = {
     "whatHappens": "क्या होता है",
     "tryChrome": "Chrome पर आज़माएँ",
     "browserDetected": "लगता है आप {browser} उपयोग करते हैं। नीचे उसके कदम चुने गए हैं। आप दूसरा ब्राउज़र चुन सकते हैं।",
-    "browserPick": "नीचे Firefox या Chrome चुनें। यह जाँच कंप्यूटर पर करने के लिए है।"
+    "browserPick": "नीचे Firefox या Chrome चुनें। यह जाँच कंप्यूटर पर करने के लिए है।",
+    "otherDownloads": "अन्य डाउनलोड",
+    "viewDownloads": "डाउनलोड देखें"
   }
 };
 export const content = {
