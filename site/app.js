@@ -43,6 +43,7 @@ function render(){
 }
 $('#language').addEventListener('change',event=>{language=event.target.value;try{localStorage.setItem('relayersBridgeSiteLanguage',language);const url=new URL(location.href);url.searchParams.set('lang',language);history.replaceState(null,'',url);}catch{}render();});
 for(const button of document.querySelectorAll('[data-browser]'))button.addEventListener('click',()=>{browser=button.dataset.browser;renderInstall();});
+for(const link of document.querySelectorAll('[data-install-browser]'))link.addEventListener('click',()=>{browser=link.dataset.installBrowser;renderInstall();});
 for(const button of document.querySelectorAll('[data-direction]'))button.addEventListener('click',()=>{direction=button.dataset.direction;result='waiting';renderDemo();});
 $('#demo-permission').addEventListener('change',event=>{permissions[direction]=event.target.checked;result='waiting';renderDemo();});
 function run(){if(!permissions[direction])result='blocked';else if(direction==='in')result='inResult';else if(outSent)result='duplicateResult';else{outSent=true;result='outResult';}renderDemo();}

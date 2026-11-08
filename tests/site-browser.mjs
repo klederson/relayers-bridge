@@ -58,6 +58,16 @@ try{
   await page.locator('#browser-chrome').click();
   assert.equal(await page.locator('#install-steps').innerText(),content[locale].install.chrome.join('\n'));
   assert.equal(await page.locator('#install-note').innerText(),messages[locale].chromeNote);
+  for(const section of ['.hero','.final-cta']){
+   for(const choice of ['chrome','firefox']){
+    const link=page.locator(section+' [data-install-browser="'+choice+'"]');
+    assert.equal(await link.isVisible(),true,'Both browsers must be offered in '+section);
+    assert.equal(await link.innerText().then(text=>text.includes(messages[locale][choice==='chrome'?'tryChrome':'tryFirefox'])),true);
+    await link.click();
+    assert.equal(await page.locator('#browser-'+choice).getAttribute('aria-selected'),'true','A browser link must select its own instructions');
+    assert.equal(await page.locator('#install-steps').innerText(),content[locale].install[choice].join('\n'));
+   }
+  }
   for(const width of [390,320]){
    await page.setViewportSize({width,height:844});
    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,'Horizontal overflow: '+locale+' '+width);

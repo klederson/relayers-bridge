@@ -104,7 +104,8 @@ export const messages = {
     "chromeNote": "Turn off TabHero while trying Bridge in the same browser. Keep your existing WhatsApp page open as it is.",
     "receiveWord": "Receive",
     "sendWord": "Send",
-    "whatHappens": "WHAT HAPPENS"
+    "whatHappens": "WHAT HAPPENS",
+    "tryChrome": "Try it on Chrome"
   },
   "pt": {
     "skip": "Ir para o conteúdo",
@@ -209,7 +210,8 @@ export const messages = {
     "chromeNote": "Desligue o TabHero enquanto testa a Bridge no mesmo navegador. Deixe a página atual do WhatsApp aberta como está.",
     "receiveWord": "Receber",
     "sendWord": "Enviar",
-    "whatHappens": "O QUE ACONTECE"
+    "whatHappens": "O QUE ACONTECE",
+    "tryChrome": "Testar no Chrome"
   },
   "es": {
     "skip": "Ir al contenido",
@@ -314,7 +316,8 @@ export const messages = {
     "chromeNote": "Apaga TabHero mientras pruebas Bridge en el mismo navegador. Deja la página actual de WhatsApp abierta como está.",
     "receiveWord": "Recibir",
     "sendWord": "Enviar",
-    "whatHappens": "QUÉ PASA"
+    "whatHappens": "QUÉ PASA",
+    "tryChrome": "Probar en Chrome"
   },
   "id": {
     "skip": "Ke konten",
@@ -419,7 +422,8 @@ export const messages = {
     "chromeNote": "Nonaktifkan TabHero saat mencoba Bridge di browser yang sama. Biarkan halaman WhatsApp yang ada tetap terbuka seperti sekarang.",
     "receiveWord": "Terima",
     "sendWord": "Kirim",
-    "whatHappens": "YANG TERJADI"
+    "whatHappens": "YANG TERJADI",
+    "tryChrome": "Coba di Chrome"
   },
   "hi": {
     "skip": "सामग्री पर जाएँ",
@@ -524,7 +528,8 @@ export const messages = {
     "chromeNote": "उसी ब्राउज़र में Bridge जाँचते समय TabHero बंद करें। मौजूदा WhatsApp पेज जैसा है वैसा खुला रखें।",
     "receiveWord": "पाएँ",
     "sendWord": "भेजें",
-    "whatHappens": "क्या होता है"
+    "whatHappens": "क्या होता है",
+    "tryChrome": "Chrome पर आज़माएँ"
   }
 };
 export const content = {
