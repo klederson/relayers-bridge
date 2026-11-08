@@ -27,3 +27,9 @@ Delete saved replies in their manager; disconnect AI to remove its saved key. Di
 No advertising, analytics, sale of data or unrelated telemetry is added by this extension. Device connection metadata required for RELAYERS authentication and delivery is part of the declared relay feature. Optional support goes to GitHub Sponsors, where payment requires your confirmation and is governed by GitHub's policies.
 
 Report problems through https://github.com/klederson/relayers-bridge/issues without posting messages, phone numbers, QR codes, API keys, tokens or session data. For a security concern, request a private reporting channel without publicly disclosing sensitive details.
+
+## Project website (separate from the extension)
+
+On the GitHub Pages website, optional Google Analytics measures visits and clicks on downloads or support only after you allow statistics. It uses cookies and receives technical visit information such as page, browser and device information. Our code removes query parameters and fragments from page addresses and does not pass form text, WhatsApp messages, phone numbers, extension activity or credentials to Analytics. Google processes this information under its [privacy policy](https://policies.google.com/privacy).
+
+No Analytics script loads before permission or after a refusal. Use **Visit statistics** in the footer to change your choice. The choice is saved locally for 180 days, separately from TabHero. Revoking permission disables measurement, removes this site's Analytics cookies and reloads this website to unload the tag. The downloaded standalone HTML guide contains no Analytics. GitHub Pages may process hosting access information under [GitHub's privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement).

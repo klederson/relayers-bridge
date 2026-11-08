@@ -3,6 +3,8 @@ import {readFile,writeFile} from 'node:fs/promises';
 const root=new URL('../',import.meta.url);
 const read=path=>readFile(new URL(path,root),'utf8');
 let html=await read('site/index.html');
+// The offline guide never loads website analytics or its preferences UI.
+html=html.replace('<script type="module" src="analytics.js"></script>','');
 const css=await read('site/styles.css');
 const catalog=await read('site/i18n.js');
 let app=await read('site/app.js');

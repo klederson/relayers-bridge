@@ -11,3 +11,6 @@
 @media(max-width:480px){.feature-item p,.faq-item>p{font-size:13px}.hero-footnote,.direction-bottom,.connection-note,.install-note,.test-state .status-footnote{font-size:11px}.footer-bottom{font-size:10px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
 
+
+/* Website statistics controls share the site palette. */
+:root{--analytics-bg:#0e1d35;--analytics-fg:#edf3ff}

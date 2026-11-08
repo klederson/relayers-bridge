@@ -24,6 +24,7 @@ const browser=await chromium.launch({channel:process.env.SITE_BROWSER_CHANNEL||'
 const errors=[],foreign=[],failed=[];
 try{
  const page=await browser.newPage({viewport:{width:1440,height:1050}});
+ await page.addInitScript(()=>localStorage.setItem('relayers-bridge:analytics-consent:v1',JSON.stringify({value:'rejected',at:Date.now()})));
  page.on('pageerror',error=>errors.push(error.message));
  page.on('request',request=>{if(new URL(request.url()).origin!==origin)foreign.push(request.url());});
  page.on('response',response=>{if(response.status()>=400)failed.push(response.status()+' '+new URL(response.url()).pathname);});
@@ -101,6 +102,7 @@ try{
   const visitor=await browser.newPage({userAgent});
   visitor.on('pageerror',error=>errors.push(error.message));
   visitor.on('request',request=>{if(new URL(request.url()).origin!==origin)foreign.push(request.url());});
+  await visitor.addInitScript(()=>localStorage.setItem('relayers-bridge:analytics-consent:v1',JSON.stringify({value:'rejected',at:Date.now()})));
   await visitor.goto(origin);await visitor.waitForFunction(()=>document.documentElement.dataset.ready==='true');
   const selected=detected||'firefox';
   assert.equal(await visitor.locator('#browser-'+selected).getAttribute('aria-selected'),'true',name+': matching instructions');
