@@ -1,6 +1,19 @@
 import { locales, messages, content } from './i18n.js';
 const $=selector=>document.querySelector(selector);
-let language='en', browser='firefox', direction='in', permissions={in:false,out:false}, outSent=false, result='waiting';
+// A local convenience hint, never an authorization or compatibility guarantee.
+function detectBrowser(userAgent){
+ if(/Android|iPhone|iPad|iPod|Mobile/i.test(userAgent))return null;
+ if(/\bFirefox\/\d/i.test(userAgent))return 'firefox';
+ if(/\b(?:Edg|Edge|OPR|Opera|Vivaldi|SamsungBrowser)\//i.test(userAgent))return null;
+ if(/\b(?:Chrome|Chromium|HeadlessChrome)\/\d/i.test(userAgent))return 'chrome';
+ return null;
+}
+const detectedBrowser=detectBrowser(navigator.userAgent);
+let language='en', browser=detectedBrowser||'firefox', direction='in', permissions={in:false,out:false}, outSent=false, result='waiting';
+if(detectedBrowser)for(const group of document.querySelectorAll('.hero-cta')){
+ const preferred=group.querySelector('[data-install-browser="'+detectedBrowser+'"]');
+ if(preferred)group.insertBefore(preferred,group.firstChild);
+}
 try {const requested=new URL(location.href).searchParams.get('lang');const saved=localStorage.getItem('relayersBridgeSiteLanguage');language=locales.includes(requested)?requested:locales.includes(saved)?saved:'en';}catch {}
 const text=(tag,value,className)=>{const node=document.createElement(tag);node.textContent=value;if(className)node.className=className;return node;};
 function renderCards(){
@@ -12,6 +25,8 @@ function renderCards(){
 }
 function renderInstall(){
  const t=messages[language];
+ $('#browser-choice').textContent=detectedBrowser?t.browserDetected.replace('{browser}',detectedBrowser==='chrome'?'Chrome':'Firefox'):t.browserPick;
+ for(const link of document.querySelectorAll('[data-install-browser]'))link.classList.toggle('button-outline',link.dataset.installBrowser!==browser);
  for(const button of document.querySelectorAll('[data-browser]'))button.setAttribute('aria-selected',String(button.dataset.browser===browser));
  $('#install-steps').setAttribute('aria-labelledby','browser-'+browser);
  $('#install-steps').replaceChildren(...content[language].install[browser].map(step=>text('li',step)));

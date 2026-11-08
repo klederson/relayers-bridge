@@ -41,6 +41,7 @@ try{
   await page.selectOption('#language',locale);
   assert.equal(await page.locator('h1').innerText(),messages[locale].heroTitle+'\n'+messages[locale].heroAccent);
   assert.equal(await page.locator('.feature-item').count(),6);
+  await page.locator('#browser-firefox').click();
   assert.equal(await page.locator('#install-steps li').count(),4);
   assert.equal(await page.locator('#install-note').innerText(),messages[locale].firefoxNote);
   await page.locator('#run-demo').click();
@@ -77,6 +78,37 @@ try{
   await page.reload();await page.waitForFunction(()=>document.documentElement.dataset.ready==='true');
   assert.equal(await page.locator('html').getAttribute('lang'),locale==='pt'?'pt-BR':locale);
   assert.equal(await page.locator('#demo-permission').isChecked(),false);
+ }
+ // Exercise the complete page with different browser identities. Detection
+ // only suggests a desktop choice; it never hides alternatives or overrides a choice.
+ const desktopChrome='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36';
+ const identities=[
+  ['Chrome',desktopChrome,'chrome'],
+  ['Firefox','Mozilla/5.0 (X11; Linux x86_64; rv:144.0) Gecko/20100101 Firefox/144.0','firefox'],
+  ['Edge',desktopChrome+' Edg/142.0.0.0',null],
+  ['Opera',desktopChrome+' OPR/124.0.0.0',null],
+  ['Safari','Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15',null],
+  ['Chrome on Android','Mozilla/5.0 (Linux; Android 15) AppleWebKit/537.36 Chrome/142.0.0.0 Mobile Safari/537.36',null],
+  ['Firefox on Android','Mozilla/5.0 (Android 15; Mobile; rv:144.0) Gecko/144.0 Firefox/144.0',null]
+ ];
+ for(const [name,userAgent,detected] of identities){
+  const visitor=await browser.newPage({userAgent});
+  visitor.on('pageerror',error=>errors.push(error.message));
+  visitor.on('request',request=>{if(new URL(request.url()).origin!==origin)foreign.push(request.url());});
+  await visitor.goto(origin);await visitor.waitForFunction(()=>document.documentElement.dataset.ready==='true');
+  const selected=detected||'firefox';
+  assert.equal(await visitor.locator('#browser-'+selected).getAttribute('aria-selected'),'true',name+': matching instructions');
+  for(const section of ['.hero','.final-cta']){
+   assert.equal(await visitor.locator(section+' [data-install-browser]').first().getAttribute('data-install-browser'),selected,name+': matching button first');
+   assert.equal(await visitor.locator(section+' [data-install-browser="'+selected+'"]').evaluate(node=>!node.classList.contains('button-outline')),true);
+  }
+  assert.equal(await visitor.locator('#browser-choice').innerText(),detected?messages.en.browserDetected.replace('{browser}',name):messages.en.browserPick);
+  const other=selected==='chrome'?'firefox':'chrome';
+  await visitor.locator('.hero [data-install-browser="'+other+'"]').click();
+  await visitor.selectOption('#language','pt');
+  assert.equal(await visitor.locator('#browser-'+other).getAttribute('aria-selected'),'true',name+': manual choice survives language changes');
+  assert.equal(await visitor.locator('#install-steps').innerText(),content.pt.install[other].join('\n'));
+  await visitor.close();
  }
  await page.selectOption('#language','en');
  await page.locator('#tab-in').focus();await page.keyboard.press('ArrowRight');
