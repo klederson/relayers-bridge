@@ -4,6 +4,7 @@ import { createServer } from 'node:http';
 import { readFile, mkdir } from 'node:fs/promises';
 import { once } from 'node:events';
 import { resolve, extname } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 import { locales, messages, content } from '../site/i18n.js';
 
@@ -22,6 +23,8 @@ server.listen(0,'127.0.0.1');await once(server,'listening');
 const origin='http://127.0.0.1:'+server.address().port;
 const browser=await chromium.launch({channel:process.env.SITE_BROWSER_CHANNEL||'chromium',headless:true});
 const errors=[],foreign=[],failed=[];
+const chromeStore='https://chromewebstore.google.com/detail/kehnlfbcbflddadaogbfeiibhckbfiie';
+const releases='https://github.com/klederson/relayers-bridge/releases';
 try{
  const page=await browser.newPage({viewport:{width:1440,height:1050}});
  await page.addInitScript(()=>localStorage.setItem('relayers-bridge:analytics-consent:v1',JSON.stringify({value:'rejected',at:Date.now()})));
@@ -45,6 +48,9 @@ try{
   await page.locator('#browser-firefox').click();
   assert.equal(await page.locator('#install-steps li').count(),4);
   assert.equal(await page.locator('#install-note').innerText(),messages[locale].firefoxNote);
+  assert.equal(await page.locator('#install-download').getAttribute('href'),releases,'Unapproved Firefox listing must not be an install destination');
+  assert.equal(await page.locator('#install-download-label').innerText(),messages[locale].downloadBuild);
+  assert.match(await page.locator('#install-note').innerText(),/Mozilla/,'Firefox approval is still pending');
   await page.locator('#run-demo').click();
   assert.equal(await page.locator('#demo-output').innerText(),messages[locale].blocked);
   await page.locator('#demo-permission').check();await page.locator('#run-demo').click();
@@ -60,6 +66,10 @@ try{
   await page.locator('#browser-chrome').click();
   assert.equal(await page.locator('#install-steps').innerText(),content[locale].install.chrome.join('\n'));
   assert.equal(await page.locator('#install-note').innerText(),messages[locale].chromeNote);
+  assert.equal(await page.locator('#install-download').getAttribute('href'),chromeStore);
+  assert.equal(await page.locator('#install-download-label').innerText(),messages[locale].installChrome);
+  assert.match(await page.locator('#install-steps').innerText(),/Chrome Web Store/);
+  assert.doesNotMatch(await page.locator('#install-steps').innerText(),/chrome:\/\/extensions/);
   for(const section of ['.hero','.final-cta']){
    const primary=page.locator(section+' [data-detected-download]');
    assert.equal(await primary.isVisible(),true);
@@ -134,6 +144,18 @@ try{
  await mkdir('artifacts',{recursive:true});await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:'artifacts/site-desktop.png'});
  await page.selectOption('#language','pt');await page.screenshot({path:'artifacts/site-pt.png',fullPage:true});
  await page.setViewportSize({width:390,height:844});await page.screenshot({path:'artifacts/site-mobile.png'});
+ // The standalone guide must keep the same official link and pending status.
+ const guide=await browser.newPage();
+ guide.on('pageerror',error=>errors.push(error.message));
+ guide.on('request',request=>{if(/^https?:/.test(request.url()))foreign.push(request.url());});
+ await guide.goto(pathToFileURL(resolve('docs/feature-guide.html')).href);
+ await guide.waitForFunction(()=>document.documentElement.dataset.ready==='true');
+ await guide.locator('#browser-chrome').click();
+ assert.equal(await guide.locator('#install-download').getAttribute('href'),chromeStore);
+ await guide.locator('#browser-firefox').click();
+ assert.equal(await guide.locator('#install-download').getAttribute('href'),releases);
+ assert.match(await guide.locator('#install-note').innerText(),/Mozilla/);
+ await guide.close();
  assert.deepEqual(errors,[]);assert.deepEqual(foreign,[],'The demo must not contact external services');assert.deepEqual(failed,[]);
  console.log('OK website: explicit IN/OUT, five complete languages, independent demo consent, duplicate-command illustration, Firefox/Chrome instructions, keyboard tabs, 320/390px layouts, social assets and no external calls.');
 }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}

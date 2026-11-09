@@ -15,7 +15,7 @@ export const messages = {
     "outOneLine": "Let RELAYERS send messages through WhatsApp.",
     "tryFirefox": "Try it on Firefox",
     "seeDemo": "See both directions",
-    "heroNote": "A test version. Keep your browser and WhatsApp open. It is not in the browser stores yet.",
+    "heroNote": "Available in the Chrome Web Store. Firefox is awaiting Mozilla approval. Keep your browser and WhatsApp open.",
     "visualLabel": "YOUR WHATSAPP, CONNECTED",
     "illustration": "EXAMPLE",
     "sampleContact": "Bia · Bakery",
@@ -67,8 +67,8 @@ export const messages = {
     "privacyLink": "Understand what happens to your data",
     "installEyebrow": "05 / TRY IT WITH SOMEONE YOU KNOW.",
     "installTitle": "Keep WhatsApp open.\nAdd the extension.",
-    "installLead": "This is still a test version. Installation has a few extra steps for now. Pick your browser below.",
-    "downloadBuild": "Download the test version",
+    "installLead": "Install Chrome from its official store. Firefox is awaiting Mozilla approval; a manual test installation is available below.",
+    "downloadBuild": "Download Firefox test build",
     "statusLabel": "STILL BEING TESTED",
     "statusTitle": "Ready to try.\nStill a test version.",
     "statusRelayers": "The connection to RELAYERS was tested",
@@ -100,16 +100,17 @@ export const messages = {
     "inResult": "Bia sent a message on WhatsApp.\n\nThe extension took it to RELAYERS.\nYou choose what RELAYERS should do next.\n\nThis was only an example.",
     "outResult": "RELAYERS asked to send a message.\n\nThe extension asked your open WhatsApp to send it to Bia.\n\nYour current chat and unfinished text stayed as they were.\n\nThis was only an example. It does not prove a real person received a message.",
     "duplicateResult": "The same send was requested again.\n\nThe extension saw that it already had a result.\nIt did not send another message.\n\nThis was only an example.",
-    "firefoxNote": "This Firefox test installation ends when you restart the browser. While testing Bridge, turn off TabHero in the same browser. Do not remove TabHero if you want to keep its settings.",
+    "firefoxNote": "Firefox is awaiting Mozilla approval. The store listing is not public yet. This Firefox test installation ends when you restart the browser. While testing Bridge, turn off TabHero in the same browser. Do not remove TabHero if you want to keep its settings.",
     "chromeNote": "Turn off TabHero while trying Bridge in the same browser. Keep your existing WhatsApp page open as it is.",
     "receiveWord": "Receive",
     "sendWord": "Send",
     "whatHappens": "WHAT HAPPENS",
-    "tryChrome": "Try it on Chrome",
+    "tryChrome": "Install for Chrome",
     "browserDetected": "Looks like you use {browser}. Its steps are ready below. You can choose another browser.",
     "browserPick": "Choose Firefox or Chrome below. These tests are for a computer.",
     "otherDownloads": "Other downloads",
-    "viewDownloads": "View downloads"
+    "viewDownloads": "View downloads",
+    "installChrome": "Install from Chrome Web Store"
   },
   "pt": {
     "skip": "Ir para o conteúdo",
@@ -125,7 +126,7 @@ export const messages = {
     "outOneLine": "Permita que o RELAYERS envie pelo WhatsApp.",
     "tryFirefox": "Testar no Firefox",
     "seeDemo": "Ver os dois sentidos",
-    "heroNote": "É uma versão de teste. Deixe o navegador e o WhatsApp abertos. Ainda não está nas lojas de extensões.",
+    "heroNote": "Disponível na Chrome Web Store. O Firefox aguarda aprovação da Mozilla. Deixe o navegador e o WhatsApp abertos.",
     "visualLabel": "SEU WHATSAPP, CONECTADO",
     "illustration": "EXEMPLO",
     "sampleContact": "Bia · Padaria",
@@ -177,8 +178,8 @@ export const messages = {
     "privacyLink": "Entenda o que acontece com seus dados",
     "installEyebrow": "05 / TESTE COM ALGUÉM QUE COMBINOU COM VOCÊ.",
     "installTitle": "Deixe o WhatsApp aberto.\nAdicione a extensão.",
-    "installLead": "Ainda é uma versão de teste. Por enquanto, a instalação tem alguns passos extras. Escolha seu navegador abaixo.",
-    "downloadBuild": "Baixar a versão de teste",
+    "installLead": "Instale no Chrome pela loja oficial. O Firefox aguarda aprovação da Mozilla; abaixo você pode fazer a instalação manual de teste.",
+    "downloadBuild": "Baixar versão de teste para Firefox",
     "statusLabel": "AINDA ESTAMOS TESTANDO",
     "statusTitle": "Pronta para experimentar.\nAinda é uma versão de teste.",
     "statusRelayers": "A ligação com o RELAYERS foi testada",
@@ -210,16 +211,17 @@ export const messages = {
     "inResult": "Bia mandou uma mensagem no WhatsApp.\n\nA extensão levou a mensagem para o RELAYERS.\nVocê escolhe o que o RELAYERS faz depois.\n\nIsso foi só um exemplo.",
     "outResult": "O RELAYERS pediu para enviar uma mensagem.\n\nA extensão pediu ao seu WhatsApp aberto para enviar à Bia.\n\nSua conversa atual e o texto que estava escrevendo ficaram como estavam.\n\nIsso foi só um exemplo. Não comprova que alguém recebeu uma mensagem real.",
     "duplicateResult": "Pediram o mesmo envio outra vez.\n\nA extensão viu que já tinha uma resposta para esse pedido.\nNão enviou outra mensagem.\n\nIsso foi só um exemplo.",
-    "firefoxNote": "Esta instalação de teste no Firefox termina ao reiniciar o navegador. Durante o teste da Bridge, desligue o TabHero no mesmo navegador. Não remova o TabHero se quiser manter as configurações dele.",
+    "firefoxNote": "O Firefox aguarda aprovação da Mozilla. A página na loja ainda não está pública. Esta instalação de teste no Firefox termina ao reiniciar o navegador. Durante o teste da Bridge, desligue o TabHero no mesmo navegador. Não remova o TabHero se quiser manter as configurações dele.",
     "chromeNote": "Desligue o TabHero enquanto testa a Bridge no mesmo navegador. Deixe a página atual do WhatsApp aberta como está.",
     "receiveWord": "Receber",
     "sendWord": "Enviar",
     "whatHappens": "O QUE ACONTECE",
-    "tryChrome": "Testar no Chrome",
+    "tryChrome": "Instalar no Chrome",
     "browserDetected": "Parece que você usa {browser}. Os passos dele já estão selecionados abaixo. Você pode trocar de navegador.",
     "browserPick": "Escolha Firefox ou Chrome abaixo. Estes testes são para usar no computador.",
     "otherDownloads": "Outros downloads",
-    "viewDownloads": "Ver downloads"
+    "viewDownloads": "Ver downloads",
+    "installChrome": "Instalar pela Chrome Web Store"
   },
   "es": {
     "skip": "Ir al contenido",
@@ -235,7 +237,7 @@ export const messages = {
     "outOneLine": "Permite que RELAYERS envíe por WhatsApp.",
     "tryFirefox": "Probar en Firefox",
     "seeDemo": "Ver ambos sentidos",
-    "heroNote": "Es una versión de prueba. Deja abiertos el navegador y WhatsApp. Aún no está en las tiendas de extensiones.",
+    "heroNote": "Disponible en Chrome Web Store. Firefox está pendiente de aprobación de Mozilla. Deja abiertos el navegador y WhatsApp.",
     "visualLabel": "TU WHATSAPP, CONECTADO",
     "illustration": "EJEMPLO",
     "sampleContact": "Bia · Panadería",
@@ -287,8 +289,8 @@ export const messages = {
     "privacyLink": "Entiende qué pasa con tus datos",
     "installEyebrow": "05 / PRUÉBALO CON ALGUIEN QUE CONOZCAS.",
     "installTitle": "Deja WhatsApp abierto.\nAñade la extensión.",
-    "installLead": "Todavía es una versión de prueba. Por ahora, instalar requiere unos pasos extra. Elige tu navegador abajo.",
-    "downloadBuild": "Descargar la versión de prueba",
+    "installLead": "Instala en Chrome desde su tienda oficial. Firefox está pendiente de aprobación de Mozilla; abajo puedes instalar manualmente la versión de prueba.",
+    "downloadBuild": "Descargar versión de prueba para Firefox",
     "statusLabel": "SEGUIMOS PROBANDO",
     "statusTitle": "Lista para probar.\nAún es una versión de prueba.",
     "statusRelayers": "La conexión con RELAYERS fue probada",
@@ -320,16 +322,17 @@ export const messages = {
     "inResult": "Bia mandó un mensaje por WhatsApp.\n\nLa extensión lo llevó a RELAYERS.\nTú eliges qué hace RELAYERS después.\n\nEsto fue solo un ejemplo.",
     "outResult": "RELAYERS pidió enviar un mensaje.\n\nLa extensión pidió a tu WhatsApp abierto que lo enviara a Bia.\n\nTu chat actual y el texto que escribías quedaron igual.\n\nFue solo un ejemplo. No prueba que alguien recibió un mensaje real.",
     "duplicateResult": "Se pidió el mismo envío otra vez.\n\nLa extensión vio que ya tenía un resultado.\nNo envió otro mensaje.\n\nFue solo un ejemplo.",
-    "firefoxNote": "Esta instalación de prueba en Firefox termina al reiniciar el navegador. Mientras pruebas Bridge, apaga TabHero en el mismo navegador. No lo elimines si quieres conservar sus ajustes.",
+    "firefoxNote": "Firefox está pendiente de aprobación de Mozilla. La página de la tienda aún no es pública. Esta instalación de prueba en Firefox termina al reiniciar el navegador. Mientras pruebas Bridge, apaga TabHero en el mismo navegador. No lo elimines si quieres conservar sus ajustes.",
     "chromeNote": "Apaga TabHero mientras pruebas Bridge en el mismo navegador. Deja la página actual de WhatsApp abierta como está.",
     "receiveWord": "Recibir",
     "sendWord": "Enviar",
     "whatHappens": "QUÉ PASA",
-    "tryChrome": "Probar en Chrome",
+    "tryChrome": "Instalar en Chrome",
     "browserDetected": "Parece que usas {browser}. Sus pasos ya están seleccionados abajo. Puedes elegir otro navegador.",
     "browserPick": "Elige Firefox o Chrome abajo. Estas pruebas son para un ordenador.",
     "otherDownloads": "Otras descargas",
-    "viewDownloads": "Ver descargas"
+    "viewDownloads": "Ver descargas",
+    "installChrome": "Instalar desde Chrome Web Store"
   },
   "id": {
     "skip": "Ke konten",
@@ -345,7 +348,7 @@ export const messages = {
     "outOneLine": "Izinkan RELAYERS mengirim lewat WhatsApp.",
     "tryFirefox": "Coba di Firefox",
     "seeDemo": "Lihat kedua arah",
-    "heroNote": "Ini versi uji. Biarkan browser dan WhatsApp terbuka. Belum tersedia di toko ekstensi.",
+    "heroNote": "Tersedia di Chrome Web Store. Firefox menunggu persetujuan Mozilla. Biarkan browser dan WhatsApp terbuka.",
     "visualLabel": "WHATSAPP ANDA, TERHUBUNG",
     "illustration": "CONTOH",
     "sampleContact": "Bia · Toko roti",
@@ -397,8 +400,8 @@ export const messages = {
     "privacyLink": "Pahami apa yang terjadi pada data Anda",
     "installEyebrow": "05 / COBA DENGAN ORANG YANG ANDA KENAL.",
     "installTitle": "Biarkan WhatsApp terbuka.\nTambahkan ekstensi.",
-    "installLead": "Ini masih versi uji. Untuk saat ini, ada beberapa langkah tambahan untuk memasang. Pilih browser Anda di bawah.",
-    "downloadBuild": "Unduh versi uji",
+    "installLead": "Pasang di Chrome melalui toko resminya. Firefox menunggu persetujuan Mozilla; pemasangan manual versi uji tersedia di bawah.",
+    "downloadBuild": "Unduh versi uji Firefox",
     "statusLabel": "MASIH DIUJI",
     "statusTitle": "Siap dicoba.\nMasih versi uji.",
     "statusRelayers": "Koneksi ke RELAYERS sudah diuji",
@@ -430,16 +433,17 @@ export const messages = {
     "inResult": "Bia mengirim pesan di WhatsApp.\n\nEkstensi membawanya ke RELAYERS.\nAnda memilih apa yang RELAYERS lakukan berikutnya.\n\nIni hanya contoh.",
     "outResult": "RELAYERS meminta pengiriman pesan.\n\nEkstensi meminta WhatsApp terbuka Anda mengirimnya ke Bia.\n\nObrolan aktif dan tulisan yang belum selesai tetap sama.\n\nIni hanya contoh. Bukan bukti seseorang menerima pesan nyata.",
     "duplicateResult": "Pengiriman yang sama diminta lagi.\n\nEkstensi melihat hasilnya sudah ada.\nTidak mengirim pesan lagi.\n\nIni hanya contoh.",
-    "firefoxNote": "Instalasi uji Firefox ini berakhir saat browser dimulai ulang. Saat mencoba Bridge, nonaktifkan TabHero di browser yang sama. Jangan hapus TabHero jika ingin menyimpan pengaturannya.",
+    "firefoxNote": "Firefox menunggu persetujuan Mozilla. Halaman toko belum tersedia untuk umum. Instalasi uji Firefox ini berakhir saat browser dimulai ulang. Saat mencoba Bridge, nonaktifkan TabHero di browser yang sama. Jangan hapus TabHero jika ingin menyimpan pengaturannya.",
     "chromeNote": "Nonaktifkan TabHero saat mencoba Bridge di browser yang sama. Biarkan halaman WhatsApp yang ada tetap terbuka seperti sekarang.",
     "receiveWord": "Terima",
     "sendWord": "Kirim",
     "whatHappens": "YANG TERJADI",
-    "tryChrome": "Coba di Chrome",
+    "tryChrome": "Pasang di Chrome",
     "browserDetected": "Sepertinya Anda memakai {browser}. Langkahnya sudah dipilih di bawah. Anda bisa memilih browser lain.",
     "browserPick": "Pilih Firefox atau Chrome di bawah. Pengujian ini untuk komputer.",
     "otherDownloads": "Unduhan lainnya",
-    "viewDownloads": "Lihat unduhan"
+    "viewDownloads": "Lihat unduhan",
+    "installChrome": "Pasang dari Chrome Web Store"
   },
   "hi": {
     "skip": "सामग्री पर जाएँ",
@@ -455,7 +459,7 @@ export const messages = {
     "outOneLine": "RELAYERS को WhatsApp से संदेश भेजने दें।",
     "tryFirefox": "Firefox पर आज़माएँ",
     "seeDemo": "दोनों दिशाएँ देखें",
-    "heroNote": "यह टेस्ट संस्करण है। ब्राउज़र और WhatsApp खुले रखें। अभी एक्सटेंशन स्टोर में नहीं है।",
+    "heroNote": "Chrome Web Store पर उपलब्ध है। Firefox के लिए Mozilla की मंज़ूरी का इंतज़ार है। ब्राउज़र और WhatsApp खुले रखें।",
     "visualLabel": "आपका WhatsApp, जुड़ा हुआ",
     "illustration": "उदाहरण",
     "sampleContact": "बिया · बेकरी",
@@ -507,8 +511,8 @@ export const messages = {
     "privacyLink": "जानें आपके डेटा का क्या होता है",
     "installEyebrow": "05 / किसी परिचित के साथ आज़माएँ।",
     "installTitle": "WhatsApp खुला रखें।\nएक्सटेंशन जोड़ें।",
-    "installLead": "यह अभी टेस्ट संस्करण है। फिलहाल जोड़ने के कुछ अतिरिक्त कदम हैं। नीचे अपना ब्राउज़र चुनें।",
-    "downloadBuild": "टेस्ट संस्करण डाउनलोड करें",
+    "installLead": "Chrome में आधिकारिक स्टोर से इंस्टॉल करें। Firefox के लिए Mozilla की मंज़ूरी बाकी है; नीचे टेस्ट संस्करण मैन्युअल रूप से इंस्टॉल कर सकते हैं।",
+    "downloadBuild": "Firefox का टेस्ट संस्करण डाउनलोड करें",
     "statusLabel": "जाँच अभी चल रही है",
     "statusTitle": "आज़माने के लिए तैयार।\nअभी टेस्ट संस्करण है।",
     "statusRelayers": "RELAYERS से जुड़ाव जाँचा गया",
@@ -540,16 +544,17 @@ export const messages = {
     "inResult": "बिया ने WhatsApp पर संदेश भेजा।\n\nएक्सटेंशन उसे RELAYERS तक ले गया।\nआगे RELAYERS क्या करे, आप चुनें।\n\nयह सिर्फ उदाहरण था।",
     "outResult": "RELAYERS ने संदेश भेजने को कहा।\n\nएक्सटेंशन ने आपके खुले WhatsApp से बिया को भेजने का अनुरोध किया।\n\nआपकी खुली चैट और अधूरा टेक्स्ट वैसे ही रहे।\n\nयह सिर्फ उदाहरण है। असली व्यक्ति को संदेश मिलने का प्रमाण नहीं है।",
     "duplicateResult": "उसी संदेश को फिर भेजने को कहा गया।\n\nएक्सटेंशन ने देखा कि उसका परिणाम पहले से है।\nदूसरा संदेश नहीं भेजा।\n\nयह सिर्फ उदाहरण था।",
-    "firefoxNote": "Firefox की यह टेस्ट इंस्टॉलेशन रीस्टार्ट पर समाप्त होती है। Bridge जाँचते समय उसी ब्राउज़र में TabHero बंद करें। उसकी सेटिंग बचानी हो तो हटाएँ नहीं।",
+    "firefoxNote": "Firefox के लिए Mozilla की मंज़ूरी का इंतज़ार है। स्टोर का पेज अभी सार्वजनिक नहीं है। Firefox की यह टेस्ट इंस्टॉलेशन रीस्टार्ट पर समाप्त होती है। Bridge जाँचते समय उसी ब्राउज़र में TabHero बंद करें। उसकी सेटिंग बचानी हो तो हटाएँ नहीं।",
     "chromeNote": "उसी ब्राउज़र में Bridge जाँचते समय TabHero बंद करें। मौजूदा WhatsApp पेज जैसा है वैसा खुला रखें।",
     "receiveWord": "पाएँ",
     "sendWord": "भेजें",
     "whatHappens": "क्या होता है",
-    "tryChrome": "Chrome पर आज़माएँ",
+    "tryChrome": "Chrome में इंस्टॉल करें",
     "browserDetected": "लगता है आप {browser} उपयोग करते हैं। नीचे उसके कदम चुने गए हैं। आप दूसरा ब्राउज़र चुन सकते हैं।",
     "browserPick": "नीचे Firefox या Chrome चुनें। यह जाँच कंप्यूटर पर करने के लिए है।",
     "otherDownloads": "अन्य डाउनलोड",
-    "viewDownloads": "डाउनलोड देखें"
+    "viewDownloads": "डाउनलोड देखें",
+    "installChrome": "Chrome Web Store से इंस्टॉल करें"
   }
 };
 export const content = {
@@ -646,8 +651,8 @@ export const content = {
         "To connect RELAYERS, click its name inside the extension. Follow the sign-in and confirmation steps. Choose the chats, then allow receiving, sending, or both."
       ],
       "chrome": [
-        "Click the download button below. On the page that opens, download the file with Chrome in its name. Open it and extract its contents into a folder.",
-        "Paste chrome://extensions into the browser address bar. Turn on “Developer mode”. Click “Load unpacked” and choose the folder you extracted.",
+        "Open the RELAYERS Bridge page in the Chrome Web Store using the button below.",
+        "Click “Add to Chrome”, review the permissions and confirm the installation.",
         "Keep WhatsApp open and signed in. Open Bridge from the extensions button in the browser. You can already look at your chats and try a reply with someone who agreed to help you test.",
         "To connect RELAYERS, click its name inside the extension. Follow the sign-in and confirmation steps. Choose the chats, then allow receiving, sending, or both."
       ]
@@ -746,8 +751,8 @@ export const content = {
         "Para conectar o RELAYERS, clique no nome dele dentro da extensão. Siga os passos para entrar na conta e confirmar. Escolha as conversas e permita receber, enviar ou os dois."
       ],
       "chrome": [
-        "Clique no botão de baixar abaixo. Na página que abrir, baixe o arquivo com Chrome no nome. Abra o arquivo e extraia o conteúdo para uma pasta.",
-        "Cole chrome://extensions na barra de endereços. Ative o botão “Modo do desenvolvedor”. Clique em “Carregar sem compactação” e escolha a pasta que você extraiu.",
+        "Abra a página do RELAYERS Bridge na Chrome Web Store pelo botão abaixo.",
+        "Clique em “Usar no Chrome”, confira as permissões e confirme a instalação.",
         "Deixe o WhatsApp aberto e conectado. Abra a Bridge pelo botão de extensões do navegador. Você já pode ver as conversas e testar uma resposta com alguém que combinou ajudar.",
         "Para conectar o RELAYERS, clique no nome dele dentro da extensão. Siga os passos para entrar na conta e confirmar. Escolha as conversas e permita receber, enviar ou os dois."
       ]
@@ -846,8 +851,8 @@ export const content = {
         "Para conectar RELAYERS, pulsa su nombre dentro de la extensión. Sigue los pasos para entrar y confirmar. Elige los chats y permite recibir, enviar o ambos."
       ],
       "chrome": [
-        "Pulsa el botón de descarga. En la página que abre, descarga el archivo con Chrome en el nombre. Ábrelo y extrae el contenido en una carpeta.",
-        "Pega chrome://extensions en la barra de direcciones. Activa “Modo desarrollador”. Pulsa “Cargar descomprimida” y elige la carpeta extraída.",
+        "Abre la página de RELAYERS Bridge en Chrome Web Store con el botón de abajo.",
+        "Haz clic en “Añadir a Chrome”, revisa los permisos y confirma la instalación.",
         "Deja WhatsApp abierto y conectado. Abre Bridge desde el botón de extensiones. Ya puedes ver los chats y probar una respuesta con alguien que aceptó ayudarte.",
         "Para conectar RELAYERS, pulsa su nombre dentro de la extensión. Sigue los pasos para entrar y confirmar. Elige los chats y permite recibir, enviar o ambos."
       ]
@@ -946,8 +951,8 @@ export const content = {
         "Untuk menghubungkan RELAYERS, klik namanya di dalam ekstensi. Ikuti langkah login dan konfirmasi. Pilih obrolan, lalu izinkan menerima, mengirim, atau keduanya."
       ],
       "chrome": [
-        "Klik tombol unduh di bawah. Pada halaman yang terbuka, unduh file dengan nama Chrome. Buka dan ekstrak isinya ke folder.",
-        "Tempel chrome://extensions di bilah alamat. Aktifkan “Developer mode”. Klik “Load unpacked” dan pilih folder yang diekstrak.",
+        "Buka halaman RELAYERS Bridge di Chrome Web Store melalui tombol di bawah.",
+        "Klik “Tambahkan ke Chrome”, tinjau izin dan konfirmasikan pemasangan.",
         "Biarkan WhatsApp terbuka dan login. Buka Bridge dari tombol ekstensi browser. Anda sudah bisa melihat obrolan dan mencoba balasan dengan orang yang setuju membantu pengujian.",
         "Untuk menghubungkan RELAYERS, klik namanya di dalam ekstensi. Ikuti langkah login dan konfirmasi. Pilih obrolan, lalu izinkan menerima, mengirim, atau keduanya."
       ]
@@ -1046,8 +1051,8 @@ export const content = {
         "RELAYERS जोड़ने के लिए एक्सटेंशन में उसका नाम दबाएँ। लॉगिन और पुष्टि के कदम पूरे करें। चैट चुनें, फिर पाने, भेजने या दोनों की अनुमति दें।"
       ],
       "chrome": [
-        "नीचे डाउनलोड बटन दबाएँ। खुले पेज पर Chrome नाम वाली फ़ाइल लें। उसे खोलकर सामग्री एक फ़ोल्डर में निकालें।",
-        "एड्रेस बार में chrome://extensions पेस्ट करें। “Developer mode” चालू करें। “Load unpacked” दबाकर निकाला फ़ोल्डर चुनें।",
+        "नीचे दिए बटन से Chrome Web Store पर RELAYERS Bridge का पेज खोलें।",
+        "“Chrome में जोड़ें” पर क्लिक करें, अनुमतियाँ देखें और इंस्टॉलेशन की पुष्टि करें।",
         "WhatsApp खुला और लॉगिन रखें। ब्राउज़र के एक्सटेंशन बटन से Bridge खोलें। चैट देखें और जाँच में मदद के लिए तैयार व्यक्ति को जवाब आज़माएँ।",
         "RELAYERS जोड़ने के लिए एक्सटेंशन में उसका नाम दबाएँ। लॉगिन और पुष्टि के कदम पूरे करें। चैट चुनें, फिर पाने, भेजने या दोनों की अनुमति दें।"
       ]

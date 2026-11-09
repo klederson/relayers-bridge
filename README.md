@@ -17,6 +17,12 @@ Derived from the [TabHero](https://github.com/klederson/tabhero) MIT core: conve
 
 Usage statistics are optional and start off. You may share feature counts and broad error categories; messages and credentials never enter these statistics. Refusing leaves all features available. See [extension statistics](docs/extension-analytics.md) for activation and data handling.
 
+## Install
+
+Chrome: install from the [official Chrome Web Store listing](https://chromewebstore.google.com/detail/kehnlfbcbflddadaogbfeiibhckbfiie).
+
+Firefox: Mozilla approval is pending. The [submitted listing](https://addons.mozilla.org/en-US/firefox/addon/relayers-bridge/) will become available after approval. For now, download the Firefox package from [releases](https://github.com/klederson/relayers-bridge/releases) and follow the temporary installation steps below.
+
 ## Development
 
 ```sh
@@ -26,7 +32,7 @@ npm run build
 npm run package
 ```
 
-Load `dist/chrome` as an unpacked extension in Chrome. In Firefox use `about:debugging`, Load Temporary Add-on, and `dist/firefox/manifest.json`. Store distribution is not available yet. This extension has its own identifier and does not need TabHero installed. The initial relay supports one active connection per browser profile, in regular windows.
+For local development, load `dist/chrome` as an unpacked extension in Chrome. In Firefox use `about:debugging`, Load Temporary Add-on, and `dist/firefox/manifest.json`; for a downloaded Firefox ZIP, extract it and select its `manifest.json`. Temporary Firefox installations end when the browser restarts. This extension has its own identifier and does not need TabHero installed. The initial relay supports one active connection per browser profile, in regular windows.
 
 The initial text IN/OUT relay is experimental. See [the public protocol](docs/protocol.md) for payloads, result semantics and limits. A dedicated account on the published RELAYERS test service has passed real panel approval, API, signed HTTP IN/OUT, queue/worker, bound WebSocket and duplicate-command checks. WhatsApp was simulated in that test; compatibility with an authenticated real WhatsApp session still needs validation. No existing WhatsApp document may be navigated or reloaded as a fallback.
 

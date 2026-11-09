@@ -1,4 +1,5 @@
 import { locales, messages, content } from './i18n.js';
+import { storeListings } from './store-links.js';
 const $=selector=>document.querySelector(selector);
 // A local convenience hint, never an authorization or compatibility guarantee.
 function detectBrowser(userAgent){
@@ -35,6 +36,9 @@ function renderInstall(){
  $('#install-steps').setAttribute('aria-labelledby','browser-'+browser);
  $('#install-steps').replaceChildren(...content[language].install[browser].map(step=>text('li',step)));
  $('#install-note').textContent=t[browser+'Note'];
+ const listing=storeListings[browser];
+ $('#install-download').href=listing.published?listing.url:'https://github.com/klederson/relayers-bridge/releases';
+ $('#install-download-label').textContent=listing.published?t.installChrome:t.downloadBuild;
 }
 function renderDemo(){
  const t=messages[language],incoming=direction==='in';
