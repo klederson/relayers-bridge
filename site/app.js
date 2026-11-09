@@ -61,6 +61,8 @@ function render(){
  $('#language').value=language;
  document.title='RELAYERS Bridge — '+t.heroTitle+' '+t.heroAccent;
  document.querySelector('meta[name="description"]').content=t.heroLead;
+ const tutorials=(location.protocol==='file:'?'https://klederson.github.io/relayers-bridge/tutorials/':'tutorials/')+(language==='pt'?'pt-br/':'');
+ for(const link of document.querySelectorAll('[data-tutorials-link]'))link.href=tutorials;
  renderCards();renderInstall();renderDemo();
  document.documentElement.dataset.ready='true';
 }

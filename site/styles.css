@@ -14,3 +14,4 @@
 
 /* Website statistics controls share the site palette. */
 :root{--analytics-bg:#0e1d35;--analytics-fg:#edf3ff}
+.tutorial-promo{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;border-top:1px solid #30415d}.tutorial-promo h2{font-size:40px;line-height:1.15;letter-spacing:-1.4px}.tutorial-promo p:not(.eyebrow){color:#a6b8d2;font-size:14px;line-height:1.9}.tutorial-promo img{display:block;width:100%;height:auto;border-radius:16px}.tutorial-promo .button{margin-top:10px}@media(max-width:760px){.tutorial-promo{grid-template-columns:1fr;gap:30px}.tutorial-promo h2{font-size:33px}}

@@ -1,0 +1,558 @@
+{
+  "en": {
+    "lang": "en",
+    "path": "",
+    "library": "Tutorials",
+    "back": "Back to the extension",
+    "login": "Sign in to RELAYERS",
+    "register": "Create an account",
+    "read": "Read the walkthrough",
+    "minutes": "min read",
+    "contents": "In this guide",
+    "next": "Keep exploring",
+    "start": "Start with the connection",
+    "local": "Application on my computer",
+    "remote": "Application somewhere else",
+    "imageCaption": "Original AI-created illustration. Hypothetical business setting.",
+    "screenCaption": "Real extension screen with fictional state and conversation prepared for this guide.",
+    "loginCaption": "The public RELAYERS sign-in screen. No credentials were used for this capture.",
+    "hypothetical": "HYPOTHETICAL SCENARIO",
+    "heroKicker": "GUIDES TO KEEP THE CONVERSATION MOVING",
+    "heroTitle": "From hello to what happens next.",
+    "heroLead": "Connect WhatsApp to the work happening in your business. Receive a message, bring it to the right application and send the reply through RELAYERS Bridge.",
+    "heroNote": "The person requesting a reply can be elsewhere. The computer running WhatsApp, its Bridge and its connection still need to stay available.",
+    "featured": "START HERE",
+    "collectionTitle": "One connection. More possibilities.",
+    "collectionLead": "Stories to help you picture the fit for your business. Illustrative examples, without promises of business results.",
+    "ctaTitle": "Your first step is an account.",
+    "ctaText": "Sign in to RELAYERS, install Bridge and authorize one conversation to start. Installing the extension alone does not link your account.",
+    "source": "Public source",
+    "privacy": "Privacy",
+    "tested": "What was checked",
+    "testedText": "On 9 November 2026, we used a test account on the RELAYERS service and simulated WhatsApp. The test checked sign-in and approval, separate connections, receipt in an application and a reply through the sending path, preserving the WhatsApp page. This was not delivery to a person in a real signed-in WhatsApp session.",
+    "step": "STEP",
+    "noteTitle": "One distinction matters",
+    "noteText": "Receiving and sending are separate actions. An incoming message can reach your application; a reply depends on an action or a rule you set up there.",
+    "requirements": [
+      "A RELAYERS account.",
+      "Bridge installed and WhatsApp Web open in the account you will use.",
+      "A test conversation with someone who agrees to take part.",
+      "An application chosen to receive messages and request replies."
+    ],
+    "localText": "The application runs on your business computer. Open RELAYERS Desktop on that computer, sign in to the same account and choose where incoming messages should go. Keep Desktop connected while using this local application.",
+    "remoteText": "The application runs on a server or is used by a team elsewhere. In RELAYERS, choose that application’s receiving address. It can receive messages and request replies without being on the WhatsApp computer.",
+    "locationNote": "In either case, WhatsApp and Bridge remain on the linked computer. A remote application does not need RELAYERS Desktop running on that other machine; its service must be reachable.",
+    "routesTitle": "Two paths. A clear purpose for each.",
+    "receiveTitle": "RECEIVE · IN",
+    "receiveText": "Someone writes in WhatsApp. Bridge brings the new message to RELAYERS. RELAYERS forwards it to the application you chose.",
+    "sendTitle": "SEND · OUT",
+    "sendText": "The application requests a reply. RELAYERS passes that request to Bridge. The linked WhatsApp sends to the authorized conversation.",
+    "scope": "You choose the account and conversations. Only newly observed messages in those conversations enter this flow; Bridge does not import your entire history.",
+    "statusText": "“Accepted by WhatsApp” means the app accepted the send request. Check delivery in WhatsApp. An uncertain result calls for checking before another attempt.",
+    "articles": [
+      {
+        "slug": "first-connection",
+        "key": "first-connection",
+        "category": "GETTING STARTED",
+        "title": "Your WhatsApp, your application and a conversation that goes both ways.",
+        "dek": "A complete walkthrough of signing in to RELAYERS, linking Bridge and choosing how a local or remote application joins the conversation.",
+        "time": 12,
+        "art": "connected-business.png",
+        "intro": "Picture a small bakery. Bia receives “Is my order ready?” in WhatsApp. She wants the message to reach her order system instead of hunting for the answer in several places. When the order is ready, that system could request a reply through the same business WhatsApp.",
+        "promise": "Bridge brings the conversation closer to the work already happening in your business. RELAYERS organizes the path between WhatsApp and your chosen application. What to answer remains a decision for your team or the rules in your application.",
+        "steps": [
+          [
+            "prepare",
+            "Choose what you want to connect.",
+            "Start with one test conversation. Keep WhatsApp Web signed in and open in the browser where Bridge is installed. Choose an application: an order system, a support desk or another tool your business already uses.",
+            "Bridge does not need to be installed on every team member’s machine. It stays in the browser holding the WhatsApp session.",
+            ""
+          ],
+          [
+            "account",
+            "Sign in to your RELAYERS account.",
+            "Use “Sign in to RELAYERS” in this guide. If you do not have an account, choose “Create an account”. Use the same account to organize the Bridge connection and the path to your application.",
+            "Signing in lets you manage your account. Authorizing the extension is the next step.",
+            "relayers-login.jpg"
+          ],
+          [
+            "pair",
+            "Approve Bridge using the displayed code.",
+            "Click the extension icon. At the top of its panel, click the RELAYERS brand to open the connection page. Click “Connect to RELAYERS”. Bridge shows a code and “Open RELAYERS to approve”. Open that button, sign in if asked and approve the code. Then return to Bridge.",
+            "Enter your password on the RELAYERS page. You do not need to paste your password into the extension.",
+            "bridge-pairing-en.jpg"
+          ],
+          [
+            "choose",
+            "Choose the account, conversation and both directions.",
+            "In Bridge, select your WhatsApp account and the test conversation. Enable “Incoming messages → RELAYERS” and “RELAYERS → outgoing messages”. Read the authorization and click “Create connection”.",
+            "You can allow only one direction. For this first two-way example, choose both.",
+            "bridge-setup-en.jpg"
+          ],
+          [
+            "separate",
+            "Find the receiving and sending paths.",
+            "Bridge creates two separate addresses in your RELAYERS account: one for messages received from WhatsApp (IN) and one for send requests (OUT). Find them in “Integration details”. In the RELAYERS panel, look for “WhatsApp Bridge IN” and “WhatsApp Bridge OUT”.",
+            "In the current flow, Bridge creates these addresses for you. There is no field for attaching addresses created earlier in the panel. The sending link back to this Bridge is also created automatically.",
+            "bridge-connected-en.jpg"
+          ],
+          [
+            "application",
+            "Choose where your application takes part.",
+            "In RELAYERS, open the matching “WhatsApp Bridge IN” entry and add forwarding to your application. Choose the local or remote option below. Check that the account and address match the ones shown by Bridge.",
+            "OUT already points to Bridge. Set up application receipt under IN and preserve the sending path created for the extension.",
+            ""
+          ],
+          [
+            "try",
+            "Complete a conversation with a test participant.",
+            "Ask the person to send “Is my order ready?” in the authorized conversation. Check the message in RELAYERS and in your application. Then use the sending action prepared in your application to reply “Your order is ready for pickup”. The application uses the connection’s OUT address and sending authorization.",
+            "Your application needs that sending action configured. Installing Bridge does not create automatic support or a reply button inside every system.",
+            ""
+          ],
+          [
+            "keep",
+            "Keep the necessary pieces available.",
+            "The WhatsApp computer stays on, with the browser, session and Bridge available. For a local application, RELAYERS Desktop also remains connected. For a remote one, its service remains reachable. You can pause the connection in Bridge.",
+            "A remote team can request replies without operating the WhatsApp computer. Sending still depends on the linked WhatsApp being available.",
+            ""
+          ]
+        ],
+        "outcomeTitle": "The message arrived. The information found its place. The reply came back.",
+        "outcome": "In the bakery story, the customer does not need to know where the order system runs. The business chooses where to work, while its linked WhatsApp remains the place to have the conversation.",
+        "checks": [
+          "RELAYERS and Bridge are linked through the same account.",
+          "The chosen conversation appears in the authorization.",
+          "The new message reaches the application through IN.",
+          "The application’s requested reply comes back through OUT.",
+          "WhatsApp keeps its page and draft without reloading to send."
+        ]
+      },
+      {
+        "slug": "order-ready",
+        "key": "order-ready",
+        "category": "ORDERS AND SALES",
+        "title": "“Your order is ready.” Right when it matters.",
+        "dek": "A hypothetical bakery connects a customer’s conversation to an order update without someone sitting in front of WhatsApp all the time.",
+        "time": 6,
+        "art": "orders.svg",
+        "intro": "It is late afternoon. The team is juggling the counter and collection orders. A customer asks about her cake. The answer is already in the order system; the conversation needs to reach it.",
+        "promise": "The aim is to keep service moving: receive the question, check the order and share an update. This is a possible use, not a promise of more sales or time savings.",
+        "steps": [
+          [
+            "start",
+            "Prepare one conversation first.",
+            "Follow the first-connection guide to link RELAYERS and Bridge. Authorize a test conversation and both receiving and sending. Choose the order system that will take part.",
+            "Bridge creates IN and OUT separately.",
+            "bridge-setup-en.jpg"
+          ],
+          [
+            "receive",
+            "Bring the question to the order system.",
+            "In RELAYERS, forward IN to your application. A new question in the chosen conversation can then enter the order’s service workflow.",
+            "Linking the person to their order belongs to your application. Bridge does not find orders by itself.",
+            ""
+          ],
+          [
+            "answer",
+            "Decide who answers and when.",
+            "The team can check the order and request a reply. If the system offers an order-ready notification rule, that rule can request the send through OUT.",
+            "The rule and wording must be set up in your system. Installing the extension does not start automatic replies.",
+            ""
+          ],
+          [
+            "finish",
+            "Check the reply in WhatsApp.",
+            "Bridge receives the send request and the authorized WhatsApp processes it. Check delivery in the conversation and keep a human path for questions the system cannot handle.",
+            "An accepted send does not prove the person received or read the message.",
+            "bridge-connected-en.jpg"
+          ]
+        ],
+        "outcomeTitle": "More context for the team. A conversation that continues for the customer.",
+        "outcome": "The system can run in the shop or elsewhere. People work where their information is, while the business WhatsApp remains the conversation channel.",
+        "checks": [
+          "The customer agreed to receive order updates.",
+          "The order is linked to the right conversation.",
+          "The system defines the wording and timing.",
+          "A person is available for exceptions."
+        ]
+      },
+      {
+        "slug": "remote-team",
+        "key": "remote-team",
+        "category": "SERVICE FROM ELSEWHERE",
+        "title": "Your team is elsewhere. Your service stays close.",
+        "dek": "Picture a remote support desk receiving and replying through WhatsApp that stays on the business computer.",
+        "time": 7,
+        "art": "remote.svg",
+        "intro": "A small business keeps WhatsApp open on an office computer. The person helping with support works from home. She wants messages in the support application and wants to request replies without controlling the office screen.",
+        "promise": "The team’s workplace and the computer holding the WhatsApp session can be different. RELAYERS links the application to the authorized Bridge.",
+        "steps": [
+          [
+            "base",
+            "Keep Bridge on the WhatsApp computer.",
+            "Install and link the extension in the office browser. Choose the account and conversations the team may work with. Enable receiving and sending and confirm authorization.",
+            "Requesting a send from the application does not require remote control of the screen.",
+            "bridge-connected-en.jpg"
+          ],
+          [
+            "service",
+            "Bring incoming messages to the team’s system.",
+            "In RELAYERS, forward IN to the remote support application. The team signs in there using the access your business provides and follows newly allowed messages.",
+            "Bridge does not create a multi-agent support desk. Conversation assignment and access management belong to your application.",
+            ""
+          ],
+          [
+            "reply",
+            "Request the reply from the application.",
+            "The team member writes the reply in the work tool. Its integration requests a send through OUT. RELAYERS passes the request to Bridge and the office WhatsApp sends it.",
+            "The application can be in another city. The WhatsApp computer still needs to stay on and connected.",
+            ""
+          ],
+          [
+            "routine",
+            "Agree on coverage and pauses.",
+            "Decide who watches availability and how the team notices an interruption. Pausing Bridge stops new exchanges; resuming continues pending work still available.",
+            "Messages during a pause are not recovered as a complete history.",
+            ""
+          ]
+        ],
+        "outcomeTitle": "Service where your people are. WhatsApp where its session is already open.",
+        "outcome": "Requesting every reply no longer depends on someone sitting at that browser. Your business remains responsible for organizing service and its limits.",
+        "checks": [
+          "The team has access to the support application.",
+          "The application is prepared to receive and request sends.",
+          "The office computer stays available.",
+          "The authorized conversations match the intended service."
+        ]
+      },
+      {
+        "slug": "appointments",
+        "key": "appointments",
+        "category": "SERVICES AND BOOKINGS",
+        "title": "From the first question to a confirmed appointment.",
+        "dek": "A hypothetical studio connects conversations to its booking routine, with expected messages and human follow-up.",
+        "time": 6,
+        "art": "appointments.svg",
+        "intro": "A customer asks whether Saturday is available. The team uses a booking application and wants the question to reach the right place. Once they agree, the team wants to confirm through the same conversation.",
+        "promise": "Bring the conversation closer to the schedule your business already uses. Availability, reservations and decisions remain with the application and your team.",
+        "steps": [
+          [
+            "link",
+            "Choose a test conversation.",
+            "Link Bridge to your RELAYERS account and allow receiving and sending for an authorized conversation. Choose the application where your team manages appointments.",
+            "Start with someone who agrees to test before including everyday service.",
+            "bridge-setup-en.jpg"
+          ],
+          [
+            "receive",
+            "Bring the question to the team.",
+            "Forward IN in RELAYERS to your chosen application. The new scheduling question can enter your booking support workflow.",
+            "Bridge does not check availability, reserve a slot or replace the booking system.",
+            ""
+          ],
+          [
+            "confirm",
+            "Send the confirmation you agreed on.",
+            "After the team or application confirms the booking, its integration can request a send through OUT: “Your appointment is confirmed for Saturday at 10.”",
+            "Reminders are part of the flow only if your application offers them and the person agrees to receive them.",
+            ""
+          ],
+          [
+            "follow",
+            "Leave room for the person to answer.",
+            "A later question or request for a change can follow IN again. The team reviews it and continues the conversation in the application.",
+            "The booking change must be completed in your system; a message alone does not update the schedule.",
+            ""
+          ]
+        ],
+        "outcomeTitle": "An organized schedule. A conversation someone follows.",
+        "outcome": "The customer keeps using a familiar conversation. The team works in the tool that organizes appointments, with a two-way connection that can support service.",
+        "checks": [
+          "The application manages the schedule and knows the booking.",
+          "The confirmation is tied to the authorized conversation.",
+          "The person agreed to any reminders.",
+          "The team follows replies and changes."
+        ]
+      }
+    ]
+  },
+  "pt-BR": {
+    "lang": "pt-BR",
+    "path": "pt-br/",
+    "library": "Tutoriais",
+    "back": "Voltar para a extensão",
+    "login": "Entrar no RELAYERS",
+    "register": "Criar minha conta",
+    "read": "Ler o passo a passo",
+    "minutes": "min de leitura",
+    "contents": "Neste guia",
+    "next": "Continue explorando",
+    "start": "Começar pela conexão",
+    "local": "Aplicação no meu computador",
+    "remote": "Aplicação em outro lugar",
+    "imageCaption": "Ilustração original criada com IA. Cenário de negócio fictício.",
+    "screenCaption": "Tela real da extensão com estado e conversa fictícios, preparados para este guia.",
+    "loginCaption": "Tela pública de entrada no RELAYERS. Nenhuma credencial foi usada neste print.",
+    "hypothetical": "CENÁRIO HIPOTÉTICO",
+    "heroKicker": "GUIAS PARA FAZER A CONVERSA ANDAR",
+    "heroTitle": "Do “oi” ao próximo passo.",
+    "heroLead": "Aprenda a ligar o WhatsApp ao trabalho que acontece na sua empresa. Receba uma mensagem, leve a informação à aplicação certa e envie a resposta pelo RELAYERS Bridge.",
+    "heroNote": "Sem precisar estar diante do computador que mantém o WhatsApp aberto. Esse computador, a Bridge e a conexão precisam continuar disponíveis.",
+    "featured": "COMECE POR AQUI",
+    "collectionTitle": "Uma conexão. Várias possibilidades.",
+    "collectionLead": "Histórias para visualizar o uso no seu negócio. Exemplos ilustrativos, sem promessa de resultado comercial.",
+    "ctaTitle": "O primeiro passo é ter uma conta.",
+    "ctaText": "Entre no RELAYERS, instale a Bridge e autorize uma conversa para começar. A instalação da extensão, sozinha, não vincula sua conta.",
+    "source": "Código público",
+    "privacy": "Privacidade",
+    "tested": "O que foi verificado",
+    "testedText": "Em 9 de novembro de 2026, usamos uma conta de teste no serviço RELAYERS e um WhatsApp simulado. O teste verificou login e aprovação, conexões separadas, recebimento em uma aplicação e resposta pelo caminho de envio, preservando a página do WhatsApp. Não foi um teste de entrega a uma pessoa em uma sessão real do WhatsApp.",
+    "step": "PASSO",
+    "noteTitle": "Uma distinção que faz diferença",
+    "noteText": "Receber e enviar são ações separadas. Uma mensagem recebida pode chegar à sua aplicação; a resposta depende de uma ação ou de uma regra que você preparou nela.",
+    "requirements": [
+      "Uma conta no RELAYERS.",
+      "A extensão Bridge instalada e o WhatsApp Web aberto na conta que você vai usar.",
+      "Uma conversa de teste com uma pessoa que concordou em participar.",
+      "Uma aplicação escolhida para receber as mensagens e pedir as respostas."
+    ],
+    "localText": "A aplicação roda no computador da empresa. Abra o RELAYERS Desktop nesse computador, entre na mesma conta e escolha para onde as mensagens recebidas devem seguir. Mantenha o Desktop conectado enquanto usa essa aplicação local.",
+    "remoteText": "A aplicação roda em um servidor ou é usada por uma equipe em outro lugar. No RELAYERS, escolha o endereço de recebimento dessa aplicação. Ela pode receber as mensagens e pedir respostas sem estar no computador do WhatsApp.",
+    "locationNote": "Em ambos os casos, o WhatsApp e a Bridge continuam no computador vinculado. Para uma aplicação remota, o RELAYERS Desktop não precisa ficar aberto nessa outra máquina; o serviço da aplicação precisa estar acessível.",
+    "routesTitle": "Dois caminhos, cada um com sua função.",
+    "receiveTitle": "RECEBER · IN",
+    "receiveText": "A pessoa escreve no WhatsApp. A Bridge leva a nova mensagem ao RELAYERS. O RELAYERS a encaminha à aplicação que você escolheu.",
+    "sendTitle": "ENVIAR · OUT",
+    "sendText": "A aplicação pede uma resposta. O RELAYERS entrega o pedido à Bridge. O WhatsApp vinculado faz o envio para a conversa autorizada.",
+    "scope": "Você escolhe a conta e as conversas. Só as novas mensagens observadas nessas conversas entram nesse fluxo; a Bridge não importa todo o histórico.",
+    "statusText": "“Aceito pelo WhatsApp” significa que o aplicativo aceitou o pedido de envio. Confira a entrega no próprio WhatsApp. Um resultado incerto pede conferência antes de tentar de novo.",
+    "articles": [
+      {
+        "slug": "primeira-conexao",
+        "key": "first-connection",
+        "category": "PRIMEIROS PASSOS",
+        "title": "Seu WhatsApp, sua aplicação e uma conversa que vai e volta.",
+        "dek": "O guia completo para entrar no RELAYERS, vincular a Bridge e entender como uma aplicação local ou remota participa do atendimento.",
+        "time": 12,
+        "art": "connected-business.png",
+        "intro": "Imagine uma pequena padaria. Bia recebe “Meu pedido está pronto?” pelo WhatsApp. Em vez de procurar a informação em vários lugares, ela quer que a mensagem chegue ao sistema de pedidos. Quando o pedido estiver pronto, esse sistema poderá pedir o envio da resposta pelo mesmo WhatsApp da empresa.",
+        "promise": "A Bridge aproxima a conversa do trabalho que já acontece na empresa. O RELAYERS organiza o caminho entre o WhatsApp e a aplicação escolhida. A decisão sobre o que responder continua no seu atendimento ou nas regras da sua aplicação.",
+        "steps": [
+          [
+            "prepare",
+            "Separe o que você vai conectar.",
+            "Comece com uma conversa de teste. Deixe o WhatsApp Web aberto e conectado no mesmo navegador em que instalou a Bridge. Escolha a aplicação que vai participar: um sistema de pedidos, uma central de atendimento ou outra ferramenta que sua empresa já usa.",
+            "Não é preciso instalar a Bridge na máquina de cada atendente. Ela permanece no navegador que mantém a sessão do WhatsApp.",
+            ""
+          ],
+          [
+            "account",
+            "Entre na sua conta RELAYERS.",
+            "Use o botão “Entrar no RELAYERS” deste guia. Se ainda não tiver conta, escolha “Criar minha conta”. Use a mesma conta para organizar a conexão da Bridge e o caminho até sua aplicação.",
+            "Entrar no painel permite gerenciar a conta. A autorização da extensão acontece no próximo passo.",
+            "relayers-login.jpg"
+          ],
+          [
+            "pair",
+            "Autorize a Bridge, pelo código mostrado.",
+            "Clique no ícone da extensão. No alto do painel, clique na marca RELAYERS para abrir a conexão. Clique em “Conectar ao RELAYERS”. A Bridge mostra um código e o botão “Abrir RELAYERS para aprovar”. Abra esse botão, entre na conta se solicitado e aprove o código. Depois volte à Bridge.",
+            "A senha é digitada na página do RELAYERS. Não é preciso colar sua senha na extensão.",
+            "bridge-pairing-pt.jpg"
+          ],
+          [
+            "choose",
+            "Escolha a conta, a conversa e os dois sentidos.",
+            "Na Bridge, selecione a conta do WhatsApp e marque a conversa de teste. Ative “Mensagens recebidas → RELAYERS” e “RELAYERS → mensagens enviadas”. Leia a autorização e clique em “Criar conexão”.",
+            "Você também pode permitir apenas um sentido. Para este primeiro exemplo de ida e volta, escolha os dois.",
+            "bridge-setup-pt.jpg"
+          ],
+          [
+            "separate",
+            "Encontre os caminhos de receber e de enviar.",
+            "A Bridge cria dois endereços separados na sua conta RELAYERS: um para receber as mensagens do WhatsApp (IN) e outro para os pedidos de envio (OUT). Eles aparecem em “Detalhes da integração”. No painel do RELAYERS, você encontra as entradas “WhatsApp Bridge IN” e “WhatsApp Bridge OUT”.",
+            "No fluxo atual, a Bridge cria esses endereços para você. Não há um campo para conectar endereços criados antes no painel. A ligação de envio até esta Bridge também é criada automaticamente.",
+            "bridge-connected-pt.jpg"
+          ],
+          [
+            "application",
+            "Escolha onde sua aplicação participa.",
+            "No RELAYERS, abra a entrada “WhatsApp Bridge IN” correspondente à conexão e adicione o encaminhamento para sua aplicação. Use a alternativa local ou remota explicada logo abaixo. Confira se a conta e o endereço são os mesmos exibidos pela Bridge.",
+            "O caminho OUT já aponta para a Bridge. Configure o recebimento da aplicação no IN e preserve o caminho de envio criado para a extensão.",
+            ""
+          ],
+          [
+            "try",
+            "Faça uma conversa completa, com uma pessoa de teste.",
+            "Peça à pessoa que envie “Meu pedido está pronto?” na conversa autorizada. Confira a mensagem no RELAYERS e na sua aplicação. Depois use a ação de envio preparada na aplicação para responder “Seu pedido está pronto para retirada”. A aplicação utiliza o endereço OUT e a autorização de envio da conexão.",
+            "Essa ação precisa estar configurada na sua aplicação. Instalar a Bridge não cria, por conta própria, um atendimento automático ou um botão de resposta em qualquer sistema.",
+            ""
+          ],
+          [
+            "keep",
+            "Mantenha o que precisa ficar disponível.",
+            "O computador do WhatsApp continua ligado, com o navegador, a sessão e a Bridge disponíveis. Se sua aplicação for local, o RELAYERS Desktop também permanece conectado. Se for remota, o serviço da aplicação continua acessível. Você pode pausar a conexão na Bridge.",
+            "Um atendimento remoto pode pedir respostas sem operar o computador do WhatsApp. O envio continua dependendo desse WhatsApp vinculado estar disponível.",
+            ""
+          ]
+        ],
+        "outcomeTitle": "A conversa entrou. A informação encontrou seu lugar. A resposta voltou.",
+        "outcome": "Na história da padaria, o cliente não precisa saber em qual computador está o sistema de pedidos. A empresa escolhe onde trabalhar, enquanto o WhatsApp vinculado continua sendo o ponto de conversa.",
+        "checks": [
+          "O RELAYERS e a Bridge estão vinculados à mesma conta.",
+          "A conversa escolhida aparece na autorização.",
+          "A mensagem nova chega à aplicação pelo caminho IN.",
+          "A resposta solicitada pela aplicação volta pelo caminho OUT.",
+          "O WhatsApp mantém sua página e seu rascunho, sem recarregar para enviar."
+        ]
+      },
+      {
+        "slug": "pedido-pronto",
+        "key": "order-ready",
+        "category": "PEDIDOS E VENDAS",
+        "title": "“Seu pedido está pronto.” No momento em que isso importa.",
+        "dek": "Uma padaria fictícia mostra como conectar a conversa do cliente ao andamento de um pedido, sem depender de alguém diante do WhatsApp o tempo todo.",
+        "time": 6,
+        "art": "orders.svg",
+        "intro": "É fim de tarde e a equipe divide a atenção entre o balcão e as encomendas. Uma cliente pergunta pelo bolo. A informação já está no sistema de pedidos; falta fazer a conversa chegar até ela.",
+        "promise": "O objetivo é dar continuidade ao atendimento: receber a dúvida, consultar o pedido e avisar quando houver uma atualização. É uma possibilidade de uso, não uma promessa de aumento de vendas ou de redução de tempo.",
+        "steps": [
+          [
+            "start",
+            "Prepare uma única conversa primeiro.",
+            "Siga o guia de primeiros passos para vincular a conta RELAYERS e a Bridge. Autorize uma conversa de teste e os sentidos de receber e enviar. Escolha o sistema de pedidos que participará do atendimento.",
+            "Os endereços IN e OUT são criados separadamente pela Bridge.",
+            "bridge-setup-pt.jpg"
+          ],
+          [
+            "receive",
+            "Leve a pergunta ao sistema de pedidos.",
+            "Configure no RELAYERS o encaminhamento do IN até sua aplicação. Uma nova pergunta na conversa escolhida poderá aparecer no atendimento do pedido.",
+            "O vínculo entre a pessoa e o pedido pertence à sua aplicação. A Bridge não procura encomendas sozinha.",
+            ""
+          ],
+          [
+            "answer",
+            "Decida quem responde e quando.",
+            "A equipe pode conferir o pedido e pedir o envio de uma resposta. Se o sistema oferecer uma regra de aviso de pedido pronto, ela poderá solicitar esse envio pelo OUT.",
+            "A regra e o texto precisam ser preparados no seu sistema. Nada passa a responder sozinho apenas por instalar a extensão.",
+            ""
+          ],
+          [
+            "finish",
+            "Confira a resposta no WhatsApp.",
+            "A Bridge recebe o pedido de envio e o WhatsApp autorizado o processa. Confira a entrega na conversa e mantenha um canal humano para dúvidas que o sistema não resolve.",
+            "Uma confirmação de envio aceito não comprova que a pessoa recebeu ou leu a mensagem.",
+            "bridge-connected-pt.jpg"
+          ]
+        ],
+        "outcomeTitle": "Mais contexto para a equipe. Uma conversa que continua para o cliente.",
+        "outcome": "O sistema pode estar na loja ou fora dela. Quem atende trabalha onde a informação está, e o WhatsApp da empresa continua sendo usado para conversar.",
+        "checks": [
+          "A cliente concordou em receber atualizações do pedido.",
+          "O pedido está ligado à conversa certa.",
+          "O texto e o momento do aviso foram definidos no sistema.",
+          "Existe uma pessoa para acompanhar exceções."
+        ]
+      },
+      {
+        "slug": "equipe-remota",
+        "key": "remote-team",
+        "category": "ATENDIMENTO A DISTÂNCIA",
+        "title": "A equipe está longe. O atendimento continua perto.",
+        "dek": "Como imaginar uma central remota recebendo e respondendo mensagens pelo WhatsApp que permanece no computador da empresa.",
+        "time": 7,
+        "art": "remote.svg",
+        "intro": "Uma pequena empresa tem um computador no escritório com o WhatsApp aberto. A pessoa que ajuda no atendimento trabalha de casa. Ela quer receber as conversas no sistema de atendimento e pedir respostas sem controlar a tela do escritório.",
+        "promise": "O lugar de trabalho da equipe e o computador que mantém a sessão do WhatsApp podem ser diferentes. O RELAYERS faz a ligação entre a aplicação e a Bridge autorizada.",
+        "steps": [
+          [
+            "base",
+            "Deixe a Bridge no computador do WhatsApp.",
+            "Instale e vincule a extensão no navegador do escritório. Escolha a conta e as conversas que a equipe poderá atender. Ative receber e enviar e confirme a autorização.",
+            "Não é necessário compartilhar o controle remoto da tela para que a aplicação peça um envio.",
+            "bridge-connected-pt.jpg"
+          ],
+          [
+            "service",
+            "Ligue o recebimento ao sistema da equipe.",
+            "No RELAYERS, encaminhe o IN até a aplicação remota de atendimento. A equipe entra nessa aplicação com o acesso que sua empresa definiu e acompanha as novas mensagens permitidas.",
+            "A Bridge não cria uma central de atendimento multiusuário. Distribuição de conversas e acessos são recursos da aplicação escolhida.",
+            ""
+          ],
+          [
+            "reply",
+            "Peça a resposta pela aplicação.",
+            "O atendente prepara a resposta na ferramenta de trabalho. A integração da aplicação pede o envio pelo OUT. O RELAYERS entrega o pedido à Bridge e o WhatsApp do escritório faz o envio.",
+            "A aplicação pode estar em outra cidade. O computador do WhatsApp precisa continuar ligado e conectado.",
+            ""
+          ],
+          [
+            "routine",
+            "Combine cobertura e pausas.",
+            "Defina quem acompanha a disponibilidade do computador e como a equipe percebe uma interrupção. Na Bridge, pausar interrompe novas trocas; retomar continua o trabalho pendente que ainda estiver disponível.",
+            "Mensagens ocorridas durante uma pausa não são recuperadas como um histórico completo.",
+            ""
+          ]
+        ],
+        "outcomeTitle": "Atendimento onde a equipe está. WhatsApp onde a sessão já está aberta.",
+        "outcome": "A operação deixa de depender de alguém estar sentado diante daquele navegador para pedir cada resposta. A organização e os limites do atendimento continuam sob responsabilidade da empresa.",
+        "checks": [
+          "A equipe tem acesso à aplicação de atendimento.",
+          "A aplicação já está preparada para receber e pedir envios.",
+          "O computador do escritório permanece disponível.",
+          "As conversas autorizadas correspondem ao atendimento desejado."
+        ]
+      },
+      {
+        "slug": "acompanhar-agendamentos",
+        "key": "appointments",
+        "category": "SERVIÇOS E AGENDAMENTOS",
+        "title": "Do primeiro contato à confirmação do horário.",
+        "dek": "Um estúdio fictício mostra como manter a conversa ligada à organização da agenda, com mensagens esperadas e acompanhamento humano.",
+        "time": 6,
+        "art": "appointments.svg",
+        "intro": "Uma cliente pergunta se existe horário para sábado. A equipe organiza a agenda em uma aplicação e quer que a mensagem chegue ao lugar certo. Depois de combinar o atendimento, deseja enviar a confirmação pela mesma conversa.",
+        "promise": "A ideia é aproximar a conversa da agenda que a empresa já utiliza. A disponibilidade, as reservas e as decisões continuam na aplicação e com a equipe.",
+        "steps": [
+          [
+            "link",
+            "Escolha uma conversa de teste.",
+            "Vincule a Bridge à sua conta RELAYERS e permita receber e enviar para uma conversa autorizada. Escolha a aplicação em que a equipe organiza os horários.",
+            "Comece com uma pessoa que concordou em testar, antes de incluir o atendimento habitual.",
+            "bridge-setup-pt.jpg"
+          ],
+          [
+            "receive",
+            "Faça a consulta chegar à equipe.",
+            "Encaminhe o IN no RELAYERS para a aplicação escolhida. A nova mensagem sobre o horário poderá entrar no fluxo de atendimento da agenda.",
+            "A Bridge não consulta horários, não reserva vagas e não substitui o sistema de agenda.",
+            ""
+          ],
+          [
+            "confirm",
+            "Envie a confirmação combinada.",
+            "Depois que a equipe ou a aplicação confirmar o agendamento, a integração pode pedir o envio pelo OUT: “Seu horário está confirmado para sábado às 10h”.",
+            "Lembretes só fazem parte desse fluxo se sua aplicação os oferecer e se a pessoa tiver concordado em recebê-los.",
+            ""
+          ],
+          [
+            "follow",
+            "Mantenha espaço para a pessoa responder.",
+            "Uma dúvida ou pedido de alteração recebido depois pode seguir novamente pelo IN. A equipe avalia e dá continuidade ao atendimento na aplicação.",
+            "A mudança de um agendamento precisa ser concluída no seu sistema; uma mensagem isolada não altera a agenda.",
+            ""
+          ]
+        ],
+        "outcomeTitle": "Uma agenda organizada. Uma conversa acompanhada.",
+        "outcome": "A cliente continua usando uma conversa conhecida. A equipe trabalha na ferramenta que organiza os horários, com uma ligação de ida e volta que pode apoiar o atendimento.",
+        "checks": [
+          "A aplicação organiza a agenda e conhece o agendamento.",
+          "A confirmação está ligada à conversa autorizada.",
+          "A pessoa concordou com eventuais lembretes.",
+          "A equipe acompanha respostas e alterações."
+        ]
+      }
+    ]
+  }
+}

@@ -1,3 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://klederson.github.io/relayers-bridge/</loc></url></urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://klederson.github.io/relayers-bridge/</loc></url>
+<url><loc>https://klederson.github.io/relayers-bridge/tutorials/</loc></url>
+<url><loc>https://klederson.github.io/relayers-bridge/tutorials/first-connection.html</loc></url>
+<url><loc>https://klederson.github.io/relayers-bridge/tutorials/order-ready.html</loc></url>
+<url><loc>https://klederson.github.io/relayers-bridge/tutorials/remote-team.html</loc></url>
+<url><loc>https://klederson.github.io/relayers-bridge/tutorials/appointments.html</loc></url>
+<url><loc>https://klederson.github.io/relayers-bridge/tutorials/pt-br/</loc></url>
+<url><loc>https://klederson.github.io/relayers-bridge/tutorials/pt-br/primeira-conexao.html</loc></url>
+<url><loc>https://klederson.github.io/relayers-bridge/tutorials/pt-br/pedido-pronto.html</loc></url>
+<url><loc>https://klederson.github.io/relayers-bridge/tutorials/pt-br/equipe-remota.html</loc></url>
+<url><loc>https://klederson.github.io/relayers-bridge/tutorials/pt-br/acompanhar-agendamentos.html</loc></url>
+</urlset>
 

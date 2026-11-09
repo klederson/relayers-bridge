@@ -110,7 +110,13 @@ export const messages = {
     "browserPick": "Choose Firefox or Chrome below. These tests are for a computer.",
     "otherDownloads": "Other downloads",
     "viewDownloads": "View downloads",
-    "installChrome": "Install from Chrome Web Store"
+    "installChrome": "Install from Chrome Web Store",
+    "relayersLogin": "Sign in",
+    "tutorials": "Tutorials",
+    "tutorialTitle": "See a conversation turn into the next step.",
+    "tutorialLead": "Link your account, choose where your application runs and explore four business stories with pictures and a step-by-step walkthrough.",
+    "tutorialRead": "Explore the tutorials",
+    "tutorialLanguages": "Guides in English and Portuguese."
   },
   "pt": {
     "skip": "Ir para o conteúdo",
@@ -221,7 +227,13 @@ export const messages = {
     "browserPick": "Escolha Firefox ou Chrome abaixo. Estes testes são para usar no computador.",
     "otherDownloads": "Outros downloads",
     "viewDownloads": "Ver downloads",
-    "installChrome": "Instalar pela Chrome Web Store"
+    "installChrome": "Instalar pela Chrome Web Store",
+    "relayersLogin": "Entrar",
+    "tutorials": "Tutoriais",
+    "tutorialTitle": "Veja a conversa virar o próximo passo.",
+    "tutorialLead": "Vincule sua conta, escolha onde sua aplicação funciona e explore quatro histórias de negócio com imagens e um passo a passo.",
+    "tutorialRead": "Explorar os tutoriais",
+    "tutorialLanguages": "Guias em português e inglês."
   },
   "es": {
     "skip": "Ir al contenido",
@@ -332,7 +344,13 @@ export const messages = {
     "browserPick": "Elige Firefox o Chrome abajo. Estas pruebas son para un ordenador.",
     "otherDownloads": "Otras descargas",
     "viewDownloads": "Ver descargas",
-    "installChrome": "Instalar desde Chrome Web Store"
+    "installChrome": "Instalar desde Chrome Web Store",
+    "relayersLogin": "Entrar",
+    "tutorials": "Tutoriales",
+    "tutorialTitle": "Descubre el siguiente paso de una conversación.",
+    "tutorialLead": "Vincula tu cuenta, elige dónde funciona tu aplicación y explora cuatro historias de negocio con imágenes y una guía paso a paso.",
+    "tutorialRead": "Explorar tutoriales en inglés",
+    "tutorialLanguages": "Guías disponibles en inglés y portugués."
   },
   "id": {
     "skip": "Ke konten",
@@ -443,7 +461,13 @@ export const messages = {
     "browserPick": "Pilih Firefox atau Chrome di bawah. Pengujian ini untuk komputer.",
     "otherDownloads": "Unduhan lainnya",
     "viewDownloads": "Lihat unduhan",
-    "installChrome": "Pasang dari Chrome Web Store"
+    "installChrome": "Pasang dari Chrome Web Store",
+    "relayersLogin": "Masuk",
+    "tutorials": "Tutorial",
+    "tutorialTitle": "Lihat percakapan menjadi langkah berikutnya.",
+    "tutorialLead": "Hubungkan akun, pilih lokasi aplikasi dan jelajahi empat kisah bisnis dengan gambar serta panduan langkah demi langkah.",
+    "tutorialRead": "Lihat tutorial bahasa Inggris",
+    "tutorialLanguages": "Panduan tersedia dalam bahasa Inggris dan Portugis."
   },
   "hi": {
     "skip": "सामग्री पर जाएँ",
@@ -554,7 +578,13 @@ export const messages = {
     "browserPick": "नीचे Firefox या Chrome चुनें। यह जाँच कंप्यूटर पर करने के लिए है।",
     "otherDownloads": "अन्य डाउनलोड",
     "viewDownloads": "डाउनलोड देखें",
-    "installChrome": "Chrome Web Store से इंस्टॉल करें"
+    "installChrome": "Chrome Web Store से इंस्टॉल करें",
+    "relayersLogin": "साइन इन",
+    "tutorials": "गाइड",
+    "tutorialTitle": "देखें बातचीत से अगला कदम कैसे बनता है।",
+    "tutorialLead": "खाता जोड़ें, ऐप की जगह चुनें और तस्वीरों व चरणबद्ध गाइड के साथ कारोबार की चार कहानियाँ देखें।",
+    "tutorialRead": "अंग्रेज़ी में गाइड पढ़ें",
+    "tutorialLanguages": "गाइड अंग्रेज़ी और पुर्तगाली में उपलब्ध हैं।"
   }
 };
 export const content = {

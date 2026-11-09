@@ -5,6 +5,8 @@ on:
     paths:
       - 'site/**'
       - 'tests/site-browser.mjs'
+      - 'tests/tutorials-browser.mjs'
+      - 'scripts/build-tutorials.mjs'
       - 'tests/website-analytics.mjs'
       - 'package.json'
       - 'package-lock.json'
@@ -25,6 +27,11 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - run: npm run build:tutorials
+      - name: Check tutorials and screenshots
+        run: npm run test:tutorials
+        env:
+          SITE_BROWSER_CHANNEL: chrome
       - name: Check website with the browser already on the runner
         run: npm run test:site
         env:

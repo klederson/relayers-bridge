@@ -13,6 +13,14 @@ You choose the account, the chats and what is allowed. Keep the computer, browse
 
 [Explore the website](https://klederson.github.io/relayers-bridge/) · [Read the protocol](docs/protocol.md) · [Privacy](PRIVACY.md)
 
+## Illustrated tutorials
+
+Start with [your first two-way conversation](https://klederson.github.io/relayers-bridge/tutorials/first-connection.html): where to sign in, how to approve Bridge, how the separate receiving (IN) and sending (OUT) connections are created, and where a local or remote application joins the flow.
+
+The [tutorial library](https://klederson.github.io/relayers-bridge/tutorials/) also explores order updates, a remote support team and appointment confirmations. All four guides are available in [Portuguese](https://klederson.github.io/relayers-bridge/tutorials/pt-br/), with original artwork, diagrams and annotated context for real extension captures using fictional data. Business scenarios are hypothetical; they are not customer testimonials.
+
+The full flow was checked on 9 November 2026 with an owned test account on the real RELAYERS service, a separate local application and simulated WhatsApp. It exercised approval, separate IN/OUT endpoints, IN delivery to the application and an independent signed OUT reply while preserving the WhatsApp document, draft and work-tab focus. This does not validate authenticated WhatsApp compatibility or recipient delivery.
+
 Derived from the [TabHero](https://github.com/klederson/tabhero) MIT core: conversation links reuse the loaded document, and the toolbar keeps quick reply, conversation search, saved replies, optional AI, media placeholders and the silent unread badge.
 
 Usage statistics are optional and start off. You may share feature counts and broad error categories; messages and credentials never enter these statistics. Refusing leaves all features available. See [extension statistics](docs/extension-analytics.md) for activation and data handling.

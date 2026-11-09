@@ -17,6 +17,8 @@ html=html.replace('<link rel="stylesheet" href="styles.css">','<style>\n'+css+'\
 const script=(catalog+'\n'+stores+'\n'+app).replace(/<\/script/gi,'<\\/script');
 html=html.replace('<script type="module" src="app.js"></script>','<script type="module">\n'+script+'\n</script>');
 html=html.replaceAll('assets/mark.svg',mark);
+const tutorialArt='data:image/png;base64,'+Buffer.from(await readFile(new URL('site/tutorials/assets/connected-business.png',root))).toString('base64');
+html=html.replaceAll('src="tutorials/assets/connected-business.png"',`src="${tutorialArt}"`);
 await writeFile(new URL('docs/feature-guide.html',root),'<!-- Generated from site/ by scripts/build-feature-guide.mjs. The local guide starts in Portuguese. -->\n'+html);
 console.log('Standalone guide: docs/feature-guide.html');
 

@@ -6,6 +6,9 @@ import { cp, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { chromium } from 'playwright';
+import { createServer } from 'node:http';
+import { WebSocket } from 'ws';
+import { decodeKey, createFrameVerifier, signFrame } from '../extension/bridge/wire.js';
 import { dismissChromiumWelcome } from './installation.mjs';
 
 if (process.env.RELAYERS_LIVE_TEST !== '1' || !process.env.RELAYERS_LIVE_ACCOUNT_FILE) {
@@ -16,6 +19,8 @@ assert.ok(account.email?.startsWith('bridge-qa-') && account.email.endsWith('@ex
 assert.equal(new URL(account.server).protocol, 'https:');
 const address = new URL(account.server).origin;
 let stage = 'test profile', context, bridge, worker, config, access, approval, loginStatus, approvalStatus;
+let appSocket, appServer, appHeartbeat, appDaemon, appError;
+const appMessages = [];
 const profile = await mkdtemp(join(tmpdir(), 'relayers-bridge-live-'));
 const extension = join(profile, 'extension');
 const eventually = async (check, message, timeout = 45000) => {
@@ -110,7 +115,12 @@ try {
   const command = { schema: 'relayers.whatsapp.v1', type: 'message.send', commandId: randomUUID(), connectionId: config.connectionId, accountId: config.accountId, chatId: config.chatIds[0], text: 'RELAYERS live transport test — simulated WhatsApp only.', expiresAt: new Date(Date.now() + 300000).toISOString() };
   const submit = async value => {
     const raw = JSON.stringify(value);
-    return request(`/v1/webhooks/${config.outEndpoint.publicId}`, { method: 'POST', body: raw, headers: { 'X-Relayers-Signature': createHmac('sha256', secret.secret).update(raw).digest('hex'), 'X-Idempotency-Key': randomUUID() } });
+    // An independent application needs the OUT secret, not the browser's
+    // RELAYERS login token or its cookies, to submit an authorized command.
+    const response = await fetch(`${address}/v1/webhooks/${config.outEndpoint.publicId}`, { method: 'POST', body: raw,
+      headers: { 'Content-Type': 'application/json', 'X-Relayers-Signature': createHmac('sha256', secret.secret).update(raw).digest('hex'), 'X-Idempotency-Key': randomUUID() }, signal: AbortSignal.timeout(20000) });
+    assert.ok(response.ok, 'Independent application OUT ingestion failed');
+    return (await response.json()).data;
   };
   const work = await context.newPage(); await work.goto('https://work.test/'); await work.bringToFront();
   const workId = await worker.evaluate(async () => (await chrome.tabs.query({ active: true, currentWindow: true }))[0].id);
@@ -133,7 +143,48 @@ try {
   assert.deepEqual(await whatsapp.evaluate(() => appState.opens), []);
   assert.equal(navigations, 0);
   assert.equal(await worker.evaluate(async () => (await chrome.tabs.query({ active: true, currentWindow: true }))[0].id), workId);
-  stage = 'real signed IN ingestion';
+  stage = 'independent local application and its own tunnel';
+  appServer = createServer(async (req, res) => {
+    let raw = ''; for await (const part of req) raw += part;
+    if (req.method !== 'POST' || req.url !== '/messages') { res.writeHead(404).end(); return; }
+    try { appMessages.push(JSON.parse(raw)); res.writeHead(204).end(); }
+    catch { res.writeHead(400).end(); }
+  });
+  await new Promise(resolve => appServer.listen(0, '127.0.0.1', resolve));
+  const appUrl = `http://127.0.0.1:${appServer.address().port}/messages`;
+  const appDestination = 'https://tutorial.bridge.invalid/messages';
+  const tunnelUrl = new URL('/v1/tunnel/connect', address); tunnelUrl.protocol = 'wss:';
+  appSocket = new WebSocket(tunnelUrl);
+  await new Promise((resolve, reject) => {
+    let key, verify, chain = Promise.resolve();
+    const timer = setTimeout(() => reject(new Error('Application tunnel timeout')), 15000);
+    const write = async frame => appSocket.send(JSON.stringify(await signFrame(key, frame)));
+    appSocket.on('open', () => appSocket.send(JSON.stringify({ type: 'auth', token: access, daemon_id: '', system_info: { hostname: 'Bridge tutorial QA app', os: 'node' } })));
+    appSocket.on('error', error => { appError = error; reject(error); });
+    appSocket.on('message', raw => {
+      chain = chain.then(async () => {
+        const frame = JSON.parse(raw.toString());
+        if (!key) {
+          assert.equal(frame.type, 'auth_ok'); appDaemon = frame.daemon_id;
+          assert.notEqual(appDaemon, config.daemonId, 'The application and browser need separate tunnel destinations');
+          key = decodeKey(frame.session_key); verify = createFrameVerifier(key);
+          await write({ type: 'subscribe', endpoint_ids: [config.inEndpoint.id] });
+          appHeartbeat = setInterval(() => write({ type: 'heartbeat' }).catch(error => { appError = error; }), 20000);
+          clearTimeout(timer); resolve(); return;
+        }
+        await verify(frame);
+        if (frame.type === 'ping') { await write({ type: 'ping_resp', ping_id: frame.ping_id }); return; }
+        if (frame.type !== 'deliver') return;
+        assert.equal(frame.endpoint_id, config.inEndpoint.id); assert.equal(frame.url, appDestination); assert.equal(frame.method, 'POST');
+        const delivered = await fetch(appUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: Buffer.from(frame.body, 'base64'), signal: AbortSignal.timeout(5000) });
+        await write({ type: 'deliver_resp', delivery_id: frame.delivery_id, status_code: delivered.status, headers: {}, body: '' });
+      }).catch(error => { appError = error; clearTimeout(timer); reject(error); });
+    });
+  });
+  await request(`/v1/endpoints/${config.inEndpoint.id}/rules/`, { method: 'POST', body: JSON.stringify({ name: 'Tutorial QA IN to application', priority: 100, filter: {},
+    destination_type: 'tunnel', destination_url: appDestination, daemon_id: appDaemon, http_method: 'POST', timeout_ms: 30000,
+    retry_policy: { max_retries: 5, backoff_base_sec: 10, backoff_max_sec: 60 } }) });
+  stage = 'real signed IN ingestion and delivery to the application';
   const messageId = `live-fixture-${randomUUID()}`;
   await whatsapp.evaluate(id => {
     require('WAWebChatCollection').ChatCollection.getModelsArray()[0].msgs.getModelsArray = () => [
@@ -149,7 +200,19 @@ try {
   }, 'IN not recorded by RELAYERS');
   assert.equal(received.payload.text, 'Incoming fixture text for the live RELAYERS transport.');
   assert.equal(received.payload.connectionId, config.connectionId);
+  await eventually(() => appMessages.some(item => item.messageId === messageId), 'IN did not reach the separate local application');
+  assert.equal(appMessages.find(item => item.messageId === messageId).text, received.payload.text);
+  assert.ok(!appError, 'Application tunnel failed');
   await eventually(async () => (await status()).pending === 0, 'Acknowledged IN still queued');
+  stage = 'application reply through OUT without browser login credentials';
+  const reply = { ...command, commandId: randomUUID(), text: 'Your order is ready — hypothetical tutorial case.', expiresAt: new Date(Date.now() + 300000).toISOString() };
+  await submit(reply);
+  await eventually(async () => await whatsapp.evaluate(() => appState.messages.length) === 2, 'Application reply did not return through OUT');
+  assert.equal(await whatsapp.evaluate(original => document === original, documentHandle), true);
+  assert.equal(await whatsapp.locator('#compose').inputValue(), draft); assert.equal(navigations, 0);
+  assert.deepEqual(await whatsapp.evaluate(() => appState.opens), []);
+  assert.equal(await worker.evaluate(async () => (await chrome.tabs.query({ active: true, currentWindow: true }))[0].id), workId);
+  console.log('Live: IN reached an independent local application; its separate HTTP request returned a reply through OUT. No browser login credential was used for the send.');
   stage = 'disconnect';
   await bridge.evaluate(() => chrome.runtime.sendMessage({ type: 'bridge-disconnect', confirm: true }));
   assert.deepEqual(await worker.evaluate(() => chrome.storage.local.get(['bridgeAuth', 'bridgeBinding', 'bridgeInbox', 'bridgeCommandJournal'])), {});
@@ -166,6 +229,8 @@ try {
   }
   process.exitCode = 1;
 } finally {
+  clearInterval(appHeartbeat); appSocket?.terminate();
+  if (appServer) await new Promise(resolve => appServer.close(resolve));
   if (!config && worker) config = await worker.evaluate(async () => (await chrome.storage.local.get('bridgeBinding')).bridgeBinding).catch(() => null);
   if (bridge) await bridge.evaluate(() => chrome.runtime.sendMessage({ type: 'bridge-disconnect', confirm: true })).catch(() => {});
   if (access && config) {
@@ -175,6 +240,7 @@ try {
       if (endpoint) await request(`/v1/endpoints/${endpoint.id}/`, { method: 'DELETE' }).catch(() => { cleanupFailures++; });
     }
     if (config.daemonId) await request(`/v1/daemons/${config.daemonId}/`, { method: 'DELETE' }).catch(() => { cleanupFailures++; });
+    if (appDaemon) await request(`/v1/daemons/${appDaemon}/`, { method: 'DELETE' }).catch(() => { cleanupFailures++; });
     if (cleanupFailures) { console.error(`QA resource cleanup failed for ${cleanupFailures} resources.`); process.exitCode = 1; }
   }
   if (context) await context.close();
