@@ -274,6 +274,303 @@
           "The person agreed to any reminders.",
           "The team follows replies and changes."
         ]
+      },
+      {
+        "slug": "relayers-for-everyone",
+        "key": "relayers-for-everyone",
+        "scope": "relayers",
+        "category": "START FROM ZERO",
+        "title": "RELAYERS for nontechnical people: a simple beginning.",
+        "dek": "Learn what it does, where to sign in and how to take your first steps, with everyday examples and familiar words.",
+        "time": 9,
+        "art": "mailroom.svg",
+        "intro": "Imagine your business receives notices from several tools: an order was placed, a payment was confirmed, someone completed a form. Each piece of news arrives in a different way. RELAYERS helps receive these notices and forward them to the place you choose so work can continue.",
+        "promise": "Think of a business mailroom: a notice arrives, the agreed path is checked and the information goes to its destination. You decide what should happen. Connecting the tools initially may need help from the person who looks after them; understanding the process and following the result does not require programming.",
+        "requirements": [
+          "A RELAYERS account.",
+          "A tool with a way to share its notices.",
+          "A destination that can receive those notices.",
+          "One simple situation and someone to help connect it if needed."
+        ],
+        "flow": [
+          "Something happens",
+          "RELAYERS forwards it",
+          "Work continues"
+        ],
+        "flowText": "For example: a shop records a new order, RELAYERS forwards the notice and the team’s chosen system can receive it. The notice follows this path after the connection has been prepared.",
+        "steps": [
+          [
+            "understand",
+            "Start with the problem you want to solve.",
+            "Use one sentence: “When an order arrives, I want the delivery team to know.” You have already defined the important parts: what happens, who needs to know and where the information should appear.",
+            "Choose one situation. A small first case is easier to follow than connecting your whole business at once.",
+            ""
+          ],
+          [
+            "account",
+            "Create an account and sign in.",
+            "Use “Create an account” if this is your first visit. Enter your name, email and password on the RELAYERS page. Then use “Sign in to RELAYERS” to open your panel. If you already have an account, sign in directly.",
+            "Your account is where you organize incoming notices and follow what happened. Use the access your business has agreed on for this work.",
+            "relayers-login.jpg"
+          ],
+          [
+            "source",
+            "Choose where the notice comes from.",
+            "It could be a shop, payment system or form that offers a way to notify other tools. Pick one specific occurrence, such as “order placed”.",
+            "RELAYERS receives what the source is prepared to share. Signing in does not automatically connect all your systems.",
+            ""
+          ],
+          [
+            "destination",
+            "Choose where the notice should arrive.",
+            "It might be a system your team uses or an application running on the business computer. Name the destination and what people expect to find there, such as a new order-picking task.",
+            "Receiving the notice and creating a task are different jobs. The chosen system must be prepared to turn the notice into the intended action.",
+            ""
+          ],
+          [
+            "connect",
+            "Prepare the path between both sides.",
+            "In RELAYERS, organize an entry for incoming notices and a path to the destination. The source tool uses the receiving address supplied by RELAYERS. If these fields are unfamiliar, ask the person who looks after the tools to connect them with you.",
+            "A useful request is: “I want this notice from this tool to reach this system.” You do not need to know installation details to define the result.",
+            ""
+          ],
+          [
+            "desktop",
+            "If the destination is on your computer, meet Desktop.",
+            "RELAYERS Desktop brings notices to a tool running on your computer. Download it from the official page, open it and sign in to the same account. “Forwarding” is where you choose where notices should arrive.",
+            "The app needs to stay connected for local receipt. For a destination available on the internet, agree with its owner how forwarding should reach it.",
+            ""
+          ],
+          [
+            "test",
+            "Try an example you can recognize.",
+            "Create a test order using demonstration details agreed with your team. Check that the notice appears in RELAYERS and then at the destination. Compare the result with your sentence from the first step.",
+            "The aim is to find that notice in the right place. Seeing it only in RELAYERS does not confirm the destination completed its part.",
+            ""
+          ],
+          [
+            "routine",
+            "Follow and adjust the routine.",
+            "Look at incoming notices and forwarding attempts in the panel or app. Agree who follows the flow and what to do when a notice needs attention. To stop a path, pause its forwarding rule.",
+            "Before requesting another attempt, check whether the destination already received the notice. This helps avoid repeating a task or action.",
+            ""
+          ]
+        ],
+        "questions": [
+          [
+            "Do I need to program?",
+            "Not to understand the process, define the result and follow everyday work. Connecting the tools depends on what each offers and may need someone experienced with their settings."
+          ],
+          [
+            "Is it an app for chatting with customers?",
+            "RELAYERS primarily receives and forwards notices between tools. A customer conversation or service screen belongs to the system you choose for that work."
+          ],
+          [
+            "What is an entry?",
+            "It is the agreed place where a tool delivers notices to RELAYERS. Think of a mailbox with its own address."
+          ],
+          [
+            "What is a destination?",
+            "It is the tool or application that should receive the notice afterward. It is where the information supports your team’s work."
+          ],
+          [
+            "What is a forwarding rule?",
+            "It is the agreement that says where a notice should go. Different needs can use different paths."
+          ],
+          [
+            "Does a received notice mean everything is done?",
+            "It confirms one part of the path. Also check forwarding to the destination and the result your team expected there."
+          ]
+        ],
+        "outcomeTitle": "You know what arrives, where it goes and who follows it.",
+        "outcome": "That is a useful first result: a simple path your team understands and has checked with an example. Once it works, you can consider a second need more clearly.",
+        "checks": [
+          "I can describe the notice that starts the process.",
+          "I know its source tool and destination.",
+          "I have an account and know where to check incoming notices.",
+          "The connection was prepared with the responsible person.",
+          "A test showed the notice at the expected destination."
+        ]
+      },
+      {
+        "slug": "follow-your-notices",
+        "key": "follow-your-notices",
+        "scope": "relayers",
+        "category": "AN EVERYDAY ROUTINE",
+        "title": "The notice arrived. What next? A guide to following everyday work.",
+        "dek": "Check incoming notices, spot when something needs attention and talk with your team without getting lost in the details.",
+        "time": 6,
+        "art": "noticeboard.svg",
+        "intro": "A hypothetical shop has prepared its first path: new-order notices go to the team’s system. The person coordinating daily work wants to know whether information is arriving and who to call when something stops.",
+        "promise": "Start with three questions: did the notice appear, did it reach the destination and did the expected result happen? Each answer covers a different part of the path.",
+        "requirements": [
+          "A receiving path already prepared.",
+          "Access to the RELAYERS account used by the business.",
+          "Someone responsible for the destination tool."
+        ],
+        "flow": [
+          "Find the notice",
+          "Follow its path",
+          "Check the result"
+        ],
+        "flowText": "Follow one known occurrence from beginning to end. Receipt in RELAYERS, forwarding and the destination’s action are separate steps.",
+        "steps": [
+          [
+            "account",
+            "Sign in to the account your business uses.",
+            "Open the RELAYERS panel with the agreed access. If you use Desktop to receive on a computer, open that app too and check that it is connected.",
+            "Use the account that organizes the path you want to follow.",
+            "relayers-login.jpg"
+          ],
+          [
+            "find",
+            "Look for a notice you can identify.",
+            "Choose a recent order or occurrence the team recognizes. Find its incoming notice in RELAYERS. Compare the time and information to recognize the right occurrence.",
+            "A known example is more useful than searching a whole list without knowing what you need.",
+            ""
+          ],
+          [
+            "follow",
+            "Check forwarding to the destination.",
+            "Open that notice’s details and follow its delivery attempts. Look for whether the destination received it, an attempt is still underway or a failure needs attention.",
+            "The history helps describe what happened. It does not replace checking the action inside the destination tool.",
+            ""
+          ],
+          [
+            "confirm",
+            "Check the team’s tool too.",
+            "If the agreement was to create an order-picking task, ask the team to find it. If the destination received the notice but the task did not appear, its owner needs to examine what happened next.",
+            "This lets you explain which step differed from the expected result.",
+            ""
+          ],
+          [
+            "help",
+            "Ask for help with a simple description.",
+            "Say which notice you expected, when it happened, how far you could follow it and which result was missing. For example: “The test order appeared in RELAYERS, but I could not find the task in our system.”",
+            "You do not need to send a password to explain a problem. The responsible person can investigate using their own access.",
+            ""
+          ],
+          [
+            "retry",
+            "Agree before making another attempt.",
+            "If someone suggests sending a notice again, first check whether the destination received it or the action already happened. Agree who makes another attempt and how to check its result.",
+            "Another attempt can repeat an action in the receiving system. Consider what has already happened in that case.",
+            ""
+          ]
+        ],
+        "questions": [
+          [
+            "Will notices reach my computer with Desktop closed?",
+            "Local receipt depends on Desktop or another receiving connection being available. Check the history and agree how to resume after an interruption."
+          ],
+          [
+            "Can I pause a path?",
+            "RELAYERS supports pausing forwarding rules. Check which rule is selected and the intended effect before changing the routine."
+          ],
+          [
+            "Does RELAYERS perform the task inside my system?",
+            "RELAYERS forwards the notice. The destination tool is responsible for using the information in the agreed task or action."
+          ]
+        ],
+        "outcomeTitle": "Less guessing. A description that helps people resolve the issue.",
+        "outcome": "You can show what arrived, what was forwarded and where the team should look next. That clarity helps both the people following daily work and the people maintaining the tools.",
+        "checks": [
+          "I found a known occurrence.",
+          "I checked its forwarding.",
+          "The team checked the destination result.",
+          "Someone is responsible for failures.",
+          "Another attempt happens only after these checks."
+        ]
+      },
+      {
+        "slug": "plan-your-first-flow",
+        "key": "plan-your-first-flow",
+        "scope": "relayers",
+        "category": "PREPARE WITH YOUR TEAM",
+        "title": "How to ask for a connection that makes sense for your business.",
+        "dek": "Define the result, talk to the people who maintain your tools and start with a case everyone understands.",
+        "time": 6,
+        "art": "planning.svg",
+        "intro": "A small business wants to connect its tools, but the discussion starts with unfamiliar terms. The person who knows the business understands what the team needs; they need to turn it into a clear request.",
+        "promise": "Begin with the routine: what happens, who needs to know, where information should arrive and how you will recognize success. RELAYERS can organize forwarding when the tools involved offer the necessary connection.",
+        "requirements": [
+          "One concrete team need.",
+          "The names of the tools involved.",
+          "Someone familiar with those tools’ access and settings."
+        ],
+        "flow": [
+          "Describe the need",
+          "Prepare with the team",
+          "Check an example"
+        ],
+        "flowText": "A clear request connects a business need to a result the team can check. Setup follows that agreement.",
+        "steps": [
+          [
+            "need",
+            "Write down what happens first.",
+            "Use a familiar sentence: “Someone completes our quote form” or “An order is confirmed.” Choose one occurrence and the tool where it happens.",
+            "“Automate everything” is hard to check. A defined occurrence gives your team a starting point.",
+            ""
+          ],
+          [
+            "destination",
+            "Say where information should appear.",
+            "Name the tool your team uses and which information would be useful there. For example: “The confirmed order should reach the system that organizes deliveries.”",
+            "The destination must have a way to receive the notice. The person looking after the tools checks that possibility.",
+            ""
+          ],
+          [
+            "action",
+            "Describe what should happen afterward.",
+            "Agree whether the result is simply receiving information or also performing an action at the destination, such as creating a task. Make clear who prepares that action and who follows exceptions.",
+            "Forwarding the notice and acting on it are different responsibilities. Include both in the request.",
+            ""
+          ],
+          [
+            "people",
+            "Decide who takes part.",
+            "Choose who approves the business result, who prepares the connection and who follows daily use. Use the RELAYERS account and access agreed by your business.",
+            "A name for each responsibility helps people know whom to ask.",
+            ""
+          ],
+          [
+            "test",
+            "Agree on a test example.",
+            "Choose a fictional order or form everyone can recognize. Write where it should appear and what you will check at the destination. Ask the responsible person to explain how to stop the path if needed.",
+            "The test should show the team’s need being met as well as a notice being received.",
+            ""
+          ],
+          [
+            "handover",
+            "Leave a simple written agreement.",
+            "Write: “When ___ happens in ___, we want ___ to arrive in ___. We will check whether ___ happened. ___ prepares it and ___ follows it.”",
+            "Use this sentence in a discussion, meeting or tracking task. Fill it with your business’s actual situation.",
+            ""
+          ]
+        ],
+        "questions": [
+          [
+            "Do I need to choose installation details?",
+            "Begin with the need and expected result. The person who looks after the tools helps select and prepare the appropriate path."
+          ],
+          [
+            "How do I know whether the idea is possible?",
+            "Ask the responsible person to check whether the source can share its notice and the destination can receive it and perform the desired action."
+          ],
+          [
+            "When should we add another situation?",
+            "After checking the first example and agreeing who follows its use. Your team then knows the path before expanding the routine."
+          ]
+        ],
+        "outcomeTitle": "A request your team can understand and check.",
+        "outcome": "You leave the discussion with a defined need, named responsibilities and an agreed example of success. That gives the work of connecting tools a direction.",
+        "checks": [
+          "We defined a starting occurrence.",
+          "We know the source and destination.",
+          "We agreed which action belongs to the destination.",
+          "Someone prepares the path and someone follows it.",
+          "We know which example will show it worked."
+        ]
       }
     ]
   },
@@ -551,6 +848,303 @@
           "A confirmação está ligada à conversa autorizada.",
           "A pessoa concordou com eventuais lembretes.",
           "A equipe acompanha respostas e alterações."
+        ]
+      },
+      {
+        "slug": "relayers-sem-complicacao",
+        "key": "relayers-for-everyone",
+        "scope": "relayers",
+        "category": "COMECE DO ZERO",
+        "title": "RELAYERS para quem não é técnico: um começo simples.",
+        "dek": "Entenda para que serve, onde entrar e como dar os primeiros passos, com exemplos da rotina e palavras que você já conhece.",
+        "time": 9,
+        "art": "mailroom.svg",
+        "intro": "Imagine que sua empresa recebe avisos de várias ferramentas: um pedido foi registrado, um pagamento foi confirmado, alguém preencheu um formulário. Cada notícia chega por um caminho. O RELAYERS ajuda a receber esses avisos e encaminhá-los ao lugar escolhido para o trabalho continuar.",
+        "promise": "Pense em uma central de correspondências da empresa: um aviso chega, o caminho combinado é consultado e a informação segue para o destino. Você decide o que precisa acontecer. A ligação inicial entre as ferramentas pode pedir ajuda de quem cuida delas; para entender o processo e acompanhar o resultado, você não precisa programar.",
+        "requirements": [
+          "Uma conta no RELAYERS.",
+          "Uma ferramenta que tenha uma forma de compartilhar seus avisos.",
+          "Um destino que consiga receber esses avisos.",
+          "Uma situação simples e uma pessoa para ajudar na ligação, se necessário."
+        ],
+        "flow": [
+          "Um aviso acontece",
+          "RELAYERS encaminha",
+          "O trabalho continua"
+        ],
+        "flowText": "Por exemplo: a loja registra um novo pedido, o RELAYERS encaminha esse aviso e o sistema escolhido pela equipe pode recebê-lo. O aviso só segue depois que esse caminho foi preparado.",
+        "steps": [
+          [
+            "understand",
+            "Comece pelo problema que quer resolver.",
+            "Pense em uma frase: “Quando um pedido entrar, quero que a equipe que prepara a entrega saiba disso”. Você já definiu o mais importante: o que acontece, quem precisa saber e onde essa informação deve aparecer.",
+            "Escolha uma única situação. Um primeiro caso pequeno é mais fácil de acompanhar do que tentar conectar a empresa inteira de uma vez.",
+            ""
+          ],
+          [
+            "account",
+            "Crie sua conta e entre.",
+            "Use “Criar minha conta” se for a primeira vez. Preencha seu nome, e-mail e senha na página do RELAYERS. Depois use “Entrar no RELAYERS” para acessar seu painel. Se já tem conta, pode entrar diretamente.",
+            "A conta é o lugar onde você organiza seus recebimentos e acompanha o que aconteceu. Use o acesso da empresa que vai cuidar desse trabalho.",
+            "relayers-login.jpg"
+          ],
+          [
+            "source",
+            "Escolha de onde o aviso vai sair.",
+            "Pode ser uma loja, um sistema de pagamentos ou um formulário que ofereça uma forma de avisar outras ferramentas. Escolha um acontecimento concreto, como “pedido criado”.",
+            "O RELAYERS recebe o que a ferramenta está preparada para compartilhar. Entrar na conta não faz todos os seus sistemas se conectarem automaticamente.",
+            ""
+          ],
+          [
+            "destination",
+            "Escolha onde esse aviso precisa chegar.",
+            "Pode ser um sistema usado pela equipe ou uma aplicação que roda no computador da empresa. Diga qual é o destino e o que as pessoas esperam encontrar ali: por exemplo, uma nova tarefa de separação do pedido.",
+            "Receber o aviso e criar uma tarefa são trabalhos diferentes. O sistema escolhido precisa estar preparado para transformar o aviso na ação desejada.",
+            ""
+          ],
+          [
+            "connect",
+            "Prepare o caminho entre os dois lados.",
+            "No RELAYERS, você organiza uma entrada para receber os avisos e o caminho até o destino. A ferramenta de origem usa o endereço de recebimento fornecido pelo RELAYERS. Se esses campos não forem familiares, peça a quem cuida das ferramentas para fazer essa ligação com você.",
+            "Uma explicação útil para pedir ajuda é: “Quero levar este aviso desta ferramenta até este sistema”. Não é preciso conhecer os detalhes da instalação para definir o resultado.",
+            ""
+          ],
+          [
+            "desktop",
+            "Se o destino estiver no seu computador, conheça o Desktop.",
+            "O RELAYERS Desktop é o aplicativo que leva os avisos até uma ferramenta que funciona no seu computador. Baixe pela página oficial, abra e entre na mesma conta. Em “Forwarding”, fica a escolha de onde os avisos devem chegar.",
+            "O aplicativo precisa continuar conectado enquanto recebe no computador. Para um destino disponível pela internet, combine com a pessoa responsável como fazer o encaminhamento até ele.",
+            ""
+          ],
+          [
+            "test",
+            "Faça um teste que você reconheça.",
+            "Crie um pedido de teste, com os dados de demonstração combinados com a equipe. Confira se o aviso aparece no RELAYERS e depois no destino. Compare o que aconteceu com a frase que você escreveu no primeiro passo.",
+            "O objetivo do teste é encontrar aquele aviso no lugar certo. Ver uma informação apenas no RELAYERS ainda não confirma que a ferramenta de destino fez a parte dela.",
+            ""
+          ],
+          [
+            "routine",
+            "Acompanhe e ajuste a rotina.",
+            "Veja os recebimentos e as tentativas de encaminhamento no painel ou no aplicativo. Combine quem acompanha o fluxo e o que fazer quando um aviso precisar de atenção. Para interromper um caminho, use a pausa da regra de encaminhamento correspondente.",
+            "Antes de pedir uma nova tentativa, confira se o destino já recebeu o aviso. Isso ajuda a evitar uma tarefa ou ação repetida.",
+            ""
+          ]
+        ],
+        "questions": [
+          [
+            "Preciso saber programar?",
+            "Para entender o processo, definir o resultado e acompanhar o dia a dia, não. A ligação entre as ferramentas depende do que cada uma oferece e pode precisar de alguém com experiência nessa configuração."
+          ],
+          [
+            "É um aplicativo de conversar com clientes?",
+            "O trabalho central do RELAYERS é receber e encaminhar avisos entre ferramentas. A tela de atendimento ou a conversa com o cliente pertence ao sistema que você escolheu para isso."
+          ],
+          [
+            "O que é uma entrada?",
+            "É o lugar combinado para uma ferramenta entregar seus avisos ao RELAYERS. Pense em uma caixa de correspondência com um endereço próprio."
+          ],
+          [
+            "O que é um destino?",
+            "É a ferramenta ou aplicação que deve receber o aviso depois. É onde a informação vai apoiar o trabalho da equipe."
+          ],
+          [
+            "O que é uma regra de encaminhamento?",
+            "É a combinação que diz para onde aquele aviso deve seguir. Você pode ter caminhos diferentes para necessidades diferentes."
+          ],
+          [
+            "Uma informação recebida significa que tudo terminou?",
+            "Ela confirma uma etapa do caminho. Confira também o encaminhamento ao destino e o resultado que sua equipe esperava encontrar lá."
+          ]
+        ],
+        "outcomeTitle": "Você sabe o que chega, para onde vai e quem acompanha.",
+        "outcome": "Esse é um bom primeiro resultado: um caminho simples, compreendido pela equipe e verificado com um exemplo. Depois que ele estiver funcionando, você pode avaliar uma segunda necessidade com mais clareza.",
+        "checks": [
+          "Consigo dizer qual aviso inicia o processo.",
+          "Sei de qual ferramenta ele vem e para qual deve ir.",
+          "Tenho uma conta e sei onde acompanhar o recebimento.",
+          "A ligação foi preparada com a pessoa responsável.",
+          "Um teste mostrou o aviso no destino esperado."
+        ]
+      },
+      {
+        "slug": "acompanhar-avisos",
+        "key": "follow-your-notices",
+        "scope": "relayers",
+        "category": "ROTINA SEM COMPLICAÇÃO",
+        "title": "O aviso chegou. E agora? Um guia para acompanhar o dia a dia.",
+        "dek": "Aprenda a conferir recebimentos, perceber quando algo precisa de atenção e conversar com a equipe sem se perder nos detalhes.",
+        "time": 6,
+        "art": "noticeboard.svg",
+        "intro": "Uma loja fictícia já preparou seu primeiro caminho: os avisos de novos pedidos seguem até o sistema da equipe. No dia a dia, a pessoa que coordena a operação quer saber se a informação está chegando e quem deve ser chamado quando houver uma interrupção.",
+        "promise": "A rotina pode começar com três perguntas: o aviso apareceu, seguiu para o destino e produziu o resultado esperado? Cada resposta mostra uma parte do caminho.",
+        "requirements": [
+          "Um caminho de recebimento já preparado.",
+          "Acesso à conta RELAYERS usada pela empresa.",
+          "Uma pessoa responsável pela ferramenta de destino."
+        ],
+        "flow": [
+          "Conferir o aviso",
+          "Acompanhar o caminho",
+          "Ver o resultado"
+        ],
+        "flowText": "Acompanhe uma ocorrência conhecida do começo ao fim. O recebimento no RELAYERS, o encaminhamento e a ação da ferramenta de destino são etapas diferentes.",
+        "steps": [
+          [
+            "account",
+            "Entre na conta que a empresa utiliza.",
+            "Abra o painel do RELAYERS com o acesso combinado. Se você usa o Desktop para receber no computador, abra também esse aplicativo e confira se ele está conectado.",
+            "Use a conta que organiza o caminho que você quer acompanhar.",
+            "relayers-login.jpg"
+          ],
+          [
+            "find",
+            "Procure um aviso que você consiga identificar.",
+            "Escolha um pedido ou outro acontecimento recente que a equipe conheça. Procure o recebimento correspondente no RELAYERS. Compare o horário e as informações para reconhecer a ocorrência certa.",
+            "Começar por um exemplo conhecido é mais útil do que olhar uma lista inteira sem saber o que procura.",
+            ""
+          ],
+          [
+            "follow",
+            "Confira o encaminhamento ao destino.",
+            "Abra os detalhes desse recebimento e acompanhe as tentativas de entrega. Veja se o destino recebeu o aviso, se ainda há uma tentativa em andamento ou se houve uma falha que precisa de atenção.",
+            "O histórico ajuda a contar o que ocorreu. Ele não substitui a conferência da ação dentro da ferramenta de destino.",
+            ""
+          ],
+          [
+            "confirm",
+            "Olhe também a ferramenta da equipe.",
+            "Se o combinado era criar uma tarefa de separação de pedido, peça à equipe que localize essa tarefa. Se o destino recebeu o aviso, mas a tarefa não apareceu, a pessoa responsável por essa ferramenta precisa conferir a continuação do trabalho.",
+            "Assim você consegue explicar em qual etapa o resultado ficou diferente do esperado.",
+            ""
+          ],
+          [
+            "help",
+            "Peça ajuda com uma descrição simples.",
+            "Diga qual aviso você esperava, quando ele aconteceu, até onde você conseguiu encontrá-lo e qual resultado faltou. Por exemplo: “O pedido de teste apareceu no RELAYERS, mas não achei a tarefa no sistema da equipe”.",
+            "Não é necessário enviar senhas para explicar um problema. A pessoa responsável pode entrar com o próprio acesso e examinar o caso.",
+            ""
+          ],
+          [
+            "retry",
+            "Combine uma nova tentativa antes de repetir.",
+            "Se alguém sugerir reenviar um aviso, confira primeiro se o destino já o recebeu ou se a ação já aconteceu. Combine com a equipe quem faz a nova tentativa e como verificar o resultado.",
+            "Uma nova tentativa pode repetir uma ação no sistema que recebe. A decisão deve considerar o que já ocorreu naquele caso.",
+            ""
+          ]
+        ],
+        "questions": [
+          [
+            "Se o Desktop estiver fechado, recebo no computador?",
+            "O recebimento local depende de o Desktop ou outra conexão de recebimento estar disponível. Confira o histórico e combine como retomar o trabalho quando houver interrupção."
+          ],
+          [
+            "Posso pausar um caminho?",
+            "O RELAYERS permite pausar regras de encaminhamento. Confira qual regra está selecionada e o efeito desejado antes de alterar a rotina."
+          ],
+          [
+            "O RELAYERS faz a tarefa dentro do meu sistema?",
+            "O RELAYERS encaminha o aviso. A ferramenta de destino é responsável por usar essa informação na tarefa ou ação combinada."
+          ]
+        ],
+        "outcomeTitle": "Menos adivinhação. Um relato que ajuda a resolver.",
+        "outcome": "Você consegue mostrar o que chegou, o que foi encaminhado e onde a equipe precisa olhar em seguida. Essa clareza ajuda tanto quem acompanha a operação quanto quem cuida das ferramentas.",
+        "checks": [
+          "Encontrei uma ocorrência conhecida.",
+          "Conferi seu encaminhamento.",
+          "A equipe verificou o resultado no destino.",
+          "Existe uma pessoa para acompanhar falhas.",
+          "Uma nova tentativa só é feita depois dessa conferência."
+        ]
+      },
+      {
+        "slug": "planejar-primeira-conexao",
+        "key": "plan-your-first-flow",
+        "scope": "relayers",
+        "category": "PREPARE COM A EQUIPE",
+        "title": "Como pedir uma conexão que faça sentido para o seu negócio.",
+        "dek": "Um roteiro para definir o resultado, conversar com quem cuida das ferramentas e começar com um caso que todos entendam.",
+        "time": 6,
+        "art": "planning.svg",
+        "intro": "Uma pequena empresa quer conectar suas ferramentas, mas a conversa começa cheia de nomes desconhecidos. A pessoa que conhece o negócio sabe do que a equipe precisa; falta transformar essa necessidade em um pedido claro.",
+        "promise": "Você pode começar pela rotina: o que acontece, quem precisa saber, onde a informação deve chegar e como reconhecer que deu certo. O RELAYERS pode organizar o encaminhamento quando as ferramentas envolvidas oferecem a ligação necessária.",
+        "requirements": [
+          "Uma necessidade concreta da equipe.",
+          "Os nomes das ferramentas envolvidas.",
+          "Uma pessoa que conheça os acessos e as configurações dessas ferramentas."
+        ],
+        "flow": [
+          "Descrever a necessidade",
+          "Preparar com a equipe",
+          "Conferir um exemplo"
+        ],
+        "flowText": "Um pedido bem definido liga uma necessidade da empresa a um resultado que a equipe consegue conferir. A configuração vem depois dessa combinação.",
+        "steps": [
+          [
+            "need",
+            "Escreva o que acontece primeiro.",
+            "Use uma frase comum: “Uma pessoa preenche o formulário de orçamento” ou “Um pedido é confirmado”. Escolha um acontecimento e a ferramenta em que ele ocorre.",
+            "“Quero automatizar tudo” é difícil de conferir. Um acontecimento definido dá um ponto de partida à equipe.",
+            ""
+          ],
+          [
+            "destination",
+            "Diga onde a informação precisa aparecer.",
+            "Indique a ferramenta que a equipe usa e a informação que será útil ali. Por exemplo: “Quero que o pedido confirmado chegue ao sistema que organiza as entregas”.",
+            "O destino precisa ter uma forma de receber o aviso. Quem cuida das ferramentas verifica essa possibilidade.",
+            ""
+          ],
+          [
+            "action",
+            "Descreva o que deve acontecer depois.",
+            "Combine se o resultado esperado é apenas receber a informação ou também realizar uma ação no sistema de destino, como criar uma tarefa. Deixe claro quem prepara essa ação e quem acompanha as exceções.",
+            "Encaminhar o aviso e agir sobre ele são responsabilidades diferentes. As duas precisam estar previstas no pedido.",
+            ""
+          ],
+          [
+            "people",
+            "Defina quem participa.",
+            "Escolha quem aprova o resultado de negócio, quem prepara a ligação e quem acompanha o uso diário. Use a conta RELAYERS e os acessos combinados pela empresa.",
+            "Um nome para cada responsabilidade ajuda a equipe a saber a quem recorrer.",
+            ""
+          ],
+          [
+            "test",
+            "Combine um exemplo de teste.",
+            "Escolha um pedido ou formulário fictício que todos consigam reconhecer. Escreva onde ele deve aparecer e o que você vai conferir no destino. Peça que a pessoa responsável explique como interromper o caminho, se necessário.",
+            "O teste precisa mostrar a necessidade da equipe sendo atendida, além de indicar que um aviso foi recebido.",
+            ""
+          ],
+          [
+            "handover",
+            "Deixe uma combinação simples por escrito.",
+            "Registre: “Quando acontecer ___ na ferramenta ___, queremos receber ___ no sistema ___. Vamos conferir se ___ aconteceu. A pessoa responsável por preparar é ___ e por acompanhar é ___”.",
+            "Essa frase pode ser usada em uma conversa, reunião ou tarefa de acompanhamento. Preencha com a realidade da sua empresa.",
+            ""
+          ]
+        ],
+        "questions": [
+          [
+            "Preciso escolher os detalhes da instalação?",
+            "Você pode começar definindo a necessidade e o resultado. A pessoa que cuida das ferramentas ajuda a escolher e preparar o caminho adequado."
+          ],
+          [
+            "Como descubro se a ideia é possível?",
+            "Peça à pessoa responsável para conferir se a origem consegue compartilhar o aviso e se o destino consegue recebê-lo e realizar a ação desejada."
+          ],
+          [
+            "Quando vale incluir outra situação?",
+            "Depois de conferir o primeiro exemplo e combinar quem acompanha o uso. Assim a equipe conhece o caminho antes de ampliar a rotina."
+          ]
+        ],
+        "outcomeTitle": "Um pedido que a equipe consegue entender e conferir.",
+        "outcome": "Você sai da conversa com uma necessidade definida, responsáveis escolhidos e um exemplo de sucesso combinado. Isso dá direção ao trabalho de ligar as ferramentas.",
+        "checks": [
+          "Definimos um acontecimento inicial.",
+          "Conhecemos a origem e o destino.",
+          "Combinamos qual ação é responsabilidade do destino.",
+          "Existe uma pessoa para preparar e outra para acompanhar.",
+          "Sabemos qual exemplo vai mostrar que funcionou."
         ]
       }
     ]

@@ -114,7 +114,7 @@ export const messages = {
     "relayersLogin": "Sign in",
     "tutorials": "Tutorials",
     "tutorialTitle": "See a conversation turn into the next step.",
-    "tutorialLead": "Link your account, choose where your application runs and explore four business stories with pictures and a step-by-step walkthrough.",
+    "tutorialLead": "Link your account, choose where your application runs and explore illustrated guides and business stories with pictures and a step-by-step walkthrough.",
     "tutorialRead": "Explore the tutorials",
     "tutorialLanguages": "Guides in English and Portuguese."
   },
@@ -231,7 +231,7 @@ export const messages = {
     "relayersLogin": "Entrar",
     "tutorials": "Tutoriais",
     "tutorialTitle": "Veja a conversa virar o próximo passo.",
-    "tutorialLead": "Vincule sua conta, escolha onde sua aplicação funciona e explore quatro histórias de negócio com imagens e um passo a passo.",
+    "tutorialLead": "Vincule sua conta, escolha onde sua aplicação funciona e explore guias ilustrados e histórias de negócio com imagens e um passo a passo.",
     "tutorialRead": "Explorar os tutoriais",
     "tutorialLanguages": "Guias em português e inglês."
   },
@@ -348,7 +348,7 @@ export const messages = {
     "relayersLogin": "Entrar",
     "tutorials": "Tutoriales",
     "tutorialTitle": "Descubre el siguiente paso de una conversación.",
-    "tutorialLead": "Vincula tu cuenta, elige dónde funciona tu aplicación y explora cuatro historias de negocio con imágenes y una guía paso a paso.",
+    "tutorialLead": "Vincula tu cuenta, elige dónde funciona tu aplicación y explora guías ilustradas e historias de negocio con imágenes y una guía paso a paso.",
     "tutorialRead": "Explorar tutoriales en inglés",
     "tutorialLanguages": "Guías disponibles en inglés y portugués."
   },
@@ -465,7 +465,7 @@ export const messages = {
     "relayersLogin": "Masuk",
     "tutorials": "Tutorial",
     "tutorialTitle": "Lihat percakapan menjadi langkah berikutnya.",
-    "tutorialLead": "Hubungkan akun, pilih lokasi aplikasi dan jelajahi empat kisah bisnis dengan gambar serta panduan langkah demi langkah.",
+    "tutorialLead": "Hubungkan akun, pilih lokasi aplikasi dan jelajahi panduan bergambar dan kisah bisnis dengan gambar serta panduan langkah demi langkah.",
     "tutorialRead": "Lihat tutorial bahasa Inggris",
     "tutorialLanguages": "Panduan tersedia dalam bahasa Inggris dan Portugis."
   },
@@ -582,7 +582,7 @@ export const messages = {
     "relayersLogin": "साइन इन",
     "tutorials": "गाइड",
     "tutorialTitle": "देखें बातचीत से अगला कदम कैसे बनता है।",
-    "tutorialLead": "खाता जोड़ें, ऐप की जगह चुनें और तस्वीरों व चरणबद्ध गाइड के साथ कारोबार की चार कहानियाँ देखें।",
+    "tutorialLead": "खाता जोड़ें, ऐप की जगह चुनें और तस्वीरों व चरणबद्ध गाइड के साथ कारोबार की गाइड और कहानियाँ देखें।",
     "tutorialRead": "अंग्रेज़ी में गाइड पढ़ें",
     "tutorialLanguages": "गाइड अंग्रेज़ी और पुर्तगाली में उपलब्ध हैं।"
   }
