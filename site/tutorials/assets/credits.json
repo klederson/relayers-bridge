@@ -21,5 +21,11 @@
     "login": "Public RELAYERS sign-in page, no credentials entered.",
     "date": "2026-11-09",
     "extensionVersion": "0.2.0"
+  },
+  "authenticatedSmoke": {
+    "date": "2026-11-09",
+    "directory": "smoke/",
+    "source": "Actual source-built Chrome extension, authorized WhatsApp bot conversation, real RELAYERS, local and remote application interfaces. Personal identifiers and private live addresses are blurred; secrets remain protected.",
+    "heroPreserved": true
   }
 }

@@ -32,7 +32,9 @@
     "test:extension-analytics:firefox": "node tests/extension-analytics-firefox.mjs",
     "build:tutorials": "node scripts/build-tutorials.mjs",
     "capture:tutorials": "node scripts/capture-tutorials.mjs",
-    "test:tutorials": "node tests/tutorials-browser.mjs"
+    "test:tutorials": "node tests/tutorials-browser.mjs",
+    "package:desk": "node scripts/package-desk.mjs",
+    "test:desk": "node tests/service-desk-browser.mjs"
   },
   "devDependencies": {
     "playwright": "^1.64.1",

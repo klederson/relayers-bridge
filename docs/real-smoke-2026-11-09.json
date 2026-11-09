@@ -1,0 +1,105 @@
+{
+  "date": "2026-11-09",
+  "extensionVersion": "0.2.0",
+  "installation": "built from public repository source",
+  "scope": {
+    "browser": "Chrome/Chromium",
+    "messageKind": "plain text",
+    "recipient": "one explicitly authorized bot conversation",
+    "unrelatedRecipientsContacted": false,
+    "operatingSystem": "Linux"
+  },
+  "scenarios": {
+    "localAuthenticated": {
+      "passed": true,
+      "incomingReachedApplication": true,
+      "outgoingAcceptedByBridge": true,
+      "applicationReplyInRealChat": true,
+      "botRepliedToApplicationReply": true,
+      "whatsappDocumentPreserved": true
+    },
+    "latestLocalApplicationUi": {
+      "passed": true,
+      "latestIncludedApplication": true,
+      "realIncomingAtLocalDesk": true,
+      "replyRequestedThroughActualUi": true,
+      "replyInRealWhatsApp": true,
+      "recipientDeliveryAcknowledged": true,
+      "botResponseReachedLocalDesk": true,
+      "nonemptyDraftPreserved": true
+    },
+    "filtersScopeExpiryDuplicates": {
+      "passed": true,
+      "basicOutgoingBlocked": true,
+      "basicIncomingExcludedBeforeUpload": true,
+      "advancedOutgoingBlocked": true,
+      "advancedIncomingAndOutgoingPassed": true,
+      "noBackfillOfExcludedContent": true,
+      "unauthorizedRecipientRejected": true,
+      "expiredCommandRejected": true,
+      "duplicateSuppressed": true,
+      "nonemptyDraftPreserved": true
+    },
+    "twoConnectedApplications": {
+      "passed": true,
+      "twoDistinctApprovedDevices": true,
+      "bothConnected": true,
+      "localReceivingPassed": true,
+      "remoteDidNotReceiveLocalRoute": true
+    },
+    "applicationOnSeparateMachine": {
+      "passed": true,
+      "incomingReachedRemoteApplication": true,
+      "remoteApplicationRequestedReply": true,
+      "replyInActualWhatsApp": true,
+      "recipientDeliveryAcknowledged": true,
+      "botRepliedToRemoteApplication": true,
+      "outgoingRequestUsedNoBrowserCookieOrLoginToken": true,
+      "localAndRemoteDestinationsIsolated": true
+    },
+    "publicHttpsApplication": {
+      "passed": true,
+      "publicHttpsDestination": true,
+      "receivingUrlAuthorizationVerified": true,
+      "authorizedAccountAndConversationVerified": true,
+      "replySentByRemoteHttpsApplication": true,
+      "replyInRealWhatsApp": true,
+      "recipientDeliveryAcknowledged": true,
+      "botRepliedToApplication": true,
+      "noAutomaticReplyLoop": true
+    },
+    "pauseResume": {
+      "passed": true,
+      "noSendWhilePaused": true,
+      "requestQueuedInRelayers": true,
+      "resumeSentOnce": true,
+      "botReplyReceived": true,
+      "documentPreserved": true,
+      "nonemptyDraftPreserved": true
+    }
+  },
+  "runtimeVerification": {
+    "differentRemoteMachineVerified": true,
+    "remoteRuntimeFilesMatchSource": true,
+    "downloadArchiveMatchesSource": true,
+    "builtExtensionFilesMatchSource": true,
+    "extensionFileCount": 49
+  },
+  "privacy": {
+    "personalNamesAndPhoneNumbersBlurred": true,
+    "liveAddressesBlurredOrKeptPrivate": true,
+    "sendingSecretsProtected": true,
+    "credentialsAndRawEventsExcluded": true
+  },
+  "limitations": [
+    "Authenticated smoke used Chrome/Chromium, plain text and one consenting bot conversation.",
+    "Authenticated Firefox, groups, media and every filter combination were not part of this live run.",
+    "Recipient delivery and bot replies were checked separately from local send acceptance."
+  ],
+  "finalState": {
+    "bridgePaused": true,
+    "localDemoKeptAvailable": true,
+    "temporaryPublicReceiverStopped": true,
+    "remoteSmokeProcessesRemoved": true
+  }
+}

@@ -6,7 +6,10 @@ on:
       - 'site/**'
       - 'tests/site-browser.mjs'
       - 'tests/tutorials-browser.mjs'
+      - 'tests/service-desk-browser.mjs'
       - 'scripts/build-tutorials.mjs'
+      - 'scripts/package-desk.mjs'
+      - 'examples/service-desk/**'
       - 'tests/website-analytics.mjs'
       - 'package.json'
       - 'package-lock.json'
@@ -27,7 +30,12 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - run: npm run package:desk
       - run: npm run build:tutorials
+      - name: Check the supplied tutorial application
+        run: npm run test:desk
+        env:
+          SITE_BROWSER_CHANNEL: chrome
       - name: Check tutorials and screenshots
         run: npm run test:tutorials
         env:

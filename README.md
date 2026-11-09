@@ -15,11 +15,11 @@ You choose the account, the chats and what is allowed. Keep the computer, browse
 
 ## Illustrated tutorials
 
-Start with [your first two-way conversation](https://klederson.github.io/relayers-bridge/tutorials/first-connection.html): where to sign in, how to approve Bridge, how the separate receiving (IN) and sending (OUT) connections are created, and where a local or remote application joins the flow.
+Start with [your first two-way conversation](https://klederson.github.io/relayers-bridge/tutorials/first-connection.html): a click-by-click walkthrough from installation to a received message and a reply back in WhatsApp. It includes the [order desk application](https://klederson.github.io/relayers-bridge/downloads/relayers-tutorial-desk.zip), download buttons, current screenshots and a checkpoint after every step. You do not need an existing integrated system to follow it.
 
-The [tutorial library](https://klederson.github.io/relayers-bridge/tutorials/) also explores order updates, a remote support team and appointment confirmations. All eight guides are available in [Portuguese](https://klederson.github.io/relayers-bridge/tutorials/pt-br/), with original artwork, diagrams and annotated context for real extension captures using fictional data. Business scenarios are hypothetical; they are not customer testimonials.
+The [tutorial library](https://klederson.github.io/relayers-bridge/tutorials/) has eight guides in English and [Portuguese](https://klederson.github.io/relayers-bridge/tutorials/pt-br/), including order updates, remote service, appointment confirmations and RELAYERS introductions for nontechnical readers.
 
-The full flow was checked on 9 November 2026 with an owned test account on the real RELAYERS service, a separate local application and simulated WhatsApp. It exercised approval, separate IN/OUT endpoints, IN delivery to the application and an independent signed OUT reply while preserving the WhatsApp document, draft and work-tab focus. This does not validate authenticated WhatsApp compatibility or recipient delivery.
+On 9 November 2026, the source-built Chrome extension passed an authenticated WhatsApp smoke with an explicitly authorized bot and real RELAYERS. The checks covered the included local application, an application on a separate machine, a public HTTPS receiver, Basic/Advanced filters, scope and expiry rejection, duplicate commands and pause/resume. Actual bot replies and WhatsApp delivery acknowledgements were checked. The loaded document, conversation, draft and work tab were preserved during sending. See the [validation record](docs/tutorial-validation.md) for the precise scope and the distinction from earlier fixture-based tests.
 
 Derived from the [TabHero](https://github.com/klederson/tabhero) MIT core: conversation links reuse the loaded document, and the toolbar keeps quick reply, conversation search, saved replies, optional AI, media placeholders and the silent unread badge.
 
@@ -52,7 +52,7 @@ npm run package
 
 For local development, load `dist/chrome` as an unpacked extension in Chrome. In Firefox use `about:debugging`, Load Temporary Add-on, and `dist/firefox/manifest.json`; for a downloaded Firefox ZIP, extract it and select its `manifest.json`. Temporary Firefox installations end when the browser restarts. This extension has its own identifier and does not need TabHero installed. The initial relay supports one active connection per browser profile, in regular windows.
 
-The initial text IN/OUT relay is experimental. See [the public protocol](docs/protocol.md) for payloads, result semantics and limits. A dedicated account on the published RELAYERS test service has passed real panel approval, API, signed HTTP IN/OUT, queue/worker, bound WebSocket and duplicate-command checks. WhatsApp was simulated in that test; compatibility with an authenticated real WhatsApp session still needs validation. No existing WhatsApp document may be navigated or reloaded as a fallback.
+The initial text IN/OUT relay is experimental. See [the public protocol](docs/protocol.md) for payloads, result semantics and limits. The authenticated Chrome/text smoke is recorded in [tutorial validation](docs/tutorial-validation.md). Automated browser fixtures separately cover permissions, error recovery and other browser cases; they do not establish real authenticated Firefox or media compatibility. No existing WhatsApp document may be navigated or reloaded as a fallback.
 
 ## Connect a test account
 

@@ -54,82 +54,298 @@
         "key": "first-connection",
         "category": "GETTING STARTED",
         "title": "Your WhatsApp, your application and a conversation that goes both ways.",
-        "dek": "A complete walkthrough of signing in to RELAYERS, linking Bridge and choosing how a local or remote application joins the conversation.",
-        "time": 12,
+        "dek": "From zero to your first received question and reply: install Bridge, connect your account and use the order desk included in this guide.",
+        "time": 25,
         "art": "connected-business.png",
-        "intro": "Picture a small bakery. Bia receives “Is my order ready?” in WhatsApp. She wants the message to reach her order system instead of hunting for the answer in several places. When the order is ready, that system could request a reply through the same business WhatsApp.",
-        "promise": "Bridge brings the conversation closer to the work already happening in your business. RELAYERS organizes the path between WhatsApp and your chosen application. What to answer remains a decision for your team or the rules in your application.",
+        "intro": "Connect WhatsApp to an order desk. Start a test conversation, watch the response reach the desk, reply there and check it back in WhatsApp.",
+        "promise": "You get the installation files, an application to open and a checkpoint at every stage. First complete the test on one computer; using another computer comes afterwards.",
         "steps": [
           [
-            "prepare",
-            "Choose what you want to connect.",
-            "Start with one test conversation. Keep WhatsApp Web signed in and open in the browser where Bridge is installed. Choose an application: an order system, a support desk or another tool your business already uses.",
-            "Bridge does not need to be installed on every team member’s machine. It stays in the browser holding the WhatsApp session.",
-            ""
+            "account",
+            "Create your account or sign in to RELAYERS.",
+            "First, prepare the account you will use in both Bridge and the desk.",
+            "",
+            "smoke/01-login.jpg"
           ],
           [
-            "account",
-            "Sign in to your RELAYERS account.",
-            "Use “Sign in to RELAYERS” in this guide. If you do not have an account, choose “Create an account”. Use the same account to organize the Bridge connection and the path to your application.",
-            "Signing in lets you manage your account. Authorizing the extension is the next step.",
-            "relayers-login.jpg"
+            "install",
+            "Install the version used in this walkthrough.",
+            "We use Chrome and this project’s 0.2.0 source package. Its interface includes the WhatsApp configuration button.",
+            "",
+            "smoke/03-installed.jpg"
+          ],
+          [
+            "prepare",
+            "Connect WhatsApp and choose a test participant.",
+            "Use a second number you own or a person who agreed to test. Do not use “Message yourself”: this check needs a message sent from the other side.",
+            "",
+            ""
           ],
           [
             "pair",
-            "Approve Bridge using the displayed code.",
-            "Click the extension icon. Use “Configure WhatsApp” below the RELAYERS brand to open the connection page. Click “Connect to RELAYERS”. Bridge shows a code and “Open RELAYERS to approve”. Open that button, sign in if asked and approve the code. Then return to Bridge.",
-            "Enter your password on the RELAYERS page. You do not need to paste your password into the extension.",
-            "bridge-pairing-en.jpg"
+            "Open Bridge and approve access.",
+            "Signing in to the website and approving the extension are separate steps. Now approve the extension.",
+            "",
+            "smoke/00-popup.jpg"
           ],
           [
             "choose",
-            "Choose the account, conversation and both directions.",
-            "In Bridge, select the WhatsApp account and test conversation. Enable “Incoming messages → RELAYERS” and “RELAYERS → outgoing messages”. Read the authorization and continue below to choose filters and destination before creating the connection.",
-            "You can allow only one direction. For this first two-way example, choose both.",
-            "bridge-setup-en.jpg"
+            "Allow only the test conversation, in both directions.",
+            "One conversation is enough for this first example.",
+            "",
+            "smoke/04-scope.jpg"
           ],
           [
             "separate",
-            "Find the receiving and sending paths.",
-            "Bridge creates two separate addresses in your RELAYERS account: one for messages received from WhatsApp (IN) and one for send requests (OUT). Find them in “Integration details”. In the RELAYERS panel, look for “WhatsApp Bridge IN” and “WhatsApp Bridge OUT”.",
-            "In the current flow, Bridge creates these addresses for you. There is no field for attaching addresses created earlier in the panel. The sending link back to this Bridge is also created automatically.",
-            "bridge-connected-en.jpg"
+            "Create the connection. Bridge prepares IN and OUT.",
+            "We start with Basic settings so filters do not get in the way of the first result.",
+            "",
+            "smoke/05-connected.jpg"
+          ],
+          [
+            "desk",
+            "Download and open the order desk.",
+            "This guide includes a ready application to receive the question and write a reply.",
+            "",
+            "smoke/06-desk.jpg"
+          ],
+          [
+            "desk-account",
+            "Approve the desk with the same RELAYERS account.",
+            "Bridge connects WhatsApp; the desk is the other participant. It also needs your approval.",
+            "Bridge and the desk are separate devices in your RELAYERS account. Choose the name shown by the desk to forward messages to the right computer.",
+            "smoke/07-desk-ready.jpg"
           ],
           [
             "application",
-            "Choose where your application takes part.",
-            "On the Bridge page, choose Basic or Advanced filters. Under “Where should received messages go?”, choose your online application or a linked computer and enter its supplied receiving address. Review your choices and click “Create connection”. Use the local and remote options explained below.",
-            "Bridge prepares the receiving and sending paths you selected. If you choose receipt only in RELAYERS, application forwarding is left for later; the connection summary makes that clear.",
-            ""
+            "Tell Bridge where the desk is.",
+            "Now connect incoming messages to the application you opened.",
+            "",
+            "smoke/08-destination.jpg"
+          ],
+          [
+            "addresses",
+            "Copy three values from Bridge to the desk.",
+            "This connects the desk’s receiving path and its ability to request a reply.",
+            "",
+            "smoke/09-paths.jpg"
+          ],
+          [
+            "receive",
+            "Start the conversation and watch the reply arrive.",
+            "Start a short conversation and watch the reply reach the application.",
+            "",
+            "smoke/10-received.jpg"
+          ],
+          [
+            "reply",
+            "Write the reply in the desk and send.",
+            "Reply from the application without typing it in the WhatsApp tab.",
+            "",
+            "smoke/11-reply.jpg"
           ],
           [
             "try",
-            "Complete a conversation with a test participant.",
-            "Ask the person to send “Is my order ready?” in the authorized conversation. Check the message in RELAYERS and in your application. Then use the sending action prepared in your application to reply “Your order is ready for pickup”. The application uses the connection’s OUT address and sending authorization.",
-            "Your application needs that sending action configured. Installing Bridge does not create automatic support or a reply button inside every system.",
-            ""
+            "Check the reply back in WhatsApp.",
+            "The last check happens in the actual conversation.",
+            "",
+            "smoke/12-whatsapp.jpg"
           ],
           [
             "keep",
-            "Keep the necessary pieces available.",
-            "The WhatsApp computer stays on, with the browser, session and Bridge available. For a local application, RELAYERS Desktop also remains connected. For a remote one, its service remains reachable. You can pause the connection in Bridge.",
-            "A remote team can request replies without operating the WhatsApp computer. Sending still depends on the linked WhatsApp being available.",
+            "End the test or keep the connection available.",
+            "You have a first connected path and know what needs to stay available.",
+            "",
             ""
           ]
         ],
-        "outcomeTitle": "The message arrived. The information found its place. The reply came back.",
-        "outcome": "In the bakery story, the customer does not need to know where the order system runs. The business chooses where to work, while its linked WhatsApp remains the place to have the conversation.",
+        "outcomeTitle": "The question reached the desk. The reply returned to WhatsApp.",
+        "outcome": "This is the first result you should be able to repeat. Then add filters, business rules or another support application.",
         "checks": [
-          "RELAYERS and Bridge are linked through the same account.",
-          "The chosen conversation appears in the authorization.",
-          "The new message reaches the application through IN.",
-          "The application’s requested reply comes back through OUT.",
-          "WhatsApp keeps its page and draft without reloading to send."
+          "Bridge and the desk were approved under the same RELAYERS account.",
+          "Only the test conversation was authorized.",
+          "The desk received a new message without manual copying.",
+          "The reply was written and requested in the desk.",
+          "The same reply appeared in the WhatsApp conversation."
         ],
         "releaseNotice": {
           "title": "Version 0.2.0 interface",
-          "body": "The controls in this guide are included in this repository’s test packages for manual installation. Store updates have not been confirmed. Check your installed version before looking for the new buttons."
-        }
+          "body": "This walkthrough uses 0.2.0 installed from the project source. Download the package below and follow the installation step. Store updates have not been confirmed."
+        },
+        "walkthrough": true,
+        "stepDetails": {
+          "account": {
+            "where": "On the RELAYERS website",
+            "actions": [
+              "Click “Create my account” below, or “Sign in to RELAYERS” if you already have one.",
+              "To register, enter your name, email and a password of at least 12 characters, then click “Start Free”. If you already have an account, enter your email and password on the sign-in page and click “Sign in”.",
+              "Keep that account signed in in your browser."
+            ],
+            "expected": "You can access your RELAYERS panel.",
+            "fix": "If the site says “too many requests”, wait before trying again. Do not keep clicking sign in.",
+            "extraScreens": [
+              {
+                "file": "smoke/18-register.jpg",
+                "caption": "If you do not have an account yet, use the registration form."
+              }
+            ]
+          },
+          "install": {
+            "where": "In Chrome",
+            "actions": [
+              "Download “Chrome 0.2.0” below and extract the whole archive to a folder. Keep that folder.",
+              "In Chrome’s ⋮ menu, open “Extensions” → “Manage extensions”. Enable “Developer mode”.",
+              "Click “Load unpacked” and choose the extracted folder containing the extension manifest. Do not choose the archive itself.",
+              "Check that the “RELAYERS Bridge” card shows version 0.2.0 and is enabled. Pin Bridge in Chrome’s extensions menu."
+            ],
+            "expected": "The extension card shows 0.2.0 and its toggle is on.",
+            "fix": "If “Configure WhatsApp” is missing, check this card and its version. These are packages for manual installation."
+          },
+          "prepare": {
+            "where": "In WhatsApp Web",
+            "actions": [
+              "Open WhatsApp Web in the same Chrome that has Bridge installed.",
+              "If a sign-in code appears, link this browser using WhatsApp on your phone.",
+              "Agree which conversation you will test. Keep this tab open. Do not ask for the question yet."
+            ],
+            "expected": "Your conversations are visible and you know which one to authorize.",
+            "fix": "Old messages are not part of this check. The participant will send a new message after both paths are ready."
+          },
+          "pair": {
+            "where": "In the extension and official approval page",
+            "actions": [
+              "Click the RELAYERS Bridge icon, then “Configure WhatsApp”.",
+              "Click “Connect to RELAYERS”. If Chrome asks for access to the RELAYERS address, accept the browser prompt.",
+              "Open the RELAYERS approval button. Check the code and click “Approve device”. Sign in if asked.",
+              "Return to Bridge and wait for the conversation list."
+            ],
+            "expected": "The official page says “Device approved” and Bridge displays conversation selection.",
+            "fix": "Enter your password only on the official RELAYERS page. If the code expires, begin approval again from Bridge.",
+            "extraScreens": [
+              {
+                "file": "smoke/02-approve.jpg",
+                "caption": "Check the code and click “Approve device”."
+              }
+            ]
+          },
+          "choose": {
+            "where": "On the Bridge page",
+            "actions": [
+              "Check the selected WhatsApp tab. Search for the test participant and select only that conversation.",
+              "Enable receiving “Incoming messages → RELAYERS” and sending “RELAYERS → outgoing messages”.",
+              "Read and check the displayed authorization."
+            ],
+            "expected": "The test conversation is selected and both directions are enabled.",
+            "fix": "If it is missing, check that it exists in the selected WhatsApp account. Do not switch accounts just to make a list appear."
+          },
+          "separate": {
+            "where": "Still in Bridge",
+            "actions": [
+              "Keep both receiving and sending filters in “Basic” mode, with their words left empty.",
+              "For the receiving destination, keep receipt in RELAYERS only for now. We will connect the desk next.",
+              "Click “Create connection” and wait for “Connected”.",
+              "Open “Integration details”. Find two addresses: IN receives from WhatsApp; OUT accepts requests to send replies."
+            ],
+            "expected": "The connection is “Connected”. Bridge creates two separate addresses, IN and OUT.",
+            "fix": "Do not create extra addresses manually in the panel. Use the two created by this connection."
+          },
+          "desk": {
+            "where": "On the computer where you will use the desk",
+            "actions": [
+              "Download the “Order desk” below and extract the entire folder.",
+              "Install Node.js 22 or newer from its official website if needed. It is the program required to open this example.",
+              "Open your system’s launcher: “Open-Windows.cmd”, “Open-macOS.command” or “Open-Linux.sh”. On Linux, choose to run the file.",
+              "The desk opens in your browser. Keep the program window open throughout the test."
+            ],
+            "expected": "The “Order desk” page shows account connection and receiving/replying setup.",
+            "fix": "If the browser does not open automatically, use http://127.0.0.1:47831 on that computer. If your system blocks the launcher, see the execution option in the package README."
+          },
+          "desk-account": {
+            "where": "In the desk and approval page",
+            "actions": [
+              "In the desk, click “Connect my RELAYERS account”.",
+              "Click “Open approval in RELAYERS”. Use the same account as Bridge, check the code and click “Approve device”.",
+              "Return to the desk and wait for “Desk connected to RELAYERS”.",
+              "In block 01, check this desk’s own name in RELAYERS. Then click “Copy” beside the receiving address."
+            ],
+            "expected": "The desk shows a connected account and provides its receiving address.",
+            "fix": "Do not copy your password or a login-page address. Copy the receiving address supplied by the desk itself."
+          },
+          "application": {
+            "where": "In Bridge",
+            "actions": [
+              "Click “Configure webhooks and filters”.",
+              "Under “Where should received messages go?”, choose “An application on a linked computer”. Paste the desk receiving address.",
+              "Click “Find linked computers” if needed. Choose the device with the exact name displayed in desk block 01.",
+              "Confirm the change authorization and click “Save WhatsApp configuration”. The connection pauses. Click “Resume” to connect again."
+            ],
+            "expected": "Bridge returns to “Connected” and its summary confirms forwarding to the selected computer.",
+            "fix": "If the desk is missing, confirm it is running and approved under the same RELAYERS account. Refresh the list. Each desk has its own name; select the one you opened."
+          },
+          "addresses": {
+            "where": "Between Bridge’s “Integration details” and desk block 02",
+            "actions": [
+              "In Bridge, open “Integration details”. Copy IN into the desk “IN address” field.",
+              "Copy OUT into the desk “OUT address” field.",
+              "Show the OUT sending key in Bridge. Copy the full key into the desk “OUT sending key” field. Share it only with applications you authorize to send.",
+              "Click “Connect both paths” in the desk."
+            ],
+            "expected": "The desk shows “Desk connected to RELAYERS” and “IN and OUT connected”.",
+            "fix": "Both addresses must belong to the same Bridge connection. If you see a connection error, copy all three fields again from that connection."
+          },
+          "receive": {
+            "where": "On the participant’s phone and in the desk",
+            "actions": [
+              "In WhatsApp, send your test bot or participant: “Hello! This is an authorized RELAYERS Bridge test. Could you reply with a short message?”.",
+              "Wait for the other side to answer. The illustrated test used a bot that replied “OK.”.",
+              "Return to the desk and check “Received messages”. Do not copy or paste the conversation."
+            ],
+            "expected": "The other side’s reply appears as “Received from WhatsApp”. IN worked.",
+            "fix": "If it is missing, check the authorized conversation, that the message was sent after connecting, Bridge’s Connected state, the desk connection, destination and filters. Ask for a new message after correcting the cause."
+          },
+          "reply": {
+            "where": "In the desk",
+            "actions": [
+              "Under the received message, write in “Your reply”: “Your order is ready for pickup. Thank you for contacting us!”.",
+              "Click “Send reply through WhatsApp” once.",
+              "Watch the status below the reply: RELAYERS first receives the request; the desk then shows the result reported by Bridge."
+            ],
+            "expected": "The desk reports Bridge accepted the send. OUT was used.",
+            "fix": "If the result is unconfirmed, check the WhatsApp conversation before attempting another reply. Do not repeat the click to force it."
+          },
+          "try": {
+            "where": "In the WhatsApp test conversation",
+            "actions": [
+              "Open the authorized conversation and find the reply you wrote in the desk.",
+              "Ask a participant to confirm receipt. If testing with a bot, also watch for its next reply.",
+              "Return to the desk: the received question and your reply remain visible while the program is running."
+            ],
+            "expected": "You saw the question reach the desk and the reply appear in WhatsApp. Both directions are connected.",
+            "fix": "Accepted sending does not confirm reading. Use the conversation’s own indicators to follow delivery and reading."
+          },
+          "keep": {
+            "where": "In Bridge and the desk",
+            "actions": [
+              "To continue testing, keep the WhatsApp computer on, its WhatsApp session connected, Bridge active and the desk running.",
+              "To finish, pause Bridge and click “Disconnect and clear local data” in the desk.",
+              "Follow the filters guide after completing this first round trip."
+            ],
+            "expected": "You know how to keep the connection available and stop it.",
+            "fix": "The desk is a demonstration. Closing the program clears its history and credentials. An everyday support application must manage its own history and team access."
+          }
+        },
+        "screenCaption": "Captured during the real walkthrough. Personal names and numbers blurred.",
+        "requirements": [
+          "Chrome on a computer and WhatsApp on your phone.",
+          "A second number you own or a participant who agreed to test.",
+          "A RELAYERS account, which you can create in step one.",
+          "The Bridge and desk packages, available in this guide."
+        ],
+        "localText": "In this walkthrough the desk and WhatsApp run on the same computer. The desk includes its own RELAYERS connection. Select its device in Bridge and use its displayed receiving address.",
+        "remoteText": "To use the desk on another computer, open the same package there and approve it under the same RELAYERS account. In the Bridge that stays with WhatsApp, select that desk device and its displayed address. Write the reply on the other computer while the WhatsApp computer stays available. This is an optional variation after the first test.",
+        "testedText": "Verified with authenticated WhatsApp, an authorized bot and real RELAYERS: receiving, replying, filters and an application on another machine. Checks also confirmed that the WhatsApp page and draft stayed in place.",
+        "remoteScreen": "smoke/15-remote-roundtrip.jpg",
+        "onlineText": "If your existing system provides an online receiving address, choose “An application available online” in Bridge and paste that address. For the desk running on another computer, keep “An application on a linked computer” and choose that desk’s name. That desk is also a RELAYERS device; an application receiving through a public address does not need to register a computer."
       },
       {
         "slug": "order-ready",
@@ -185,49 +401,132 @@
         "key": "remote-team",
         "category": "SERVICE FROM ELSEWHERE",
         "title": "Your team is elsewhere. Your service stays close.",
-        "dek": "Picture a remote support desk receiving and replying through WhatsApp that stays on the business computer.",
-        "time": 7,
+        "dek": "Move the service desk to another computer and confirm a complete conversation while business WhatsApp stays where it already runs.",
+        "time": 12,
         "art": "remote.svg",
-        "intro": "A small business keeps WhatsApp open on an office computer. The person helping with support works from home. She wants messages in the support application and wants to request replies without controlling the office screen.",
-        "promise": "The team’s workplace and the computer holding the WhatsApp session can be different. RELAYERS links the application to the authorized Bridge.",
+        "intro": "WhatsApp stays at the business. The support person is elsewhere. Use the first guide’s desk on their computer to receive and reply.",
+        "promise": "Complete the first guide before starting. Here you change the destination, approve the second computer and test service from there.",
         "steps": [
           [
             "base",
-            "Keep Bridge on the WhatsApp computer.",
-            "Install and link the extension in the office browser. Choose the account and conversations the team may work with. Enable receiving and sending and confirm authorization.",
-            "Requesting a send from the application does not require remote control of the screen.",
-            "bridge-connected-en.jpg"
+            "Keep WhatsApp ready at the business.",
+            "First complete the first-connection guide with one test conversation. Bridge stays on the computer holding WhatsApp.",
+            "",
+            "smoke/05-connected.jpg"
+          ],
+          [
+            "desk",
+            "Open the desk on the other computer.",
+            "This can be the support person’s computer elsewhere. WhatsApp stays at the business.",
+            "",
+            "smoke/06-desk.jpg"
+          ],
+          [
+            "remote-account",
+            "Approve this desk in RELAYERS.",
+            "Each desk has its own approval and name.",
+            "",
+            "smoke/16-remote-paths.jpg"
           ],
           [
             "service",
-            "Bring incoming messages to the team’s system.",
-            "In RELAYERS, forward IN to the remote support application. The team signs in there using the access your business provides and follows newly allowed messages.",
-            "Bridge does not create a multi-agent support desk. Conversation assignment and access management belong to your application.",
-            ""
+            "Change the receiving destination in the business Bridge.",
+            "Choose the computer using the exact name supplied by the desk.",
+            "",
+            "smoke/19-select-receiving-computer.jpg"
+          ],
+          [
+            "paths",
+            "Fill three fields in the remote desk.",
+            "Use the same connection that already worked at the business.",
+            "",
+            "smoke/16-remote-paths.jpg"
           ],
           [
             "reply",
-            "Request the reply from the application.",
-            "The team member writes the reply in the work tool. Its integration requests a send through OUT. RELAYERS passes the request to Bridge and the office WhatsApp sends it.",
-            "The application can be in another city. The WhatsApp computer still needs to stay on and connected.",
-            ""
-          ],
-          [
-            "routine",
-            "Agree on coverage and pauses.",
-            "Decide who watches availability and how the team notices an interruption. Pausing Bridge stops new exchanges; resuming continues pending work still available.",
-            "Messages during a pause are not recovered as a complete history.",
-            ""
+            "Provide service from the other computer.",
+            "Work in the desk without operating the business WhatsApp screen.",
+            "",
+            "smoke/15-remote-roundtrip.jpg"
           ]
         ],
         "outcomeTitle": "Service where your people are. WhatsApp where its session is already open.",
         "outcome": "Requesting every reply no longer depends on someone sitting at that browser. Your business remains responsible for organizing service and its limits.",
         "checks": [
-          "The team has access to the support application.",
-          "The application is prepared to receive and request sends.",
-          "The office computer stays available.",
-          "The authorized conversations match the intended service."
-        ]
+          "Bridge and the desk use the same RELAYERS account.",
+          "The selected name belongs to the second computer’s desk.",
+          "IN, OUT and the sending key belong to the same connection.",
+          "A new message reached the remote desk.",
+          "Its reply appeared in business WhatsApp."
+        ],
+        "downloadDesk": true,
+        "stepDetails": {
+          "base": {
+            "where": "On the WhatsApp computer",
+            "actions": [
+              "Follow the first-connection guide and confirm one desk round trip.",
+              "Keep Bridge linked to the RELAYERS account and chosen conversation.",
+              "Leave WhatsApp Web open."
+            ],
+            "expected": "The first round trip already works. Now change where the desk runs.",
+            "fix": "Resolve the first connection before moving to another computer."
+          },
+          "desk": {
+            "where": "On the support computer",
+            "actions": [
+              "Download and extract the order desk below.",
+              "Install Node.js 22 or newer from the linked official website if necessary.",
+              "Open your system’s launcher and keep the program window open."
+            ],
+            "expected": "The desk appears in the second computer’s browser.",
+            "fix": "Bridge stays with WhatsApp; the desk does not require Bridge installed on this second computer."
+          },
+          "remote-account": {
+            "where": "In the second computer’s desk",
+            "actions": [
+              "Click “Connect my RELAYERS account”, then “Open approval in RELAYERS”.",
+              "Use the same account as the business Bridge and click “Approve device”.",
+              "Return to the desk. Note its name in block 01 and copy its receiving address."
+            ],
+            "expected": "The desk is connected and you have its name and receiving address.",
+            "fix": "A desk approved under another account will not appear in the business Bridge’s list."
+          },
+          "service": {
+            "where": "On the WhatsApp computer",
+            "actions": [
+              "Click “Configure webhooks and filters”.",
+              "Choose “An application on a linked computer” and paste the address supplied by the second computer’s desk.",
+              "Click “Find linked computers” and select that desk’s exact name.",
+              "Confirm the change, click “Save WhatsApp configuration”, then “Resume”."
+            ],
+            "expected": "Bridge is Connected and receiving points to the selected computer.",
+            "fix": "A desk elsewhere still uses the linked-computer option. The online-application option is for systems providing a public receiving address.",
+            "caption": "In this form, select the name shown by the other desk."
+          },
+          "paths": {
+            "where": "Between Bridge and the support desk",
+            "actions": [
+              "Open “Integration details” in Bridge.",
+              "Copy IN, OUT and the OUT sending key into the three corresponding fields in the other computer’s desk.",
+              "Click “Connect both paths”. Share the key only with someone you authorize to send."
+            ],
+            "expected": "The desk shows “IN and OUT connected”.",
+            "fix": "Do not create extra addresses in the panel for this move. Use the existing connection."
+          },
+          "reply": {
+            "where": "In the support desk",
+            "actions": [
+              "Start a short conversation with the authorized participant or bot and wait for a response.",
+              "Check that it reaches “Received messages” in the remote desk.",
+              "Write the reply there and click “Send reply through WhatsApp”.",
+              "Check it in the WhatsApp conversation and follow the other side’s next response."
+            ],
+            "expected": "The question reached the other computer and its reply returned through business WhatsApp.",
+            "fix": "Keep both computers connected and running. To end the test, pause Bridge and disconnect the desk."
+          }
+        },
+        "testedText": "Verified with authenticated WhatsApp, an authorized bot and real RELAYERS: receiving, replying, filters and an application on another machine. Checks also confirmed that the WhatsApp page and draft stayed in place.",
+        "screenCaption": "Desk configuration and service."
       },
       {
         "slug": "appointments",
@@ -591,7 +890,7 @@
             "Open “Configure WhatsApp” in the extension panel.",
             "Click Bridge’s browser icon. Below the RELAYERS brand, use “Configure WhatsApp” to open the connection page. If your account is not linked yet, sign-in and registration links are available there.",
             "The controls in this guide require extension version 0.2.0 or later. Check the installation note before starting.",
-            "bridge-popup-en.jpg"
+            "smoke/00-popup.jpg"
           ],
           [
             "account",
@@ -605,21 +904,21 @@
             "Choose conversations and allowed directions.",
             "Select the WhatsApp account and the conversations for your case. Enable receiving, sending or both and read the authorization. The filters below respect that account and conversation selection.",
             "A filter cannot authorize another conversation. Start with someone who agrees to help test.",
-            "bridge-setup-en.jpg"
+            "smoke/04-scope.jpg"
           ],
           [
             "basic",
             "In Basic mode, enter words of interest.",
             "Under “Receive messages”, choose “Basic” and enter, for example, “order, quote”. A new message passes if it contains either phrase. You can set a separate list under “Send messages”. Case and accents are ignored.",
             "An empty list permits all new messages in authorized conversations. The outgoing filter only allows or blocks a request; it does not write or create replies.",
-            "bridge-settings-basic-en.jpg"
+            "smoke/13-basic-filters.jpg"
           ],
           [
             "advanced",
             "In Advanced mode, combine conditions for your routine.",
             "Choose “Advanced”, add conditions and decide whether all must match or just one. For example: the text contains “order” and does not contain “cancelled”. For receiving, you can also choose the message kind. Conditions can apply to one authorized conversation.",
             "Use “Try the filter without sending” to check an example text. It simulates a text message in the first authorized conversation and does not send messages.",
-            "bridge-settings-advanced-en.jpg"
+            "smoke/14-advanced-filters.jpg"
           ],
           [
             "destination",
@@ -633,7 +932,7 @@
             "Create the connection and check both paths.",
             "After reviewing authorization, click “Create connection”. Bridge creates the IN receiving and OUT sending paths you selected. Sending is linked to this Bridge. If you provided a receiving application, its path is prepared too. Under “Integration details”, copy the receiving and sending addresses separately.",
             "Incoming messages are filtered before leaving the extension. A sending request that fails its filter is blocked before WhatsApp sends it.",
-            "bridge-connected-en.jpg"
+            "smoke/05-connected.jpg"
           ],
           [
             "edit",
@@ -662,7 +961,9 @@
         "releaseNotice": {
           "title": "Version 0.2.0 interface",
           "body": "The controls in this guide are included in this repository’s test packages for manual installation. Store updates have not been confirmed. Check your installed version before looking for the new buttons."
-        }
+        },
+        "screenCaption": "Configuration in the extension.",
+        "testedText": "Verified with authenticated WhatsApp, an authorized bot and real RELAYERS: receiving, replying, filters and an application on another machine. Checks also confirmed that the WhatsApp page and draft stayed in place."
       }
     ]
   },
@@ -721,82 +1022,298 @@
         "key": "first-connection",
         "category": "PRIMEIROS PASSOS",
         "title": "Seu WhatsApp, sua aplicação e uma conversa que vai e volta.",
-        "dek": "O guia completo para entrar no RELAYERS, vincular a Bridge e entender como uma aplicação local ou remota participa do atendimento.",
-        "time": 12,
+        "dek": "Do zero à primeira pergunta recebida e respondida: instale a Bridge, conecte sua conta e use o balcão de pedidos incluído neste guia.",
+        "time": 25,
         "art": "connected-business.png",
-        "intro": "Imagine uma pequena padaria. Bia recebe “Meu pedido está pronto?” pelo WhatsApp. Em vez de procurar a informação em vários lugares, ela quer que a mensagem chegue ao sistema de pedidos. Quando o pedido estiver pronto, esse sistema poderá pedir o envio da resposta pelo mesmo WhatsApp da empresa.",
-        "promise": "A Bridge aproxima a conversa do trabalho que já acontece na empresa. O RELAYERS organiza o caminho entre o WhatsApp e a aplicação escolhida. A decisão sobre o que responder continua no seu atendimento ou nas regras da sua aplicação.",
+        "intro": "Vamos ligar o WhatsApp a um balcão de pedidos. Você inicia uma conversa de teste, acompanha a resposta chegando ao balcão, responde por ele e confere a volta no WhatsApp.",
+        "promise": "Você terá os arquivos para instalar, uma aplicação para abrir e uma checagem em cada etapa. Primeiro faremos o teste em um computador; a opção de usar outro computador vem depois.",
         "steps": [
           [
-            "prepare",
-            "Separe o que você vai conectar.",
-            "Comece com uma conversa de teste. Deixe o WhatsApp Web aberto e conectado no mesmo navegador em que instalou a Bridge. Escolha a aplicação que vai participar: um sistema de pedidos, uma central de atendimento ou outra ferramenta que sua empresa já usa.",
-            "Não é preciso instalar a Bridge na máquina de cada atendente. Ela permanece no navegador que mantém a sessão do WhatsApp.",
-            ""
+            "account",
+            "Crie sua conta ou entre no RELAYERS.",
+            "Primeiro, vamos deixar sua conta pronta. Você usará a mesma conta na extensão e no balcão.",
+            "",
+            "smoke/01-login.jpg"
           ],
           [
-            "account",
-            "Entre na sua conta RELAYERS.",
-            "Use o botão “Entrar no RELAYERS” deste guia. Se ainda não tiver conta, escolha “Criar minha conta”. Use a mesma conta para organizar a conexão da Bridge e o caminho até sua aplicação.",
-            "Entrar no painel permite gerenciar a conta. A autorização da extensão acontece no próximo passo.",
-            "relayers-login.jpg"
+            "install",
+            "Instale a versão usada neste passo a passo.",
+            "Vamos usar o Chrome e o pacote 0.2.0 do código deste projeto. A tela precisa ter o botão de configurar o WhatsApp.",
+            "",
+            "smoke/03-installed.jpg"
+          ],
+          [
+            "prepare",
+            "Conecte o WhatsApp e escolha quem participa.",
+            "Use uma conversa com um segundo número seu ou com uma pessoa que concordou em testar. Não use “Mensagem para você”: o teste precisa receber uma mensagem enviada pelo outro lado.",
+            "",
+            ""
           ],
           [
             "pair",
-            "Autorize a Bridge, pelo código mostrado.",
-            "Clique no ícone da extensão. Use o botão “Configurar WhatsApp”, abaixo da marca RELAYERS, para abrir a conexão. Clique em “Conectar ao RELAYERS”. A Bridge mostra um código e o botão “Abrir RELAYERS para aprovar”. Abra esse botão, entre na conta se solicitado e aprove o código. Depois volte à Bridge.",
-            "A senha é digitada na página do RELAYERS. Não é preciso colar sua senha na extensão.",
-            "bridge-pairing-pt.jpg"
+            "Abra a Bridge e aprove o acesso.",
+            "A conta no site e a autorização da extensão são duas etapas. Agora vamos aprovar a extensão.",
+            "",
+            "smoke/00-popup.jpg"
           ],
           [
             "choose",
-            "Escolha a conta, a conversa e os dois sentidos.",
-            "Na Bridge, selecione a conta do WhatsApp e marque a conversa de teste. Ative “Mensagens recebidas → RELAYERS” e “RELAYERS → mensagens enviadas”. Leia a autorização e continue abaixo para escolher os filtros e o destino antes de criar a conexão.",
-            "Você também pode permitir apenas um sentido. Para este primeiro exemplo de ida e volta, escolha os dois.",
-            "bridge-setup-pt.jpg"
+            "Autorize só a conversa de teste, nos dois sentidos.",
+            "Não vamos liberar todas as conversas. Neste primeiro caso, uma conversa é suficiente.",
+            "",
+            "smoke/04-scope.jpg"
           ],
           [
             "separate",
-            "Encontre os caminhos de receber e de enviar.",
-            "A Bridge cria dois endereços separados na sua conta RELAYERS: um para receber as mensagens do WhatsApp (IN) e outro para os pedidos de envio (OUT). Eles aparecem em “Detalhes da integração”. No painel do RELAYERS, você encontra as entradas “WhatsApp Bridge IN” e “WhatsApp Bridge OUT”.",
-            "No fluxo atual, a Bridge cria esses endereços para você. Não há um campo para conectar endereços criados antes no painel. A ligação de envio até esta Bridge também é criada automaticamente.",
-            "bridge-connected-pt.jpg"
+            "Crie a conexão. A Bridge prepara IN e OUT.",
+            "Para chegar ao primeiro resultado sem filtros no caminho, começaremos com a configuração básica.",
+            "",
+            "smoke/05-connected.jpg"
+          ],
+          [
+            "desk",
+            "Baixe e abra o balcão de pedidos.",
+            "Este guia inclui a aplicação que faltava no exemplo: uma tela pronta para receber a pergunta e escrever a resposta.",
+            "",
+            "smoke/06-desk.jpg"
+          ],
+          [
+            "desk-account",
+            "Aprove o balcão na mesma conta RELAYERS.",
+            "A Bridge conecta o WhatsApp; o balcão será o outro participante dessa ligação. Ele também precisa da sua aprovação.",
+            "A Bridge e o balcão são dispositivos separados na sua conta RELAYERS. Escolha o nome mostrado pelo balcão para enviar as mensagens ao computador certo.",
+            "smoke/07-desk-ready.jpg"
           ],
           [
             "application",
-            "Escolha onde sua aplicação participa.",
-            "Na própria tela da Bridge, escolha o modo básico ou avançado para os filtros. Em “Para onde vão as mensagens recebidas?”, escolha sua aplicação na internet ou um computador vinculado e informe o endereço de recebimento fornecido por ela. Confira tudo e clique em “Criar conexão”. Use as alternativas local e remota explicadas abaixo.",
-            "A Bridge prepara os caminhos de recebimento e envio que você selecionou. Se escolher apenas receber no RELAYERS, o destino da aplicação ficará para depois; o resumo da conexão informa isso.",
-            ""
+            "Diga à Bridge onde fica o balcão.",
+            "Agora vamos ligar a chegada das mensagens à tela que você acabou de abrir.",
+            "",
+            "smoke/08-destination.jpg"
+          ],
+          [
+            "addresses",
+            "Copie os três dados da Bridge para o balcão.",
+            "Esta é a ligação que permite ao balcão reconhecer a entrada e pedir a resposta.",
+            "",
+            "smoke/09-paths.jpg"
+          ],
+          [
+            "receive",
+            "Inicie a conversa e veja a resposta chegar.",
+            "Agora vamos iniciar uma conversa curta e acompanhar a resposta chegando à aplicação.",
+            "",
+            "smoke/10-received.jpg"
+          ],
+          [
+            "reply",
+            "Escreva a resposta no balcão e envie.",
+            "Você vai responder pela aplicação, sem digitar a resposta na aba do WhatsApp.",
+            "",
+            "smoke/11-reply.jpg"
           ],
           [
             "try",
-            "Faça uma conversa completa, com uma pessoa de teste.",
-            "Peça à pessoa que envie “Meu pedido está pronto?” na conversa autorizada. Confira a mensagem no RELAYERS e na sua aplicação. Depois use a ação de envio preparada na aplicação para responder “Seu pedido está pronto para retirada”. A aplicação utiliza o endereço OUT e a autorização de envio da conexão.",
-            "Essa ação precisa estar configurada na sua aplicação. Instalar a Bridge não cria, por conta própria, um atendimento automático ou um botão de resposta em qualquer sistema.",
-            ""
+            "Confira a mensagem de volta no WhatsApp.",
+            "A última checagem é na conversa real, não apenas no aviso da aplicação.",
+            "",
+            "smoke/12-whatsapp.jpg"
           ],
           [
             "keep",
-            "Mantenha o que precisa ficar disponível.",
-            "O computador do WhatsApp continua ligado, com o navegador, a sessão e a Bridge disponíveis. Se sua aplicação for local, o RELAYERS Desktop também permanece conectado. Se for remota, o serviço da aplicação continua acessível. Você pode pausar a conexão na Bridge.",
-            "Um atendimento remoto pode pedir respostas sem operar o computador do WhatsApp. O envio continua dependendo desse WhatsApp vinculado estar disponível.",
+            "Encerre o teste ou mantenha o atendimento disponível.",
+            "Agora você tem um primeiro caminho funcionando e sabe quais partes precisam ficar abertas.",
+            "",
             ""
           ]
         ],
-        "outcomeTitle": "A conversa entrou. A informação encontrou seu lugar. A resposta voltou.",
-        "outcome": "Na história da padaria, o cliente não precisa saber em qual computador está o sistema de pedidos. A empresa escolhe onde trabalhar, enquanto o WhatsApp vinculado continua sendo o ponto de conversa.",
+        "outcomeTitle": "A pergunta chegou ao balcão. A resposta voltou ao WhatsApp.",
+        "outcome": "Esse é o primeiro resultado que você deve conseguir repetir. Só depois adicione filtros, regras de negócio ou outro sistema de atendimento.",
         "checks": [
-          "O RELAYERS e a Bridge estão vinculados à mesma conta.",
-          "A conversa escolhida aparece na autorização.",
-          "A mensagem nova chega à aplicação pelo caminho IN.",
-          "A resposta solicitada pela aplicação volta pelo caminho OUT.",
-          "O WhatsApp mantém sua página e seu rascunho, sem recarregar para enviar."
+          "A Bridge e o balcão foram aprovados na mesma conta RELAYERS.",
+          "Apenas a conversa de teste foi autorizada.",
+          "O balcão recebeu uma mensagem nova, sem copiar e colar.",
+          "A resposta foi escrita e solicitada pelo balcão.",
+          "A mesma resposta apareceu na conversa do WhatsApp."
         ],
         "releaseNotice": {
           "title": "Interface da versão 0.2.0",
-          "body": "Os controles deste guia estão nos pacotes de teste deste repositório, para instalação manual. A atualização das lojas ainda não foi confirmada. Confira a versão instalada antes de procurar os novos botões."
-        }
+          "body": "Este percurso usa a versão 0.2.0, instalada a partir do código do projeto. Baixe o pacote abaixo e siga o passo de instalação. A atualização das lojas ainda não foi confirmada."
+        },
+        "walkthrough": true,
+        "stepDetails": {
+          "account": {
+            "where": "No site do RELAYERS",
+            "actions": [
+              "Clique em “Criar minha conta”, abaixo. Se você já tem conta, clique em “Entrar no RELAYERS”.",
+              "No cadastro, preencha “Name” com seu nome, “Email” com seu e-mail e “Password” com uma senha de pelo menos 12 caracteres. Clique em “Start Free”. Se já tem conta, informe e-mail e senha no login e clique em “Sign in”.",
+              "Mantenha essa conta conectada no navegador."
+            ],
+            "expected": "Você consegue entrar no painel do RELAYERS.",
+            "fix": "Se o site mostrar “too many requests”, aguarde antes de tentar novamente. Não fique clicando em entrar.",
+            "extraScreens": [
+              {
+                "file": "smoke/18-register.jpg",
+                "caption": "Se ainda não tem conta, use o formulário de cadastro."
+              }
+            ]
+          },
+          "install": {
+            "where": "No Chrome",
+            "actions": [
+              "Baixe o pacote “Chrome 0.2.0” disponível abaixo e extraia o arquivo para uma pasta. Guarde a pasta extraída.",
+              "No menu ⋮ do Chrome, abra “Extensões” → “Gerenciar extensões”. Ative “Modo do desenvolvedor”.",
+              "Clique em “Carregar sem compactação” e escolha a pasta extraída que contém o arquivo de identificação da extensão. Não selecione o arquivo compactado.",
+              "Confira o cartão “RELAYERS Bridge”, a versão 0.2.0 e o botão de ativação ligado. No menu de extensões do Chrome, fixe o ícone da Bridge."
+            ],
+            "expected": "O cartão da extensão mostra a versão 0.2.0 e ela está ativada.",
+            "fix": "Se o botão “Configure WhatsApp” não aparecer depois, volte a este cartão e confira a versão. Os pacotes deste guia são para instalação manual."
+          },
+          "prepare": {
+            "where": "No WhatsApp Web",
+            "actions": [
+              "Abra o WhatsApp Web no mesmo Chrome em que você instalou a Bridge.",
+              "Se aparecer o código de entrada, use o WhatsApp no celular para vincular esse navegador.",
+              "Confirme com a pessoa qual conversa será usada. Deixe essa aba aberta. Ainda não peça para ela enviar a pergunta."
+            ],
+            "expected": "O WhatsApp mostra suas conversas e você sabe qual conversa vai autorizar.",
+            "fix": "As mensagens antigas não servem para esta checagem. A pessoa enviará uma mensagem nova quando os dois caminhos estiverem prontos."
+          },
+          "pair": {
+            "where": "Na extensão e na página oficial de aprovação",
+            "actions": [
+              "Clique no ícone RELAYERS Bridge. Clique em “Configure WhatsApp” — configurar WhatsApp.",
+              "Na página da extensão, clique em “Connect to RELAYERS”. Se o Chrome pedir acesso ao endereço do RELAYERS, aceite o aviso do navegador.",
+              "Clique no botão de abrir o RELAYERS para aprovar. Na página que abriu, confira o código e clique em “Approve device”. Entre na sua conta se solicitado.",
+              "Volte para a aba da Bridge e aguarde a lista de conversas."
+            ],
+            "expected": "A página oficial mostra “Device approved” e a Bridge passa a mostrar a seleção de conversas.",
+            "fix": "Sua senha é informada na página oficial do RELAYERS. Se o código expirar, inicie uma nova aprovação pela Bridge.",
+            "extraScreens": [
+              {
+                "file": "smoke/02-approve.jpg",
+                "caption": "Confira o código e clique em “Approve device”."
+              }
+            ]
+          },
+          "choose": {
+            "where": "Na página da Bridge",
+            "actions": [
+              "Confira a aba do WhatsApp selecionada. Use a busca da lista para encontrar a pessoa do teste e marque somente essa conversa.",
+              "Marque o recebimento “Incoming messages → RELAYERS” e o envio “RELAYERS → outgoing messages”.",
+              "Leia e marque a autorização exibida."
+            ],
+            "expected": "A conversa de teste está marcada e as duas direções estão habilitadas.",
+            "fix": "Se a conversa não aparecer, confira se ela existe no WhatsApp da conta escolhida. Não troque de conta apenas para fazer a lista aparecer."
+          },
+          "separate": {
+            "where": "Ainda na Bridge",
+            "actions": [
+              "Nos filtros de recebimento e de envio, mantenha o modo “Basic” e deixe as palavras vazias.",
+              "No destino de recebimento, mantenha por enquanto a opção de receber apenas no RELAYERS. Vamos ligar o balcão nos próximos passos.",
+              "Clique em “Create connection” e aguarde o estado “Connected”.",
+              "Abra “Integration details”. Confira que existem dois endereços: IN para receber do WhatsApp e OUT para pedir o envio de respostas."
+            ],
+            "expected": "A conexão está “Connected”. A Bridge cria dois endereços separados, IN e OUT.",
+            "fix": "Não crie outros endereços manualmente no painel. Use os dois que esta conexão acabou de criar."
+          },
+          "desk": {
+            "where": "No computador em que você vai usar o balcão",
+            "actions": [
+              "Baixe o “Balcão de pedidos” no botão abaixo e extraia a pasta inteira.",
+              "Instale Node.js 22 ou superior pelo site oficial, se ele ainda não estiver instalado. É o programa necessário para abrir este exemplo.",
+              "Abra o iniciador do seu sistema: “Open-Windows.cmd”, “Open-macOS.command” ou “Open-Linux.sh”. No Linux, escolha a opção de executar o arquivo.",
+              "O balcão abre no navegador. Mantenha a janela do programa aberta durante o teste."
+            ],
+            "expected": "Você vê a página “Balcão de pedidos”, com as áreas de conectar a conta e ligar os dois caminhos.",
+            "fix": "Se o navegador não abrir automaticamente, use o endereço http://127.0.0.1:47831 nesse computador. Se o sistema bloquear o iniciador, consulte a opção de execução descrita no arquivo README do pacote."
+          },
+          "desk-account": {
+            "where": "No balcão e na página de aprovação",
+            "actions": [
+              "No balcão, clique em “Conectar minha conta RELAYERS”.",
+              "Clique em “Abrir aprovação no RELAYERS”. Use a mesma conta aprovada na Bridge, confira o código e clique em “Approve device”.",
+              "Volte ao balcão e espere aparecer “Balcão conectado ao RELAYERS”.",
+              "No bloco 01, confira o nome próprio deste balcão no RELAYERS. Depois clique em “Copiar” ao lado do endereço de recebimento."
+            ],
+            "expected": "O balcão mostra a conta conectada e fornece seu endereço de recebimento.",
+            "fix": "Não copie sua senha nem um endereço da página de login. Aqui você copia apenas o endereço de recebimento fornecido pelo próprio balcão."
+          },
+          "application": {
+            "where": "Na Bridge",
+            "actions": [
+              "Clique em “Configure webhooks and filters”.",
+              "Em “Where should received messages go?”, escolha “An application on a linked computer”. Cole o endereço copiado do balcão no campo de recebimento.",
+              "Clique em “Find linked computers”, se precisar atualizar a lista. Escolha o dispositivo com exatamente o nome mostrado no bloco 01 do seu balcão.",
+              "Confirme a autorização da alteração e clique em “Save WhatsApp configuration”. O estado fica pausado. Clique em “Resume” para voltar a conectar."
+            ],
+            "expected": "A Bridge volta a “Connected” e o resumo indica o encaminhamento para a aplicação no computador escolhido.",
+            "fix": "Se o balcão não aparecer, confirme que ele está aberto e foi aprovado na mesma conta RELAYERS. Atualize a lista. Cada balcão tem seu próprio nome; escolha o que você acabou de abrir."
+          },
+          "addresses": {
+            "where": "Entre “Integration details” da Bridge e o bloco 02 do balcão",
+            "actions": [
+              "Na Bridge, abra “Integration details”. Copie o endereço IN e cole em “Endereço IN” no balcão.",
+              "Copie o endereço OUT e cole em “Endereço OUT” no balcão.",
+              "Na Bridge, clique para mostrar a chave de envio OUT. Copie a chave completa e cole em “Chave de envio OUT” no balcão. Guarde essa chave só nas aplicações que você autoriza a enviar.",
+              "No balcão, clique em “Conectar os dois caminhos”."
+            ],
+            "expected": "O topo do balcão mostra “Balcão conectado ao RELAYERS” e “IN e OUT conectados”.",
+            "fix": "Os dois endereços devem ser da mesma conexão Bridge. Se aparecer erro de conexão, copie os três campos novamente daquela conexão; não misture endereços de testes anteriores."
+          },
+          "receive": {
+            "where": "No celular do participante e no balcão",
+            "actions": [
+              "No WhatsApp, envie ao bot ou contato do teste: “Olá! Este é um teste autorizado do RELAYERS Bridge. Pode responder com uma mensagem curta, por favor?”.",
+              "Aguarde a resposta da outra ponta. No teste mostrado, usamos um bot que respondeu “OK.”.",
+              "Volte ao balcão e confira a resposta em “Mensagens recebidas”. Você não precisa copiar nem colar a conversa."
+            ],
+            "expected": "A resposta da outra ponta aparece no balcão como “Recebida do WhatsApp”. O caminho IN funcionou.",
+            "fix": "Se não chegar, confira: conversa autorizada; mensagem enviada depois da conexão; Bridge em “Connected”; balcão conectado; destino e filtros. Após corrigir, peça uma nova mensagem."
+          },
+          "reply": {
+            "where": "No balcão",
+            "actions": [
+              "Na mensagem recebida, escreva em “Sua resposta”: “Seu pedido está pronto para retirada. Obrigado pelo contato!”.",
+              "Clique uma vez em “Enviar resposta pelo WhatsApp”.",
+              "Acompanhe a indicação abaixo da resposta: primeiro o RELAYERS recebe o pedido; depois o balcão informa o resultado comunicado pelo Bridge."
+            ],
+            "expected": "O balcão informa que o Bridge aceitou o envio. O caminho OUT foi acionado.",
+            "fix": "Se o resultado ficar não confirmado, confira a conversa no WhatsApp antes de tentar outra resposta. Não repita o clique para forçar o envio."
+          },
+          "try": {
+            "where": "Na conversa de teste do WhatsApp",
+            "actions": [
+              "Abra a conversa autorizada e procure a resposta que você escreveu no balcão.",
+              "Se for um contato, peça que confirme o recebimento. Se for um bot, acompanhe também a resposta seguinte dele.",
+              "Volte ao balcão: a pergunta recebida e sua resposta ficam visíveis ali durante a execução."
+            ],
+            "expected": "Você viu a pergunta chegar ao balcão e viu a resposta aparecer no WhatsApp. A ida e a volta estão ligadas.",
+            "fix": "A indicação de envio aceito não confirma leitura pela pessoa. Use as confirmações da própria conversa para acompanhar entrega e leitura."
+          },
+          "keep": {
+            "where": "Na Bridge e no balcão",
+            "actions": [
+              "Para continuar o teste, mantenha o computador do WhatsApp ligado, a sessão do WhatsApp conectada, a Bridge ativa e o balcão aberto.",
+              "Para terminar, pause a conexão na Bridge e clique em “Desconectar e apagar dados locais” no balcão.",
+              "Quando quiser restringir o conteúdo, siga o guia de filtros depois de concluir esta primeira ida e volta."
+            ],
+            "expected": "Você sabe como manter a conexão disponível e como interrompê-la.",
+            "fix": "O balcão é uma demonstração: seu histórico e credenciais são apagados ao fechar o programa. Um sistema de atendimento para o dia a dia precisa cuidar do próprio histórico e das pessoas que o usam."
+          }
+        },
+        "screenCaption": "Print do percurso real. Nomes e números pessoais borrados.",
+        "requirements": [
+          "Chrome em um computador e WhatsApp no celular.",
+          "Um segundo número seu ou uma pessoa que concordou em participar.",
+          "Uma conta RELAYERS, que você pode criar no primeiro passo.",
+          "Os pacotes da Bridge e do balcão, disponíveis neste guia."
+        ],
+        "localText": "Neste passo a passo, o balcão e o WhatsApp ficam no mesmo computador. O balcão já faz sua própria conexão ao RELAYERS. Selecione o dispositivo dele na Bridge e use o endereço de recebimento mostrado na tela.",
+        "remoteText": "Para usar o balcão em outro computador, abra o mesmo pacote lá e aprove-o na mesma conta RELAYERS. Na Bridge que ficou com o WhatsApp, selecione o dispositivo desse balcão e o endereço mostrado por ele. A resposta pode ser escrita no outro computador; o computador do WhatsApp continua ligado. Essa é uma variação do percurso, não uma etapa necessária para o primeiro teste.",
+        "testedText": "Verificado com WhatsApp autenticado, um bot autorizado e RELAYERS real: recebimento, resposta, filtros e aplicação em outra máquina. Os testes também conferiram a permanência da página e do rascunho do WhatsApp.",
+        "remoteScreen": "smoke/15-remote-roundtrip.jpg",
+        "onlineText": "Se o seu sistema já fornece um endereço de recebimento na internet, escolha “An application available online” na Bridge e cole esse endereço. Para o balcão aberto em outro computador, continue escolhendo “An application on a linked computer” e o nome daquele balcão. Nesse caso, ele também é um dispositivo RELAYERS; uma aplicação recebendo por endereço público não precisa registrar um computador."
       },
       {
         "slug": "pedido-pronto",
@@ -852,49 +1369,132 @@
         "key": "remote-team",
         "category": "ATENDIMENTO A DISTÂNCIA",
         "title": "A equipe está longe. O atendimento continua perto.",
-        "dek": "Como imaginar uma central remota recebendo e respondendo mensagens pelo WhatsApp que permanece no computador da empresa.",
-        "time": 7,
+        "dek": "Mova o balcão de atendimento para outro computador e confirme uma conversa completa, mantendo o WhatsApp da empresa onde ele já está.",
+        "time": 12,
         "art": "remote.svg",
-        "intro": "Uma pequena empresa tem um computador no escritório com o WhatsApp aberto. A pessoa que ajuda no atendimento trabalha de casa. Ela quer receber as conversas no sistema de atendimento e pedir respostas sem controlar a tela do escritório.",
-        "promise": "O lugar de trabalho da equipe e o computador que mantém a sessão do WhatsApp podem ser diferentes. O RELAYERS faz a ligação entre a aplicação e a Bridge autorizada.",
+        "intro": "O WhatsApp fica na empresa. A pessoa que atende está em outro local. Vamos usar o mesmo balcão do primeiro guia, aberto no computador dela, para receber e responder.",
+        "promise": "Conclua o primeiro guia antes de começar. Aqui você vai mudar o destino, aprovar o segundo computador e testar o atendimento de lá.",
         "steps": [
           [
             "base",
-            "Deixe a Bridge no computador do WhatsApp.",
-            "Instale e vincule a extensão no navegador do escritório. Escolha a conta e as conversas que a equipe poderá atender. Ative receber e enviar e confirme a autorização.",
-            "Não é necessário compartilhar o controle remoto da tela para que a aplicação peça um envio.",
-            "bridge-connected-pt.jpg"
+            "Deixe o WhatsApp pronto na empresa.",
+            "Primeiro conclua a primeira conexão com uma conversa de teste. A Bridge fica no computador que mantém o WhatsApp conectado.",
+            "",
+            "smoke/05-connected.jpg"
+          ],
+          [
+            "desk",
+            "Abra o balcão no outro computador.",
+            "Pode ser o computador de quem vai atender, em outro local. O WhatsApp continua na empresa.",
+            "",
+            "smoke/06-desk.jpg"
+          ],
+          [
+            "remote-account",
+            "Aprove este balcão no RELAYERS.",
+            "Cada balcão tem sua própria autorização e seu próprio nome.",
+            "",
+            "smoke/16-remote-paths.jpg"
           ],
           [
             "service",
-            "Ligue o recebimento ao sistema da equipe.",
-            "No RELAYERS, encaminhe o IN até a aplicação remota de atendimento. A equipe entra nessa aplicação com o acesso que sua empresa definiu e acompanha as novas mensagens permitidas.",
-            "A Bridge não cria uma central de atendimento multiusuário. Distribuição de conversas e acessos são recursos da aplicação escolhida.",
-            ""
+            "Troque o destino na Bridge da empresa.",
+            "Escolha o computador pelo nome que o balcão acabou de mostrar.",
+            "",
+            "smoke/19-select-receiving-computer.jpg"
+          ],
+          [
+            "paths",
+            "Preencha os três campos no balcão remoto.",
+            "Use os dados da mesma conexão que já estava funcionando na empresa.",
+            "",
+            "smoke/16-remote-paths.jpg"
           ],
           [
             "reply",
-            "Peça a resposta pela aplicação.",
-            "O atendente prepara a resposta na ferramenta de trabalho. A integração da aplicação pede o envio pelo OUT. O RELAYERS entrega o pedido à Bridge e o WhatsApp do escritório faz o envio.",
-            "A aplicação pode estar em outra cidade. O computador do WhatsApp precisa continuar ligado e conectado.",
-            ""
-          ],
-          [
-            "routine",
-            "Combine cobertura e pausas.",
-            "Defina quem acompanha a disponibilidade do computador e como a equipe percebe uma interrupção. Na Bridge, pausar interrompe novas trocas; retomar continua o trabalho pendente que ainda estiver disponível.",
-            "Mensagens ocorridas durante uma pausa não são recuperadas como um histórico completo.",
-            ""
+            "Atenda pelo outro computador.",
+            "Agora a pessoa trabalha no balcão, sem operar a tela do WhatsApp da empresa.",
+            "",
+            "smoke/15-remote-roundtrip.jpg"
           ]
         ],
         "outcomeTitle": "Atendimento onde a equipe está. WhatsApp onde a sessão já está aberta.",
         "outcome": "A operação deixa de depender de alguém estar sentado diante daquele navegador para pedir cada resposta. A organização e os limites do atendimento continuam sob responsabilidade da empresa.",
         "checks": [
-          "A equipe tem acesso à aplicação de atendimento.",
-          "A aplicação já está preparada para receber e pedir envios.",
-          "O computador do escritório permanece disponível.",
-          "As conversas autorizadas correspondem ao atendimento desejado."
-        ]
+          "A Bridge e o balcão estão na mesma conta RELAYERS.",
+          "O nome selecionado pertence ao balcão do segundo computador.",
+          "IN, OUT e a chave de envio são da mesma conexão.",
+          "Uma mensagem nova chegou ao balcão remoto.",
+          "A resposta escrita nele apareceu no WhatsApp da empresa."
+        ],
+        "downloadDesk": true,
+        "stepDetails": {
+          "base": {
+            "where": "No computador do WhatsApp",
+            "actions": [
+              "Siga o guia de primeira conexão e confirme uma ida e volta no balcão.",
+              "Mantenha a Bridge vinculada à conta RELAYERS e à conversa escolhida.",
+              "Deixe o WhatsApp Web aberto."
+            ],
+            "expected": "A primeira ida e volta já funcionou. Agora você só vai mudar onde o balcão fica.",
+            "fix": "Se a primeira conexão ainda não funcionou, resolva-a antes de mudar de computador."
+          },
+          "desk": {
+            "where": "No computador do atendimento",
+            "actions": [
+              "Baixe o balcão de pedidos abaixo e extraia a pasta.",
+              "Instale Node.js 22 ou superior, se necessário, pelo site oficial indicado.",
+              "Abra o iniciador do seu sistema e mantenha a janela do programa aberta."
+            ],
+            "expected": "O balcão aparece no navegador do segundo computador.",
+            "fix": "Não é preciso instalar a Bridge nesse computador para usar o balcão. A Bridge continua onde está o WhatsApp."
+          },
+          "remote-account": {
+            "where": "No balcão do outro computador",
+            "actions": [
+              "Clique em “Conectar minha conta RELAYERS” e depois em “Abrir aprovação no RELAYERS”.",
+              "Use a mesma conta aprovada na Bridge da empresa e clique em “Approve device”.",
+              "Volte ao balcão. Anote o nome mostrado no bloco 01 e copie seu endereço de recebimento."
+            ],
+            "expected": "O balcão está conectado e você tem o nome e o endereço dele.",
+            "fix": "Se entrar em outra conta, o balcão não aparecerá na lista da Bridge da empresa."
+          },
+          "service": {
+            "where": "No computador do WhatsApp",
+            "actions": [
+              "Na Bridge, clique em “Configure webhooks and filters”.",
+              "Escolha “An application on a linked computer” e cole o endereço fornecido pelo balcão do outro computador.",
+              "Clique em “Find linked computers” e escolha exatamente o nome daquele balcão.",
+              "Confirme a alteração, clique em “Save WhatsApp configuration” e depois em “Resume”."
+            ],
+            "expected": "A Bridge está “Connected” e o recebimento aponta para o computador escolhido.",
+            "fix": "Mesmo estando em outro local, esse balcão usa a opção de computador vinculado. “An application available online” é para sistemas que fornecem um endereço público de recebimento.",
+            "caption": "Neste formulário, selecione o nome mostrado pelo outro balcão."
+          },
+          "paths": {
+            "where": "Entre a Bridge e o balcão do atendimento",
+            "actions": [
+              "Na Bridge, abra “Integration details”.",
+              "Copie IN, OUT e a chave de envio OUT para os três campos correspondentes no balcão do outro computador.",
+              "Clique em “Conectar os dois caminhos”. A chave deve ficar apenas com quem você autoriza a enviar."
+            ],
+            "expected": "O balcão mostra “IN e OUT conectados”.",
+            "fix": "Não crie novos endereços no painel para fazer essa troca. Use os endereços da conexão existente."
+          },
+          "reply": {
+            "where": "No balcão do atendimento",
+            "actions": [
+              "Inicie uma conversa curta com o contato ou bot autorizado e aguarde a resposta.",
+              "Confira a mensagem chegando em “Mensagens recebidas” no balcão remoto.",
+              "Escreva a resposta ali e clique em “Enviar resposta pelo WhatsApp”.",
+              "Confira a resposta na conversa do WhatsApp e acompanhe a resposta seguinte da outra ponta."
+            ],
+            "expected": "A pergunta chegou ao outro computador e a resposta dele voltou pelo WhatsApp da empresa.",
+            "fix": "Mantenha os dois computadores ligados e conectados. Para encerrar o teste, pause a Bridge e desconecte o balcão."
+          }
+        },
+        "testedText": "Verificado com WhatsApp autenticado, um bot autorizado e RELAYERS real: recebimento, resposta, filtros e aplicação em outra máquina. Os testes também conferiram a permanência da página e do rascunho do WhatsApp.",
+        "screenCaption": "Configuração e atendimento pelo balcão."
       },
       {
         "slug": "acompanhar-agendamentos",
@@ -1258,7 +1858,7 @@
             "Abra “Configurar WhatsApp” no painel da extensão.",
             "Clique no ícone da Bridge no navegador. Abaixo da marca RELAYERS, use o botão “Configurar WhatsApp”. Ele abre a página da conexão. Se a conta ainda não estiver vinculada, você encontra ali os links de entrar ou criar conta.",
             "Os controles deste guia fazem parte da versão 0.2.0 ou posterior da extensão. Confira a nota de instalação antes de começar.",
-            "bridge-popup-pt.jpg"
+            "smoke/00-popup.jpg"
           ],
           [
             "account",
@@ -1272,21 +1872,21 @@
             "Escolha as conversas e os sentidos que deseja permitir.",
             "Selecione a conta do WhatsApp e marque as conversas do seu caso de uso. Ative o recebimento, o envio ou ambos e leia a autorização. Os filtros abaixo respeitam essa escolha de conta e conversas.",
             "Um filtro não dá acesso a uma conversa que você não autorizou. Para começar, use uma conversa com uma pessoa que concordou em testar.",
-            "bridge-setup-pt.jpg"
+            "smoke/04-scope.jpg"
           ],
           [
             "basic",
             "No modo básico, escreva palavras de interesse.",
             "Em “Receber mensagens”, escolha “Básico” e escreva, por exemplo, “pedido, orçamento”. Uma mensagem nova passa se contiver uma dessas frases. Você pode configurar outra lista em “Enviar mensagens”. Maiúsculas e acentos são ignorados.",
             "Se deixar a lista vazia, todas as novas mensagens das conversas autorizadas são permitidas. O filtro de envio só permite ou bloqueia um pedido; ele não escreve nem cria respostas sozinho.",
-            "bridge-settings-basic-pt.jpg"
+            "smoke/13-basic-filters.jpg"
           ],
           [
             "advanced",
             "No avançado, combine as condições da sua rotina.",
             "Escolha “Avançado”, adicione as condições e decida se todas precisam corresponder ou se basta uma. Por exemplo: o texto contém “pedido” e não contém “cancelado”. No recebimento, você também pode escolher o tipo de mensagem. As condições podem se limitar a uma conversa autorizada.",
             "Use “Testar o filtro sem enviar” para conferir um texto de exemplo. A simulação considera uma mensagem de texto na primeira conversa autorizada; ela não envia mensagens.",
-            "bridge-settings-advanced-pt.jpg"
+            "smoke/14-advanced-filters.jpg"
           ],
           [
             "destination",
@@ -1300,7 +1900,7 @@
             "Crie a conexão e confira os dois caminhos.",
             "Após conferir a autorização, clique em “Criar conexão”. A Bridge cria o recebimento IN e o envio OUT que você selecionou. O envio fica ligado a esta Bridge. Se você informou uma aplicação de recebimento, o caminho até ela também é preparado. Em “Detalhes da integração”, você pode copiar os endereços de receber e enviar separadamente.",
             "O recebimento é filtrado antes de sair da extensão. Um pedido de envio que não passa pelo filtro é bloqueado antes de enviar pelo WhatsApp.",
-            "bridge-connected-pt.jpg"
+            "smoke/05-connected.jpg"
           ],
           [
             "edit",
@@ -1329,7 +1929,9 @@
         "releaseNotice": {
           "title": "Interface da versão 0.2.0",
           "body": "Os controles deste guia estão nos pacotes de teste deste repositório, para instalação manual. A atualização das lojas ainda não foi confirmada. Confira a versão instalada antes de procurar os novos botões."
-        }
+        },
+        "screenCaption": "Configuração na extensão.",
+        "testedText": "Verificado com WhatsApp autenticado, um bot autorizado e RELAYERS real: recebimento, resposta, filtros e aplicação em outra máquina. Os testes também conferiram a permanência da página e do rascunho do WhatsApp."
       }
     ]
   }

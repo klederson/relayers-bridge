@@ -45,6 +45,26 @@ try {
       await page.goto(origin + base + a.slug + '.html');
       await page.waitForFunction(() => document.documentElement.dataset.tutorialReady === 'true');
       assert.equal(await page.locator('h1').innerText(), a.title);
+      assert.doesNotMatch(await page.locator('main').innerText(), /Ilustração original criada com IA|Original AI-created illustration/);
+      if (a.walkthrough) {
+        assert.equal(await page.locator('.cover img').getAttribute('src'), `${locale === 'pt-BR' ? '../' : ''}assets/connected-business.png`, 'Keep the original hero');
+        assert.equal(await page.locator('.practical-step').count(), a.steps.length);
+        assert.equal(await page.locator('.checkpoint').count(), a.steps.length);
+        for (const [id] of a.steps) {
+          const detail=a.stepDetails[id];
+          assert.equal(await page.locator(`#${id} .click-list li`).count(), detail.actions.length);
+          assert.ok((await page.locator(`#${id} .checkpoint`).innerText()).includes(detail.expected));
+        }
+        assert.equal(await page.locator('#desk a[download]').count(),1,'The application must be supplied rather than left as homework');
+        const deskArchive=await page.request.get(origin+'/downloads/relayers-tutorial-desk.zip');
+        assert.equal(deskArchive.ok(),true);
+        const deskFiles=execFileSync('unzip',['-Z1',resolve(root,'downloads/relayers-tutorial-desk.zip')],{encoding:'utf8'});
+        for (const file of ['server.mjs','index.html','app.js','style.css','wire.mjs','Open-Windows.cmd','Open-macOS.command','Open-Linux.sh','LICENSE']) assert.ok(deskFiles.split('\n').includes(file));
+        assert.equal(await page.locator('.screen img[src*="/smoke/"]').count(),a.steps.filter(step=>step[4]).length+Object.values(a.stepDetails).reduce((n,d)=>n+(d.extraScreens?.length||0),0)+(a.remoteScreen?1:0),'Every walkthrough screenshot must be from the real smoke');
+        await page.locator('#application .step-help summary').click();
+        assert.equal(await page.locator('#application .step-help').getAttribute('open'),'');
+      }
+
       assert.equal(await page.locator('.step-section').count(), a.steps.length);
       assert.equal(await page.locator('pre,code').count(), 0, 'Business guides must contain no code samples');
       if (a.releaseNotice) {
@@ -67,7 +87,7 @@ try {
         assert.doesNotMatch(text, /webhooks?|endpoints?|tunnel|daemon/i, 'The beginner guides must use everyday language');
         assert.equal(await page.locator('svg.flow').count(), 1);
         assert.equal(await page.locator('.beginner-faq details').count(), a.questions.length);
-        assert.ok(!text.includes(t.testedText), 'Do not apply the WhatsApp test claim to a general RELAYERS guide');
+        assert.ok(!text.includes(a.testedText || t.testedText), 'Do not apply the WhatsApp test claim to a general RELAYERS guide');
         await page.locator('.beginner-faq summary').first().click();
         assert.equal(await page.locator('.beginner-faq details').first().getAttribute('open'), '');
         if (a.key === 'relayers-for-everyone') {
@@ -77,7 +97,7 @@ try {
         }
       } else {
         assert.equal(await page.locator('svg.flow').count(), 2);
-        assert.equal(await page.locator('.proof-note').innerText().then(text => text.includes(t.testedText)), true);
+        assert.equal(await page.locator('.proof-note').innerText().then(text => text.includes(a.testedText || t.testedText)), true);
       }
       // Verify the complete static article, image resources and table of contents.
       assert.ok((await (await page.request.get(origin + base + a.slug + '.html')).text()).includes(a.title));
@@ -92,7 +112,7 @@ try {
         await page.locator('#remote-tab').click();
         assert.equal(await page.locator('#remote-panel').isVisible(), true);
         assert.equal(await page.locator('#local-panel').isVisible(), false);
-        assert.ok((await page.locator('#remote-panel').innerText()).includes(t.remoteText));
+        assert.ok((await page.locator('#remote-panel').innerText()).includes(a.remoteText || t.remoteText));
         await page.locator('#remote-tab').focus(); await page.keyboard.press('Home');
         assert.equal(await page.locator('#local-tab').getAttribute('aria-selected'), 'true');
       }
