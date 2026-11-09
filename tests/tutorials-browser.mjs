@@ -3,6 +3,7 @@ import { createServer } from 'node:http';
 import { readFile, mkdir } from 'node:fs/promises';
 import { resolve, extname } from 'node:path';
 import { chromium } from 'playwright';
+import { execFileSync } from 'node:child_process';
 
 const root = resolve('site');
 const catalogs = JSON.parse(await readFile('site/tutorials/content.json', 'utf8'));
@@ -46,6 +47,18 @@ try {
       assert.equal(await page.locator('h1').innerText(), a.title);
       assert.equal(await page.locator('.step-section').count(), a.steps.length);
       assert.equal(await page.locator('pre,code').count(), 0, 'Business guides must contain no code samples');
+      if (a.releaseNotice) {
+        assert.equal(await page.locator('.release-note').count(), 1);
+        assert.ok((await page.locator('.release-note').innerText()).includes(a.releaseNotice.body));
+        for (const family of ['chrome', 'firefox']) {
+          const archive = `downloads/relayers-bridge-${family}-0.2.0.zip`;
+          const response = await page.request.get(origin + '/' + archive);
+          assert.equal(response.ok(), true);
+          assert.equal((await response.body()).subarray(0, 2).toString(), 'PK');
+          const manifest = JSON.parse(execFileSync('unzip', ['-p', resolve(root, archive), 'manifest.json'], { encoding: 'utf8' }));
+          assert.equal(manifest.version, '0.2.0', 'The illustrated interface must be available in the linked test package');
+        }
+      }
       assert.doesNotMatch(await page.locator('main').innerText(), /HMAC|JSON|API key|WebSocket|Bearer|localhost:\d|http_method/i);
       if (a.scope === 'relayers') {
         const text = await page.locator('main').innerText();

@@ -12,24 +12,37 @@ import { chromium } from 'playwright';
 import { dismissChromiumWelcome } from './installation.mjs';
 
 const endpoints = [], rules = [], ingested = [], replies = [], sockets = [];
-const daemonId = randomUUID();
+const daemonId = randomUUID(), appDaemonId = randomUUID();
 let failFirstIngest = true;
-let forwardCommand, holdToken = false, releaseToken;
+let forwardCommand, holdToken = false, releaseToken, failRuleUpdate = false, loseIncomingRuleResponse = true;
 const server = createServer(async (request, response) => {
   response.setHeader('Access-Control-Allow-Origin', '*');
   response.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Relayers-Signature, X-Idempotency-Key');
-  response.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  response.setHeader('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE,OPTIONS');
   if (request.method === 'OPTIONS') { response.writeHead(204).end(); return; }
   let raw = ''; for await (const part of request) raw += part;
   const body = raw ? JSON.parse(raw) : null, path = new URL(request.url, 'http://test').pathname;
   const send = (data, status = 200) => { response.writeHead(status, { 'Content-Type': 'application/json' }); response.end(JSON.stringify({ data })); };
   if (path === '/v1/auth/device/code') { send({ device_code: 'fixture-device', user_code: 'TEST-CODE', verification_uri: `http://127.0.0.1:${server.address().port}/approve`, expires_in: 600, interval: 5 }); return; }
   if (path === '/v1/auth/device/token') { assert.equal(body.device_code, 'fixture-device'); const reply = () => send({ access_token: 'fictional-test-access', refresh_token: 'fictional-test-refresh' }); if (holdToken) releaseToken = reply; else reply(); return; }
+  if (path === '/v1/daemons/') { send([{ id: appDaemonId, hostname: 'Application fixture' }, { id: daemonId, hostname: 'Browser fixture' }]); return; }
   if (path.startsWith('/v1/endpoints')) {
     assert.equal(request.headers.authorization, 'Bearer fictional-test-access');
-    if (path.endsWith('/rules/')) {
-      if (request.method === 'POST') { const rule = { id: randomUUID(), ...body }; rules.push(rule); send(rule, 201); }
-      else send(rules);
+    if (path.includes('/rules/')) {
+      const endpoint = path.split('/')[3], ruleId = path.split('/')[5];
+      if (request.method === 'PATCH') {
+        if (failRuleUpdate) { response.writeHead(503, { 'Content-Type': 'application/json' }).end(JSON.stringify({ error: { code: 'fixture-save-error' } })); return; }
+        const rule = rules.find(item => item.id === ruleId && item.endpoint === endpoint); assert.ok(rule); Object.assign(rule, body); send(rule);
+      } else if (request.method === 'DELETE') {
+        const index = rules.findIndex(item => item.id === ruleId && item.endpoint === endpoint); assert.ok(index >= 0); rules.splice(index, 1); send({});
+      } else if (request.method === 'POST') {
+        const rule = { id: randomUUID(), endpoint, ...body }; rules.push(rule);
+        if (body.name.startsWith('WhatsApp Bridge IN app') && loseIncomingRuleResponse) {
+          loseIncomingRuleResponse = false; response.writeHead(503, { 'Content-Type': 'application/json' }).end(JSON.stringify({ error: { code: 'fixture-save-error' } })); return;
+        }
+        send(rule, 201);
+      }
+      else send(rules.filter(item => item.endpoint === endpoint));
     } else if (request.method === 'POST') {
       const endpoint = { id: randomUUID(), public_id: `ep-${randomUUID()}`, ...body }; endpoints.push(endpoint); send(endpoint, 201);
     } else { const query = new URL(request.url, 'http://test').searchParams.get('search'); send(endpoints.filter(item => item.slug === query)); }
@@ -137,6 +150,60 @@ try {
   await deliver({ ...command, commandId: randomUUID(), chatId: '12025550141@c.us' });
   await eventually(() => replies.some(item => item.code === 'wrong-binding'), 'Unselected conversation not rejected');
   assert.equal(await whatsapp.evaluate(() => appState.messages.length), 1);
+  // Configure a receiving destination from the real UI. A failed update must
+  // keep the old filters and route and prevent Resume until a successful save.
+  await bridge.locator('#edit-settings').click();
+  await bridge.locator('#whatsapp-settings').waitFor({ state: 'visible' });
+  await bridge.locator('#in-words').fill('order');
+  await bridge.locator('#out-words').fill('approved');
+  await bridge.locator('#filter-in summary').click();
+  await bridge.locator('#in-sample').fill('My ORDER is ready'); await bridge.locator('#in-test-filter').click();
+  assert.match(await bridge.locator('#in-filter-result').textContent(), /passes/);
+  await bridge.locator('#in-sample').fill('Unrelated greeting'); await bridge.locator('#in-test-filter').click();
+  assert.match(await bridge.locator('#in-filter-result').textContent(), /blocked/);
+  assert.equal(await whatsapp.evaluate(() => appState.messages.length), 1, 'Testing filters must not send a WhatsApp message');
+  assert.equal(ingested.length, 0, 'Testing filters must not upload an example');
+  await bridge.locator('#destination-kind').selectOption('remote');
+  await bridge.locator('#destination-url').fill('https://application.test/messages');
+  await bridge.locator('#settings-consent').check(); await bridge.locator('#save-settings').click();
+  const getStatus = () => bridge.evaluate(() => chrome.runtime.sendMessage({ type: 'bridge-status' }));
+  await eventually(async () => (await getStatus()).lastError === 'fixture-save-error', 'Lost create response not surfaced');
+  assert.equal((await getStatus()).binding.settingsPending, true);
+  await bridge.locator('#save-settings').click();
+  await eventually(async () => (await getStatus()).binding.applicationRoute && !(await getStatus()).binding.settingsPending, 'Receiving configuration not created');
+  assert.equal((await getStatus()).state, 'paused');
+  const applicationRule = rules.find(rule => rule.destination_url === 'https://application.test/messages');
+  assert.ok(applicationRule); assert.equal(applicationRule.destination_type, 'public');
+  assert.equal(rules.filter(rule => rule.name.startsWith('WhatsApp Bridge IN app')).length, 1, 'A lost create response must not duplicate the receiving route');
+  assert.equal(rules.filter(rule => rule.daemon_id === daemonId).length, 1, 'OUT keeps its original browser-bound route');
+  await bridge.locator('#in-words').fill('changed'); failRuleUpdate = true;
+  await bridge.locator('#settings-consent').check(); await bridge.locator('#save-settings').click();
+  await eventually(async () => (await getStatus()).lastError === 'fixture-save-error', 'Simulated save failure not surfaced');
+  assert.equal((await getStatus()).binding.settings.incomingFilter.conditions[0].value, 'order');
+  assert.equal((await getStatus()).binding.settingsPending, true);
+  assert.equal(await bridge.locator('#resume').isDisabled(), true);
+  assert.equal(applicationRule.destination_url, 'https://application.test/messages');
+  failRuleUpdate = false; await bridge.locator('#save-settings').click();
+  await eventually(async () => !(await getStatus()).binding.settingsPending && (await getStatus()).binding.settings.incomingFilter.conditions[0].value === 'changed', 'Configuration did not recover');
+  assert.equal(rules.filter(rule => rule.id === applicationRule.id).length, 1, 'Retry updates the same managed rule');
+  const unrelated = { id: randomUUID(), endpoint: applicationRule.endpoint, name: 'User-created separate receiving route', destination_url: 'https://other-application.test/messages', destination_type: 'public' };
+  rules.push(unrelated);
+  await bridge.locator('#destination-kind').selectOption('none');
+  await bridge.locator('#settings-consent').check(); await bridge.locator('#save-settings').click();
+  await eventually(async () => !(await getStatus()).binding.applicationRoute, 'Application forwarding was not removed');
+  assert.equal(rules.length, 2, 'Removing application forwarding leaves OUT and unrelated routes intact');
+  assert.equal(rules.find(rule => rule.id === unrelated.id), unrelated);
+  // Restore permissive filters for the existing same-account rebind checks.
+  await bridge.locator('#in-words').fill(''); await bridge.locator('#out-words').fill('');
+  await bridge.locator('#settings-consent').check(); await bridge.locator('#save-settings').click();
+  await eventually(async () => !(await getStatus()).binding.settingsPending && !(await getStatus()).binding.settings.outgoingFilter.conditions.length, 'Default filters not restored');
+  await bridge.locator('#resume').click();
+  await eventually(async () => (await getStatus()).state === 'connected', 'Configured connection did not resume');
+  assert.equal(await whatsapp.evaluate(original => document === original, originalDocument), true);
+  assert.equal(await whatsapp.evaluate(() => documentToken), token);
+  assert.equal(await whatsapp.locator('#compose').inputValue(), originalDraft);
+  assert.equal(whatsapp.url(), 'https://web.whatsapp.com/');
+  assert.equal(navigations, 0, 'Editing webhook configuration must preserve the loaded WhatsApp document');
   await whatsapp.evaluate(() => {
     const store = require('WAWebChatCollection').ChatCollection;
     const chat = store.getModelsArray()[0];

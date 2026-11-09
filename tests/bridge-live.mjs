@@ -152,7 +152,7 @@ try {
   });
   await new Promise(resolve => appServer.listen(0, '127.0.0.1', resolve));
   const appUrl = `http://127.0.0.1:${appServer.address().port}/messages`;
-  const appDestination = 'https://tutorial.bridge.invalid/messages';
+  const appDestination = appUrl;
   const tunnelUrl = new URL('/v1/tunnel/connect', address); tunnelUrl.protocol = 'wss:';
   appSocket = new WebSocket(tunnelUrl);
   await new Promise((resolve, reject) => {
@@ -181,14 +181,43 @@ try {
       }).catch(error => { appError = error; clearTimeout(timer); reject(error); });
     });
   });
-  await request(`/v1/endpoints/${config.inEndpoint.id}/rules/`, { method: 'POST', body: JSON.stringify({ name: 'Tutorial QA IN to application', priority: 100, filter: {},
-    destination_type: 'tunnel', destination_url: appDestination, daemon_id: appDaemon, http_method: 'POST', timeout_ms: 30000,
-    retry_policy: { max_retries: 5, backoff_base_sec: 10, backoff_max_sec: 60 } }) });
+  stage = 'WhatsApp configuration UI, filters and local receiving rule';
+  await bridge.locator('#edit-settings').click();
+  await bridge.locator('#whatsapp-settings').waitFor({ state: 'visible' });
+  await bridge.locator('#in-filter-mode').selectOption('advanced');
+  await bridge.locator('#in-add-condition').click();
+  await bridge.locator('#in-conditions [data-value]').fill('fixture');
+  await bridge.locator('#out-words').fill('tutorial');
+  await bridge.locator('#destination-kind').selectOption('local');
+  await bridge.locator('#destination-url').fill(appDestination);
+  await bridge.locator('#destination-device').selectOption(appDaemon);
+  await bridge.locator('#settings-consent').check();
+  await bridge.locator('#save-settings').click();
+  await eventually(async () => {
+    const current = await status();
+    return current.state === 'paused' && !current.binding.settingsPending && current.binding.applicationRoute;
+  }, 'Local application configuration did not save');
+  const managed = (await worker.evaluate(async () => (await chrome.storage.local.get('bridgeBinding')).bridgeBinding)).inRuleId;
+  assert.ok(managed);
+  stage = 'update existing receiving rule from the configuration UI';
+  await bridge.locator('#out-words').fill('tutorial, order');
+  await bridge.locator('#settings-consent').check(); await bridge.locator('#save-settings').click();
+  await eventually(async () => {
+    const current = await status();
+    return !current.binding.settingsPending && current.binding.settings.outgoingFilter.conditions.length === 2;
+  }, 'Receiving configuration update did not save');
+  assert.equal((await worker.evaluate(async () => (await chrome.storage.local.get('bridgeBinding')).bridgeBinding)).inRuleId, managed);
+  const configuredRules = await request(`/v1/endpoints/${config.inEndpoint.id}/rules/`);
+  assert.equal(configuredRules.filter(rule => rule.id === managed).length, 1, 'Saving twice must update the same application route');
+  await bridge.locator('#resume').click();
+  await eventually(async () => (await status()).state === 'connected', 'Configured connection did not resume');
+  await work.bringToFront();
   stage = 'real signed IN ingestion and delivery to the application';
   const messageId = `live-fixture-${randomUUID()}`;
   await whatsapp.evaluate(id => {
     require('WAWebChatCollection').ChatCollection.getModelsArray()[0].msgs.getModelsArray = () => [
       { id: { _serialized: id, fromMe: false }, type: 'chat', body: 'Incoming fixture text for the live RELAYERS transport.', t: Math.floor(Date.now() / 1000) + 1 },
+      { id: { _serialized: `${id}-filtered`, fromMe: false }, type: 'chat', body: 'Unrelated private text should stay here.', t: Math.floor(Date.now() / 1000) + 1 },
       { id: { _serialized: `${id}-echo`, fromMe: true }, type: 'chat', body: 'Do not export outgoing echoes.', t: Math.floor(Date.now() / 1000) + 1 }
     ];
   }, messageId);
@@ -203,8 +232,14 @@ try {
   await eventually(() => appMessages.some(item => item.messageId === messageId), 'IN did not reach the separate local application');
   assert.equal(appMessages.find(item => item.messageId === messageId).text, received.payload.text);
   assert.ok(!appError, 'Application tunnel failed');
+  assert.equal(appMessages.some(item => item.messageId === `${messageId}-filtered`), false);
   await eventually(async () => (await status()).pending === 0, 'Acknowledged IN still queued');
   stage = 'application reply through OUT without browser login credentials';
+  const blockedEvent = await submit({ ...command, commandId: randomUUID(), text: 'Unmatched reply', expiresAt: new Date(Date.now() + 300000).toISOString() });
+  await eventually(async () => (await request(`/v1/events/${blockedEvent.event_id}/deliveries`) ?? []).some(item => {
+    try { return JSON.parse(item.response_body).code === 'filtered-out'; } catch { return false; }
+  }), 'Outgoing filter did not reject an unmatched reply');
+  assert.equal(await whatsapp.evaluate(() => appState.messages.length), 1);
   const reply = { ...command, commandId: randomUUID(), text: 'Your order is ready — hypothetical tutorial case.', expiresAt: new Date(Date.now() + 300000).toISOString() };
   await submit(reply);
   await eventually(async () => await whatsapp.evaluate(() => appState.messages.length) === 2, 'Application reply did not return through OUT');
@@ -220,12 +255,20 @@ try {
 } catch (error) {
   // Keep credentials, device codes, tokens and payloads out of logs.
   console.error(`Live Bridge test failed at: ${stage} (${error.name}).`);
+  if (stage === 'application reply through OUT without browser login credentials') {
+    console.error(JSON.stringify({ check: error.message.split('\n')[0] }));
+    if (context) {
+      const page = context.pages().find(page => page.url() === 'https://web.whatsapp.com/');
+      if (page) console.error(JSON.stringify(await page.evaluate(() => ({ fixtureMessageCount: appState.messages.length, fixtureUncertain: Boolean(window.sendUncertain), fixtureUnavailable: Boolean(window.integrationUnavailable) })).catch(() => ({}))));
+    }
+  }
   if (stage === 'approval page navigation') console.error(error.message.split('\n')[0].replace(/https?:\/\/[^\s"']+/g, '[verification page]'));
   if (error.httpStatus) console.error(JSON.stringify({ httpStatus: error.httpStatus, apiCode: error.apiCode }));
   if (approval) console.error(JSON.stringify({ approvalPath: new URL(approval.url()).pathname, approvalQueryKeys: [...new URL(approval.url()).searchParams.keys()], loginStatus, approvalStatus }));
   if (bridge && worker) {
     const safe = await bridge.evaluate(() => chrome.runtime.sendMessage({ type: 'bridge-status' })).catch(() => null);
-    if (safe) console.error(JSON.stringify({ state: safe.state, lastError: safe.lastError, lastResult: safe.lastResult }));
+    const uiError = await bridge.locator('#error-code').textContent().catch(() => '');
+    if (safe) console.error(JSON.stringify({ state: safe.state, authenticated: safe.authenticated, hasBinding: Boolean(safe.binding), uiError: /^[a-z0-9-]+$/.test(uiError) ? uiError : '', lastError: safe.lastError, lastResult: safe.lastResult }));
   }
   process.exitCode = 1;
 } finally {

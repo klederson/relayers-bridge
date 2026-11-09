@@ -67,3 +67,6 @@ const previewMessages = {
 };
 for (const [locale, messages] of Object.entries(previewMessages)) Object.assign(popupCatalogs[locale], messages);
 export function popupMessages(language) { return popupCatalogs[language?.split(/[-_]/)[0]] ?? en; }
+
+const bridgeEntryLabels = { en: "Configure WhatsApp", pt: "Configurar WhatsApp", es: "Configurar WhatsApp", id: "Atur WhatsApp", hi: "WhatsApp सेट करें" };
+for (const [locale, bridgeConfigure] of Object.entries(bridgeEntryLabels)) Object.assign(popupCatalogs[locale], { bridgeConfigure });

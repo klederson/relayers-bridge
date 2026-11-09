@@ -22,23 +22,34 @@ try {
   const whatsapp = await context.newPage(); await whatsapp.goto('https://web.whatsapp.com/');
   await whatsapp.waitForFunction(() => window.documentToken);
   await context.addInitScript(() => {
-    if (!location.href.includes('/bridge.html')) return;
-    const lang = new URL(location.href).searchParams.get('lang') || 'en';
+    if (!location.href.includes('/bridge.html') && !location.href.includes('/popup.html')) return;
+    const lang = new URL(location.href).searchParams.get('lang') || sessionStorage.getItem('tutorialCaptureLanguage') || 'en';
     chrome.i18n.getMessage = key => key === 'language' ? lang : '';
+    if (location.href.includes('/popup.html')) return;
     const stage = new URL(location.href).searchParams.get('stage') || 'login';
     const binding = { connectionId: '00000000-0000-4000-8000-000000000001', accountId: '12025550000@c.us', chatIds: ['12025550140@c.us'], enabled: true,
-      inbound: true, outbound: true, inUrl: 'https://example.invalid/receive-demo', outUrl: 'https://example.invalid/send-demo' };
+      inbound: true, outbound: true, inUrl: 'https://example.invalid/receive-demo', outUrl: 'https://example.invalid/send-demo',
+      applicationRoute: stage === 'connected', settings: stage === 'connected' ? { destination: { kind: 'remote', url: 'https://example.invalid/messages' } } : undefined };
     chrome.runtime.sendMessage = async request => {
-      if (request.type === 'bridge-status') return { ok: true, authenticated: ['setup', 'connected'].includes(stage),
-        binding: stage === 'connected' ? binding : null, pairing: stage === 'pairing' ? { userCode: 'DEMO-2026', verificationUri: 'https://example.invalid/approve' } : null,
-        state: stage === 'connected' ? 'connected' : 'disconnected', pending: 0, lastResult: stage === 'connected' ? { status: 'accepted' } : null };
+      const connected = ['connected', 'settings-basic', 'settings-advanced'].includes(stage);
+      if (request.type === 'bridge-status') return { ok: true, authenticated: stage === 'setup' || connected,
+        binding: connected ? binding : null, pairing: stage === 'pairing' ? { userCode: 'DEMO-2026', verificationUri: 'https://example.invalid/approve' } : null,
+        state: connected ? 'connected' : 'disconnected', pending: 0, lastResult: connected ? { status: 'accepted' } : null };
       if (request.type === 'bridge-tabs') return { ok: true, tabs: [{ id: 1, title: 'WhatsApp · Demo' }] };
       if (request.type === 'bridge-chats') return { ok: true, accountId: binding.accountId, chats: [{ id: binding.chatIds[0], name: lang === 'pt' ? 'Bia · Pedido de exemplo' : 'Bia · Example order' }] };
+      if (request.type === 'bridge-config-options') return { ok: true, devices: [], chats: [{ id: binding.chatIds[0], name: lang === 'pt' ? 'Bia · Pedido de exemplo' : 'Bia · Example order' }] };
       return { ok: true };
     };
   });
   for (const lang of ['en', 'pt']) {
-    for (const stage of ['login', 'pairing', 'setup', 'connected']) {
+    const popup = await context.newPage(); await popup.setViewportSize({ width: 390, height: 700 });
+    await popup.goto(`${origin}/popup.html`);
+    await popup.evaluate(value => sessionStorage.setItem('tutorialCaptureLanguage', value), lang);
+    await popup.reload();
+    await popup.locator('#bridge-settings-link').waitFor();
+    await popup.locator('#composer').waitFor({ state: 'visible' });
+    await popup.locator('body').screenshot({ path: join(directory, `bridge-popup-${lang}.jpg`), type: 'jpeg', quality: 90 }); await popup.close();
+    for (const stage of ['login', 'pairing', 'setup', 'connected', 'settings-basic', 'settings-advanced']) {
       const page = await context.newPage();
       await page.goto(`${origin}/bridge.html?lang=${lang}&stage=${stage}`);
       await page.waitForFunction(() => document.documentElement.dataset.ready === 'true');
@@ -46,7 +57,23 @@ try {
         await page.locator('#chats input').check();
         await page.locator('#incoming').check(); await page.locator('#outgoing').check(); await page.locator('#consent').check();
       }
-      await page.locator('main').screenshot({ path: join(directory, `bridge-${stage}-${lang}.jpg`), type: 'jpeg', quality: 88 });
+      if (stage.startsWith('settings-')) {
+        await page.locator('#edit-settings').click(); await page.locator('#whatsapp-settings').waitFor({ state: 'visible' });
+        await page.locator('#in-words').fill(lang === 'pt' ? 'pedido, orçamento' : 'order, quote');
+        await page.locator('#out-words').fill(lang === 'pt' ? 'pedido' : 'order');
+        await page.locator('#destination-kind').selectOption('remote'); await page.locator('#destination-url').fill('https://example.invalid/messages');
+        if (stage === 'settings-advanced') {
+          await page.locator('#in-filter-mode').selectOption('advanced');
+          await page.locator('#in-match').selectOption('all');
+          for (let i = 0; i < 2; i++) await page.locator('#in-add-condition').click();
+          await page.locator('#in-conditions [data-value]').nth(0).fill(lang === 'pt' ? 'pedido' : 'order');
+          await page.locator('#in-conditions [data-operator]').nth(1).selectOption('notContains');
+          await page.locator('#in-conditions [data-value]').nth(1).fill(lang === 'pt' ? 'cancelado' : 'cancelled');
+          await page.locator('#filter-in summary').click();
+          await page.locator('#in-sample').fill(lang === 'pt' ? 'Pedido pronto' : 'Order ready'); await page.locator('#in-test-filter').click();
+        }
+      }
+      await page.locator(stage.startsWith('settings-') ? '#whatsapp-settings' : 'main').screenshot({ path: join(directory, `bridge-${stage}-${lang}.jpg`), type: 'jpeg', quality: 88 });
       await page.close();
     }
   }

@@ -19,6 +19,7 @@
   "screenshots": {
     "extension": "Real bundled extension interfaces populated with fictional state by scripts/capture-tutorials.mjs. No real WhatsApp conversation or credentials.",
     "login": "Public RELAYERS sign-in page, no credentials entered.",
-    "date": "2026-11-09"
+    "date": "2026-11-09",
+    "extensionVersion": "0.2.0"
   }
 }

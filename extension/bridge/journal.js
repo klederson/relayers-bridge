@@ -29,7 +29,7 @@ export function createCommandJournal(storage, { now = Date.now, limit = 4096 } =
           const preflight = validateCommand(command, currentBinding(), now());
           const sent = preflight ? { ok: false, code: preflight } : await dispatch(command);
           result = sent?.ok && sent.status === 'accepted' ? { status: 'accepted' }
-            : sent?.code && ['stale-document', 'stale-chat', 'unavailable', 'not-ready', 'wrong-account', 'wrong-binding', 'outbound-disabled', 'permission-revoked', 'expired-command'].includes(sent.code) ? { status: 'rejected', code: sent.code }
+            : sent?.code && ['stale-document', 'stale-chat', 'unavailable', 'not-ready', 'wrong-account', 'wrong-binding', 'outbound-disabled', 'permission-revoked', 'expired-command', 'filtered-out'].includes(sent.code) ? { status: 'rejected', code: sent.code }
             : { status: 'uncertain', code: 'send-unknown' };
         } catch { result = { status: 'uncertain', code: 'send-unknown' }; }
         records[command.commandId].result = result;

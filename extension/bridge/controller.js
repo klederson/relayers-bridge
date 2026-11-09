@@ -5,6 +5,7 @@ import { readRelayInPage } from './whatsapp.js';
 import { executeQuickReply } from '../quick-reply.js';
 import { createRelayersClient } from './api.js';
 import { hmac, decodeKey, signFrame, createFrameVerifier, decodeBody } from './wire.js';
+import { normalizeSettings, matchesFilter } from './filters.js';
 
 export function createBridgeController(api, { fetcher = fetch, Socket = WebSocket, now = Date.now } = {}) {
   const local = api.storage.local;
@@ -89,6 +90,51 @@ export function createBridgeController(api, { fetcher = fetch, Socket = WebSocke
     if (!uuid(rule?.id)) throw new Error('invalid-rule');
     binding.ruleId = rule.id; await saveBinding();
   };
+  const applicationDevices = async () => {
+    const response = await client.request('/v1/daemons/?per_page=100');
+    const listed = response === null ? [] : response;
+    if (!Array.isArray(listed)) throw new Error('invalid-devices');
+    return listed.filter(item => uuid(item.id) && item.id !== binding?.daemonId).map(item => ({ id: item.id,
+      name: String(item.name || item.hostname || item.system_info?.hostname || item.id).slice(0, 120), status: String(item.status || '').slice(0, 30) }));
+  };
+  const ensureIncomingRule = async settings => {
+    if (!binding?.inbound) {
+      if (settings.destination.kind !== 'none') throw new Error('inbound-disabled');
+      return;
+    }
+    const current = binding, epoch = generation, transport = client;
+    const check = () => { if (current !== binding || epoch !== generation) throw new Error('disconnected'); };
+    const destination = settings.destination;
+    const base = `/v1/endpoints/${current.inEndpoint.id}/rules/`;
+    const name = `WhatsApp Bridge IN app ${current.connectionId}`;
+    // Reconcile before a write: the service may have committed a previous POST
+    // whose response was lost. Retrying must not duplicate application delivery.
+    const response = await transport.request(base); check();
+    const listed = response === null ? [] : response;
+    if (!Array.isArray(listed)) throw new Error('invalid-rule');
+    const named = listed.filter(rule => rule.name === name);
+    if (named.length > 1) throw new Error('duplicate-application-rules');
+    const existing = listed.find(rule => rule.id === current.inRuleId) ?? named[0];
+    current.inRuleId = existing?.id ?? null;
+    if (current.inRuleId && !uuid(current.inRuleId)) throw new Error('invalid-rule');
+    if (destination.kind === 'none') {
+      if (current.inRuleId) {
+        await transport.request(`/v1/endpoints/${current.inEndpoint.id}/rules/${current.inRuleId}`, { method: 'DELETE' }); check();
+        current.inRuleId = null; await saveBinding();
+      }
+      return;
+    }
+    if (destination.kind === 'local') {
+      const devices = await applicationDevices(); check();
+      if (!devices.some(item => item.id === destination.daemonId)) throw new Error('invalid-device');
+    }
+    const body = { name, priority: 100, filter: {}, destination_url: destination.url,
+      destination_type: destination.kind === 'local' ? 'tunnel' : 'public', daemon_id: destination.kind === 'local' ? destination.daemonId : null,
+      http_method: 'POST', timeout_ms: 30000, retry_policy: { max_retries: 5, backoff_base_sec: 10, backoff_max_sec: 60 } };
+    const rule = await transport.request(current.inRuleId ? `${base}${current.inRuleId}` : base, { method: current.inRuleId ? 'PATCH' : 'POST', body }); check();
+    if (!uuid(rule?.id)) throw new Error('invalid-rule');
+    current.inRuleId = rule.id; await saveBinding();
+  };
   const deliver = async frame => {
     let result = { status: 'rejected', code: 'wrong-endpoint' }, command;
     if (binding?.enabled && frame.endpoint_id === binding.outEndpoint?.id && frame.url === DESTINATION && frame.method === 'POST') {
@@ -96,6 +142,7 @@ export function createBridgeController(api, { fetcher = fetch, Socket = WebSocke
         command = decodeBody(frame.body);
         result = await journal.execute(command, () => binding, async value => {
           if (!binding?.enabled || !binding.outbound) return { ok: false, code: 'outbound-disabled' };
+          if (!matchesFilter(binding.settings?.outgoingFilter, { text: value.text, type: 'chat', chatId: value.chatId })) return { ok: false, code: 'filtered-out' };
           if (!await api.permissions.contains(credentials())) return { ok: false, code: 'permission-revoked' };
           await scan(binding.tabId);
           const snapshot = await executeQuickReply(api, binding.tabId, { action: 'snapshot', chatId: value.chatId });
@@ -211,7 +258,8 @@ export function createBridgeController(api, { fetcher = fetch, Socket = WebSocke
         return { ok: true, state, lastError, lastResult, server: auth?.server, connectedAccount: binding?.accountId,
         authenticated: Boolean(auth?.access_token), binding: binding ? { connectionId: binding.connectionId, accountId: binding.accountId, chatIds: binding.chatIds,
           enabled: binding.enabled, inbound: binding.inbound, outbound: binding.outbound, inUrl: binding.inEndpoint ? `${auth.server}/v1/webhooks/${binding.inEndpoint.publicId}` : null,
-          outUrl: binding.outEndpoint ? `${auth.server}/v1/webhooks/${binding.outEndpoint.publicId}` : null } : null,
+          outUrl: binding.outEndpoint ? `${auth.server}/v1/webhooks/${binding.outEndpoint.publicId}` : null,
+          settings: normalizeSettings(binding.settings), settingsPending: Boolean(binding.settingsPending), applicationRoute: Boolean(binding.inRuleId) } : null,
         pending: await inbox.count(), pairing: pairing ? { userCode: pairing.userCode, verificationUri: pairing.verificationUri } : null };
       }
       if (message.type === 'bridge-begin-auth') {
@@ -263,6 +311,8 @@ export function createBridgeController(api, { fetcher = fetch, Socket = WebSocke
         if (!auth?.access_token || !message.consent || (!message.inbound && !message.outbound) || !Number.isInteger(message.tabId)
           || !Array.isArray(message.chatIds) || !message.chatIds.length || message.chatIds.length > 50 || message.chatIds.some(id => !chatId(id))) throw new Error('invalid-scope');
         if (!await api.permissions.contains(credentials())) throw new Error('permission-revoked');
+        const settings = normalizeSettings(message.settings);
+        if (!message.inbound && settings.destination.kind !== 'none') throw new Error('inbound-disabled');
         configuring = true;
         try {
           const snapshot = await scan(message.tabId, message.chatIds);
@@ -270,13 +320,41 @@ export function createBridgeController(api, { fetcher = fetch, Socket = WebSocke
           if (snapshot.messages.length > 10000) throw new Error('queue-full');
           binding = { connectionId: crypto.randomUUID(), accountId: snapshot.accountId, tabId: message.tabId, cookieStoreId: snapshot.cookieStoreId,
             chatIds: [...new Set(message.chatIds)], inbound: message.inbound === true, outbound: message.outbound === true, enabled: false, startedAt: now(),
-            signingSecrets: Object.fromEntries(['in', 'out'].map(direction => [direction, [...crypto.getRandomValues(new Uint8Array(32))].map(byte => byte.toString(16).padStart(2, '0')).join('')])) };
+            settings, settingsPending: true, signingSecrets: Object.fromEntries(['in', 'out'].map(direction => [direction, [...crypto.getRandomValues(new Uint8Array(32))].map(byte => byte.toString(16).padStart(2, '0')).join('')])) };
           await saveBinding(); await inbox.baseline(binding.connectionId, snapshot.messages);
           if (binding.inbound) await ensureEndpoint('in');
           if (binding.outbound) await ensureEndpoint('out');
-          binding.enabled = true; await saveBinding();
+          await ensureIncomingRule(settings);
+          binding.settingsPending = false; binding.enabled = true; await saveBinding();
         } finally { configuring = false; }
         await connect(); return { ok: true };
+      }
+      if (message.type === 'bridge-config-options') {
+        if (!auth?.access_token) throw new Error('not-configured');
+        const devices = await applicationDevices();
+        const snapshot = binding ? await scan(binding.tabId, binding.chatIds) : null;
+        return { ok: true, devices, chats: snapshot?.chats?.filter(item => binding.chatIds.includes(item.id)) ?? [] };
+      }
+      if (message.type === 'bridge-configure') {
+        if (!binding || !auth?.access_token || configuring) throw new Error('not-configured');
+        if (message.consent !== true) throw new Error('confirmation-required');
+        const settings = normalizeSettings(message.settings);
+        if (!await api.permissions.contains(credentials())) throw new Error('permission-revoked');
+        configuring = true;
+        try {
+          binding.enabled = false; stopTransport(); state = 'paused';
+          await tickChain.catch(() => {}); await commandChain.catch(() => {});
+          const current = binding, epoch = generation;
+          if (!current) throw new Error('disconnected');
+          current.settingsPending = true; await saveBinding();
+          if (current.inbound) await ensureEndpoint('in');
+          if (current.outbound) await ensureEndpoint('out');
+          await ensureIncomingRule(settings);
+          if (current !== binding || epoch !== generation) throw new Error('disconnected');
+          current.settings = settings; current.settingsPending = false; await saveBinding(); lastError = '';
+        } catch (error) { lastError = error.message; throw error; }
+        finally { configuring = false; }
+        return { ok: true, paused: true };
       }
       if (message.type === 'bridge-pause') {
         if (binding) { binding.enabled = false; await saveBinding(); } stopTransport(); state = 'paused'; return { ok: true };
@@ -286,6 +364,7 @@ export function createBridgeController(api, { fetcher = fetch, Socket = WebSocke
         return { ok: true, secret: binding.signingSecrets.out };
       }
       if (message.type === 'bridge-rebind') {
+        if (configuring) throw new Error('configuration-pending');
         if (!binding || !Number.isInteger(message.tabId)) throw new Error('not-configured');
         const snapshot = await scan(message.tabId, binding.chatIds, false);
         if (snapshot.accountId !== binding.accountId) throw new Error('wrong-account');
@@ -299,6 +378,7 @@ export function createBridgeController(api, { fetcher = fetch, Socket = WebSocke
       }
       if (message.type === 'bridge-resume') {
         if (!binding || !auth?.access_token) throw new Error('not-configured');
+        if (configuring || binding.settingsPending) throw new Error('configuration-pending');
         await scan(binding.tabId);
         if (!await api.permissions.contains(credentials())) throw new Error('permission-revoked');
         if (binding.inbound) await ensureEndpoint('in'); if (binding.outbound) await ensureEndpoint('out');

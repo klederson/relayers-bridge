@@ -17,7 +17,7 @@ You choose the account, the chats and what is allowed. Keep the computer, browse
 
 Start with [your first two-way conversation](https://klederson.github.io/relayers-bridge/tutorials/first-connection.html): where to sign in, how to approve Bridge, how the separate receiving (IN) and sending (OUT) connections are created, and where a local or remote application joins the flow.
 
-The [tutorial library](https://klederson.github.io/relayers-bridge/tutorials/) also explores order updates, a remote support team and appointment confirmations. All seven guides are available in [Portuguese](https://klederson.github.io/relayers-bridge/tutorials/pt-br/), with original artwork, diagrams and annotated context for real extension captures using fictional data. Business scenarios are hypothetical; they are not customer testimonials.
+The [tutorial library](https://klederson.github.io/relayers-bridge/tutorials/) also explores order updates, a remote support team and appointment confirmations. All eight guides are available in [Portuguese](https://klederson.github.io/relayers-bridge/tutorials/pt-br/), with original artwork, diagrams and annotated context for real extension captures using fictional data. Business scenarios are hypothetical; they are not customer testimonials.
 
 The full flow was checked on 9 November 2026 with an owned test account on the real RELAYERS service, a separate local application and simulated WhatsApp. It exercised approval, separate IN/OUT endpoints, IN delivery to the application and an independent signed OUT reply while preserving the WhatsApp document, draft and work-tab focus. This does not validate authenticated WhatsApp compatibility or recipient delivery.
 
@@ -32,6 +32,14 @@ For a nontechnical introduction to RELAYERS itself, start with [RELAYERS for eve
 Chrome: install from the [official Chrome Web Store listing](https://chromewebstore.google.com/detail/kehnlfbcbflddadaogbfeiibhckbfiie).
 
 Firefox: Mozilla approval is pending. The [submitted listing](https://addons.mozilla.org/en-US/firefox/addon/relayers-bridge/) will become available after approval. For now, download the Firefox package from [releases](https://github.com/klederson/relayers-bridge/releases) and follow the temporary installation steps below.
+
+## Install test build
+
+The WhatsApp configuration screen, Basic/Advanced filters and blue-and-green interface are in **0.2.0**, available as [Chrome](https://klederson.github.io/relayers-bridge/downloads/relayers-bridge-chrome-0.2.0.zip) and [Firefox](https://klederson.github.io/relayers-bridge/downloads/relayers-bridge-firefox-0.2.0.zip) test ZIPs. Store approval of this update has not been confirmed. The [illustrated configuration guide](https://klederson.github.io/relayers-bridge/tutorials/configure-whatsapp-in-the-extension.html) shows this version.
+
+Extract the ZIP first. In Chrome, open `chrome://extensions`, enable Developer mode, choose **Load unpacked** and select the extracted folder. In Firefox, open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on** and select `manifest.json` inside the extracted folder; this installation lasts until Firefox restarts. Reload only the extension when updating a local build; keep the WhatsApp document loaded.
+
+Click **Configure WhatsApp** in the popup to link your RELAYERS account, authorize conversations and create separate receiving/sending connections. Basic filters accept any listed phrase; Advanced combines up to ten text, conversation and incoming message-kind conditions. Incoming filters run before new content enters the outgoing-to-RELAYERS queue. Outgoing filters reject before WhatsApp dispatch and preserve that rejection on a retry of the same command. Edit the receiving application from the same page; only this connection's managed IN route is changed. The existing browser-bound OUT route is retained. Saving pauses the connection for review; incomplete saves block Resume.
 
 ## Development
 

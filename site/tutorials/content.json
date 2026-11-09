@@ -14,7 +14,7 @@
     "local": "Application on my computer",
     "remote": "Application somewhere else",
     "imageCaption": "Original AI-created illustration. Hypothetical business setting.",
-    "screenCaption": "Real extension screen with fictional state and conversation prepared for this guide.",
+    "screenCaption": "Real extension 0.2.0 screen with fictional state and conversation prepared for this guide.",
     "loginCaption": "The public RELAYERS sign-in screen. No credentials were used for this capture.",
     "hypothetical": "HYPOTHETICAL SCENARIO",
     "heroKicker": "GUIDES TO KEEP THE CONVERSATION MOVING",
@@ -39,8 +39,8 @@
       "A test conversation with someone who agrees to take part.",
       "An application chosen to receive messages and request replies."
     ],
-    "localText": "The application runs on your business computer. Open RELAYERS Desktop on that computer, sign in to the same account and choose where incoming messages should go. Keep Desktop connected while using this local application.",
-    "remoteText": "The application runs on a server or is used by a team elsewhere. In RELAYERS, choose that application’s receiving address. It can receive messages and request replies without being on the WhatsApp computer.",
+    "localText": "The application runs on your business computer. Open RELAYERS Desktop there and sign in to the same account to link it. In Bridge, select that computer and the receiving address supplied by the application. Keep Desktop connected during use.",
+    "remoteText": "The application runs on a server or is used by a team elsewhere. In Bridge, choose an online application and enter its receiving address. RELAYERS forwards messages to it; reply requests use the authorized sending path.",
     "locationNote": "In either case, WhatsApp and Bridge remain on the linked computer. A remote application does not need RELAYERS Desktop running on that other machine; its service must be reachable.",
     "routesTitle": "Two paths. A clear purpose for each.",
     "receiveTitle": "RECEIVE · IN",
@@ -78,14 +78,14 @@
           [
             "pair",
             "Approve Bridge using the displayed code.",
-            "Click the extension icon. At the top of its panel, click the RELAYERS brand to open the connection page. Click “Connect to RELAYERS”. Bridge shows a code and “Open RELAYERS to approve”. Open that button, sign in if asked and approve the code. Then return to Bridge.",
+            "Click the extension icon. Use “Configure WhatsApp” below the RELAYERS brand to open the connection page. Click “Connect to RELAYERS”. Bridge shows a code and “Open RELAYERS to approve”. Open that button, sign in if asked and approve the code. Then return to Bridge.",
             "Enter your password on the RELAYERS page. You do not need to paste your password into the extension.",
             "bridge-pairing-en.jpg"
           ],
           [
             "choose",
             "Choose the account, conversation and both directions.",
-            "In Bridge, select your WhatsApp account and the test conversation. Enable “Incoming messages → RELAYERS” and “RELAYERS → outgoing messages”. Read the authorization and click “Create connection”.",
+            "In Bridge, select the WhatsApp account and test conversation. Enable “Incoming messages → RELAYERS” and “RELAYERS → outgoing messages”. Read the authorization and continue below to choose filters and destination before creating the connection.",
             "You can allow only one direction. For this first two-way example, choose both.",
             "bridge-setup-en.jpg"
           ],
@@ -99,8 +99,8 @@
           [
             "application",
             "Choose where your application takes part.",
-            "In RELAYERS, open the matching “WhatsApp Bridge IN” entry and add forwarding to your application. Choose the local or remote option below. Check that the account and address match the ones shown by Bridge.",
-            "OUT already points to Bridge. Set up application receipt under IN and preserve the sending path created for the extension.",
+            "On the Bridge page, choose Basic or Advanced filters. Under “Where should received messages go?”, choose your online application or a linked computer and enter its supplied receiving address. Review your choices and click “Create connection”. Use the local and remote options explained below.",
+            "Bridge prepares the receiving and sending paths you selected. If you choose receipt only in RELAYERS, application forwarding is left for later; the connection summary makes that clear.",
             ""
           ],
           [
@@ -126,7 +126,11 @@
           "The new message reaches the application through IN.",
           "The application’s requested reply comes back through OUT.",
           "WhatsApp keeps its page and draft without reloading to send."
-        ]
+        ],
+        "releaseNotice": {
+          "title": "Version 0.2.0 interface",
+          "body": "The controls in this guide are included in this repository’s test packages for manual installation. Store updates have not been confirmed. Check your installed version before looking for the new buttons."
+        }
       },
       {
         "slug": "order-ready",
@@ -571,6 +575,95 @@
           "Someone prepares the path and someone follows it.",
           "We know which example will show it worked."
         ]
+      },
+      {
+        "slug": "configure-whatsapp-in-the-extension",
+        "key": "whatsapp-settings",
+        "category": "CONFIGURE IN THE EXTENSION",
+        "title": "Your WhatsApp, your choices: connections and filters in one place.",
+        "dek": "Create receiving and sending paths, choose the application that takes part and decide which messages can pass using Bridge’s own controls.",
+        "time": 10,
+        "art": "remote.svg",
+        "intro": "In the story of a small shop, the team wants order questions to reach its support system. The person responsible wants to choose conversations, separate receiving from sending and check conditions before the connection starts.",
+        "promise": "Bridge’s configuration screen brings these choices together. Sign in to RELAYERS, authorize conversations and prepare receiving and sending separately. Then use words of interest or combine conditions without writing code. Your application remains responsible for deciding or preparing the reply.",
+        "steps": [
+          [
+            "open",
+            "Open “Configure WhatsApp” in the extension panel.",
+            "Click Bridge’s browser icon. Below the RELAYERS brand, use “Configure WhatsApp” to open the connection page. If your account is not linked yet, sign-in and registration links are available there.",
+            "The controls in this guide require extension version 0.2.0 or later. Check the installation note before starting.",
+            "bridge-popup-en.jpg"
+          ],
+          [
+            "account",
+            "Link your RELAYERS account using the code.",
+            "Click “Connect to RELAYERS”, allow the requested connection and open “Open RELAYERS to approve”. Sign in, approve the displayed code and return to Bridge. Conversation selection appears after approval.",
+            "Approving Bridge links the browser to your account. Enter your password on the RELAYERS page.",
+            "bridge-pairing-en.jpg"
+          ],
+          [
+            "scope",
+            "Choose conversations and allowed directions.",
+            "Select the WhatsApp account and the conversations for your case. Enable receiving, sending or both and read the authorization. The filters below respect that account and conversation selection.",
+            "A filter cannot authorize another conversation. Start with someone who agrees to help test.",
+            "bridge-setup-en.jpg"
+          ],
+          [
+            "basic",
+            "In Basic mode, enter words of interest.",
+            "Under “Receive messages”, choose “Basic” and enter, for example, “order, quote”. A new message passes if it contains either phrase. You can set a separate list under “Send messages”. Case and accents are ignored.",
+            "An empty list permits all new messages in authorized conversations. The outgoing filter only allows or blocks a request; it does not write or create replies.",
+            "bridge-settings-basic-en.jpg"
+          ],
+          [
+            "advanced",
+            "In Advanced mode, combine conditions for your routine.",
+            "Choose “Advanced”, add conditions and decide whether all must match or just one. For example: the text contains “order” and does not contain “cancelled”. For receiving, you can also choose the message kind. Conditions can apply to one authorized conversation.",
+            "Use “Try the filter without sending” to check an example text. It simulates a text message in the first authorized conversation and does not send messages.",
+            "bridge-settings-advanced-en.jpg"
+          ],
+          [
+            "destination",
+            "Choose where the application receives messages.",
+            "For an online application, select that option and enter its supplied receiving address. For a local application, choose a computer linked to your RELAYERS account and the address provided by its owner. That computer’s RELAYERS Desktop or receiving connection must stay available.",
+            "“Receive in RELAYERS · choose an application later” keeps receipt in the service without preparing application forwarding. The connection summary shows that distinction.",
+            ""
+          ],
+          [
+            "create",
+            "Create the connection and check both paths.",
+            "After reviewing authorization, click “Create connection”. Bridge creates the IN receiving and OUT sending paths you selected. Sending is linked to this Bridge. If you provided a receiving application, its path is prepared too. Under “Integration details”, copy the receiving and sending addresses separately.",
+            "Incoming messages are filtered before leaving the extension. A sending request that fails its filter is blocked before WhatsApp sends it.",
+            "bridge-connected-en.jpg"
+          ],
+          [
+            "edit",
+            "Edit carefully and resume when ready.",
+            "For an existing connection, click “Configure webhooks and filters”. Review conditions and destination, check the authorization and save. The connection stays paused for your review. Click “Resume” to continue. If saving fails, correct the configuration before resuming.",
+            "New incoming filters apply to newly observed messages. Already queued messages retain their original authorization. Sending remains limited to the authorized conversations.",
+            ""
+          ],
+          [
+            "check",
+            "Check a complete example with your application.",
+            "Send a test message matching the receiving filter and confirm it reaches your application. Then request a reply that matches the sending filter and check WhatsApp. The application can be on another machine; the WhatsApp computer and Bridge still need to stay available.",
+            "The guide’s test used real RELAYERS and simulated WhatsApp. Captures contain fictional data and show the interface, not a real customer service deployment.",
+            ""
+          ]
+        ],
+        "outcomeTitle": "One receiving path. One sending path. Conditions chosen by you.",
+        "outcome": "Your team can see what is authorized and where the application takes part. Receiving, deciding and sending stay distinct, with configuration controls inside the extension.",
+        "checks": [
+          "The RELAYERS account was linked.",
+          "Conversations and directions were authorized.",
+          "Basic or advanced conditions were reviewed.",
+          "The receiving destination matches the chosen application.",
+          "After saving an edit, the connection was reviewed and resumed."
+        ],
+        "releaseNotice": {
+          "title": "Version 0.2.0 interface",
+          "body": "The controls in this guide are included in this repository’s test packages for manual installation. Store updates have not been confirmed. Check your installed version before looking for the new buttons."
+        }
       }
     ]
   },
@@ -589,7 +682,7 @@
     "local": "Aplicação no meu computador",
     "remote": "Aplicação em outro lugar",
     "imageCaption": "Ilustração original criada com IA. Cenário de negócio fictício.",
-    "screenCaption": "Tela real da extensão com estado e conversa fictícios, preparados para este guia.",
+    "screenCaption": "Tela real da extensão 0.2.0 com estado e conversa fictícios, preparados para este guia.",
     "loginCaption": "Tela pública de entrada no RELAYERS. Nenhuma credencial foi usada neste print.",
     "hypothetical": "CENÁRIO HIPOTÉTICO",
     "heroKicker": "GUIAS PARA FAZER A CONVERSA ANDAR",
@@ -614,8 +707,8 @@
       "Uma conversa de teste com uma pessoa que concordou em participar.",
       "Uma aplicação escolhida para receber as mensagens e pedir as respostas."
     ],
-    "localText": "A aplicação roda no computador da empresa. Abra o RELAYERS Desktop nesse computador, entre na mesma conta e escolha para onde as mensagens recebidas devem seguir. Mantenha o Desktop conectado enquanto usa essa aplicação local.",
-    "remoteText": "A aplicação roda em um servidor ou é usada por uma equipe em outro lugar. No RELAYERS, escolha o endereço de recebimento dessa aplicação. Ela pode receber as mensagens e pedir respostas sem estar no computador do WhatsApp.",
+    "localText": "A aplicação roda no computador da empresa. Abra o RELAYERS Desktop nesse computador e entre na mesma conta para deixá-lo vinculado. Na Bridge, escolha esse computador e o endereço de recebimento fornecido pela aplicação. Mantenha o Desktop conectado durante o uso.",
+    "remoteText": "A aplicação roda em um servidor ou é usada por uma equipe em outro lugar. Na Bridge, escolha uma aplicação disponível pela internet e informe seu endereço de recebimento. O RELAYERS encaminha as mensagens até ela; os pedidos de resposta usam o caminho de envio autorizado.",
     "locationNote": "Em ambos os casos, o WhatsApp e a Bridge continuam no computador vinculado. Para uma aplicação remota, o RELAYERS Desktop não precisa ficar aberto nessa outra máquina; o serviço da aplicação precisa estar acessível.",
     "routesTitle": "Dois caminhos, cada um com sua função.",
     "receiveTitle": "RECEBER · IN",
@@ -653,14 +746,14 @@
           [
             "pair",
             "Autorize a Bridge, pelo código mostrado.",
-            "Clique no ícone da extensão. No alto do painel, clique na marca RELAYERS para abrir a conexão. Clique em “Conectar ao RELAYERS”. A Bridge mostra um código e o botão “Abrir RELAYERS para aprovar”. Abra esse botão, entre na conta se solicitado e aprove o código. Depois volte à Bridge.",
+            "Clique no ícone da extensão. Use o botão “Configurar WhatsApp”, abaixo da marca RELAYERS, para abrir a conexão. Clique em “Conectar ao RELAYERS”. A Bridge mostra um código e o botão “Abrir RELAYERS para aprovar”. Abra esse botão, entre na conta se solicitado e aprove o código. Depois volte à Bridge.",
             "A senha é digitada na página do RELAYERS. Não é preciso colar sua senha na extensão.",
             "bridge-pairing-pt.jpg"
           ],
           [
             "choose",
             "Escolha a conta, a conversa e os dois sentidos.",
-            "Na Bridge, selecione a conta do WhatsApp e marque a conversa de teste. Ative “Mensagens recebidas → RELAYERS” e “RELAYERS → mensagens enviadas”. Leia a autorização e clique em “Criar conexão”.",
+            "Na Bridge, selecione a conta do WhatsApp e marque a conversa de teste. Ative “Mensagens recebidas → RELAYERS” e “RELAYERS → mensagens enviadas”. Leia a autorização e continue abaixo para escolher os filtros e o destino antes de criar a conexão.",
             "Você também pode permitir apenas um sentido. Para este primeiro exemplo de ida e volta, escolha os dois.",
             "bridge-setup-pt.jpg"
           ],
@@ -674,8 +767,8 @@
           [
             "application",
             "Escolha onde sua aplicação participa.",
-            "No RELAYERS, abra a entrada “WhatsApp Bridge IN” correspondente à conexão e adicione o encaminhamento para sua aplicação. Use a alternativa local ou remota explicada logo abaixo. Confira se a conta e o endereço são os mesmos exibidos pela Bridge.",
-            "O caminho OUT já aponta para a Bridge. Configure o recebimento da aplicação no IN e preserve o caminho de envio criado para a extensão.",
+            "Na própria tela da Bridge, escolha o modo básico ou avançado para os filtros. Em “Para onde vão as mensagens recebidas?”, escolha sua aplicação na internet ou um computador vinculado e informe o endereço de recebimento fornecido por ela. Confira tudo e clique em “Criar conexão”. Use as alternativas local e remota explicadas abaixo.",
+            "A Bridge prepara os caminhos de recebimento e envio que você selecionou. Se escolher apenas receber no RELAYERS, o destino da aplicação ficará para depois; o resumo da conexão informa isso.",
             ""
           ],
           [
@@ -701,7 +794,11 @@
           "A mensagem nova chega à aplicação pelo caminho IN.",
           "A resposta solicitada pela aplicação volta pelo caminho OUT.",
           "O WhatsApp mantém sua página e seu rascunho, sem recarregar para enviar."
-        ]
+        ],
+        "releaseNotice": {
+          "title": "Interface da versão 0.2.0",
+          "body": "Os controles deste guia estão nos pacotes de teste deste repositório, para instalação manual. A atualização das lojas ainda não foi confirmada. Confira a versão instalada antes de procurar os novos botões."
+        }
       },
       {
         "slug": "pedido-pronto",
@@ -1146,6 +1243,95 @@
           "Existe uma pessoa para preparar e outra para acompanhar.",
           "Sabemos qual exemplo vai mostrar que funcionou."
         ]
+      },
+      {
+        "slug": "configurar-whatsapp-na-extensao",
+        "key": "whatsapp-settings",
+        "category": "CONFIGURE NA EXTENSÃO",
+        "title": "Seu WhatsApp, suas escolhas: conexões e filtros em uma só tela.",
+        "dek": "Crie os caminhos de receber e enviar, escolha a aplicação que participa e decida quais mensagens podem passar, usando os controles da própria Bridge.",
+        "time": 10,
+        "art": "remote.svg",
+        "intro": "Na história de uma pequena loja, a equipe quer levar dúvidas sobre pedidos ao sistema de atendimento. A pessoa responsável quer escolher as conversas, separar o que recebe do que envia e conferir as condições antes de colocar a conexão para funcionar.",
+        "promise": "A tela de configuração da Bridge reúne essas escolhas. Você entra na conta RELAYERS, autoriza as conversas e prepara o recebimento e o envio separadamente. Depois pode usar palavras de interesse ou combinar condições sem escrever código. Sua aplicação continua responsável por decidir ou preparar a resposta.",
+        "steps": [
+          [
+            "open",
+            "Abra “Configurar WhatsApp” no painel da extensão.",
+            "Clique no ícone da Bridge no navegador. Abaixo da marca RELAYERS, use o botão “Configurar WhatsApp”. Ele abre a página da conexão. Se a conta ainda não estiver vinculada, você encontra ali os links de entrar ou criar conta.",
+            "Os controles deste guia fazem parte da versão 0.2.0 ou posterior da extensão. Confira a nota de instalação antes de começar.",
+            "bridge-popup-pt.jpg"
+          ],
+          [
+            "account",
+            "Vincule sua conta RELAYERS pelo código.",
+            "Clique em “Conectar ao RELAYERS”, permita a conexão solicitada e abra “Abrir RELAYERS para aprovar”. Entre na conta, aprove o código mostrado e volte à Bridge. A etapa de escolher as conversas aparece depois da aprovação.",
+            "Aprovar a Bridge vincula o navegador à sua conta. A senha é digitada na página do RELAYERS.",
+            "bridge-pairing-pt.jpg"
+          ],
+          [
+            "scope",
+            "Escolha as conversas e os sentidos que deseja permitir.",
+            "Selecione a conta do WhatsApp e marque as conversas do seu caso de uso. Ative o recebimento, o envio ou ambos e leia a autorização. Os filtros abaixo respeitam essa escolha de conta e conversas.",
+            "Um filtro não dá acesso a uma conversa que você não autorizou. Para começar, use uma conversa com uma pessoa que concordou em testar.",
+            "bridge-setup-pt.jpg"
+          ],
+          [
+            "basic",
+            "No modo básico, escreva palavras de interesse.",
+            "Em “Receber mensagens”, escolha “Básico” e escreva, por exemplo, “pedido, orçamento”. Uma mensagem nova passa se contiver uma dessas frases. Você pode configurar outra lista em “Enviar mensagens”. Maiúsculas e acentos são ignorados.",
+            "Se deixar a lista vazia, todas as novas mensagens das conversas autorizadas são permitidas. O filtro de envio só permite ou bloqueia um pedido; ele não escreve nem cria respostas sozinho.",
+            "bridge-settings-basic-pt.jpg"
+          ],
+          [
+            "advanced",
+            "No avançado, combine as condições da sua rotina.",
+            "Escolha “Avançado”, adicione as condições e decida se todas precisam corresponder ou se basta uma. Por exemplo: o texto contém “pedido” e não contém “cancelado”. No recebimento, você também pode escolher o tipo de mensagem. As condições podem se limitar a uma conversa autorizada.",
+            "Use “Testar o filtro sem enviar” para conferir um texto de exemplo. A simulação considera uma mensagem de texto na primeira conversa autorizada; ela não envia mensagens.",
+            "bridge-settings-advanced-pt.jpg"
+          ],
+          [
+            "destination",
+            "Escolha onde a aplicação recebe as mensagens.",
+            "Para uma aplicação na internet, escolha essa opção e preencha o endereço de recebimento fornecido por ela. Para uma aplicação local, escolha o computador vinculado à conta RELAYERS e o endereço informado pela pessoa que cuida desse sistema. O RELAYERS Desktop ou a conexão de recebimento desse computador precisa estar disponível.",
+            "A opção “Receber no RELAYERS · escolher a aplicação depois” guarda o recebimento no serviço, sem preparar um encaminhamento à aplicação. O resumo da conexão mostra essa diferença.",
+            ""
+          ],
+          [
+            "create",
+            "Crie a conexão e confira os dois caminhos.",
+            "Após conferir a autorização, clique em “Criar conexão”. A Bridge cria o recebimento IN e o envio OUT que você selecionou. O envio fica ligado a esta Bridge. Se você informou uma aplicação de recebimento, o caminho até ela também é preparado. Em “Detalhes da integração”, você pode copiar os endereços de receber e enviar separadamente.",
+            "O recebimento é filtrado antes de sair da extensão. Um pedido de envio que não passa pelo filtro é bloqueado antes de enviar pelo WhatsApp.",
+            "bridge-connected-pt.jpg"
+          ],
+          [
+            "edit",
+            "Edite com calma e retome quando estiver pronto.",
+            "Na conexão existente, clique em “Configurar webhooks e filtros”. Confira as condições e o destino, marque a autorização e salve. A conexão fica pausada para você revisar. Clique em “Retomar” para continuar. Se houver uma falha ao salvar, corrija a configuração antes de retomar.",
+            "Filtros novos de recebimento valem para novas mensagens observadas. As mensagens já na fila mantêm sua autorização original. A configuração de envio continua limitada às conversas autorizadas.",
+            ""
+          ],
+          [
+            "check",
+            "Confira um exemplo completo com sua aplicação.",
+            "Envie uma mensagem de teste que corresponda ao filtro de recebimento e confirme sua chegada na aplicação. Depois peça uma resposta pela aplicação que corresponda ao filtro de envio. Confira o resultado no WhatsApp. A aplicação pode estar em outra máquina; o computador com o WhatsApp e a Bridge precisa continuar disponível.",
+            "No teste do guia, o RELAYERS foi real e o WhatsApp foi simulado. Os prints têm dados fictícios e mostram a interface, não um atendimento real de cliente.",
+            ""
+          ]
+        ],
+        "outcomeTitle": "Um caminho de receber. Outro de enviar. As condições escolhidas por você.",
+        "outcome": "A equipe consegue visualizar o que está autorizado e onde a aplicação participa. A separação entre receber, decidir e enviar continua clara, com controles de configuração dentro da extensão.",
+        "checks": [
+          "A conta RELAYERS foi vinculada.",
+          "As conversas e os sentidos foram autorizados.",
+          "As condições básicas ou avançadas foram conferidas.",
+          "O destino de recebimento corresponde à aplicação escolhida.",
+          "Depois de salvar uma edição, a conexão foi revisada e retomada."
+        ],
+        "releaseNotice": {
+          "title": "Interface da versão 0.2.0",
+          "body": "Os controles deste guia estão nos pacotes de teste deste repositório, para instalação manual. A atualização das lojas ainda não foi confirmada. Confira a versão instalada antes de procurar os novos botões."
+        }
       }
     ]
   }

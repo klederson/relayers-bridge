@@ -62,3 +62,13 @@ Immediately before sending, the extension checks enabled direction, scope, expir
 Pause stops new transport work and retains local pending data. Resume continues pending input and newly observed messages, without backfilling the paused interval. Browser shutdown, session disconnection and unsupported WhatsApp internals affect availability.
 
 Disconnect requires explicit confirmation. It stops transport, waits for outstanding local operations, removes local credentials/queue/journal and revokes the server-origin grant. It does not delete server endpoints, queued server work, data already forwarded or provider-side records. Old commands are invalid for any newly created connection identity.
+
+## WhatsApp configuration (extension 0.2.0)
+
+The private connection page can create or update the receiving application route belonging to its own IN endpoint. Online applications use a public HTTPS destination. Local applications use a loopback address and a daemon selected from the authenticated account, excluding the Bridge's own daemon. The client does not fetch these user-supplied destinations; RELAYERS performs forwarding. Updating uses PATCH on the managed IN rule, and removing that application forwarding removes only that rule. OUT remains bound to this browser.
+
+Both directions support bounded data-only filters. Basic mode matches any of up to ten comma-separated text phrases. Advanced mode combines up to ten conditions with all/any semantics: text contains/does-not-contain/equals/starts-with, conversation equality, and incoming message-kind equality. Text matching ignores case and combining accents. Empty conditions allow all messages within the already authorized scope. No filter expands account/conversation permissions or executes expressions, scripts or regular expressions.
+
+IN filtering happens before queue capture; excluded message identities are marked as observed without retaining their content, so changing a filter does not backfill that history. Previously queued authorized content retains its original authorization. OUT filtering happens before dispatch and its definitive rejection is journaled; retrying that same command cannot turn into a send after a filter change.
+
+Saving configuration stops transport, waits for current work and persists a pending marker before the platform update. A failed or interrupted save leaves the connection paused and blocks Resume until configuration is saved successfully. The in-flight-operation and disconnect rules above still apply. Filter previews evaluate only the entered example as text in the first authorized conversation and neither read chats nor send.
